@@ -1,0 +1,14 @@
+.articleDetailsPage {
+  display: block;
+}
+
+.commentTitle {
+  margin-top: 20px;
+}
+
+.recommendations {
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+}

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+<div
+  className="app app_light_theme"
+>
+  <div>
+    <h1
+      data-testid="value-title"
+    >
+      10
+    </h1>
+    <button
+      className="button outline size_m"
+      data-testid="increment-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      increment
+    </button>
+    <button
+      className="button outline size_m"
+      data-testid="decrement-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      decrement
+    </button>
+  </div>
+</div>
+`;

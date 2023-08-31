@@ -1,0 +1,49 @@
+.mainLayout {
+  display: grid;
+
+  // указываем порядок отображения
+  grid-template-areas: 'sidebar content rightbar';
+
+  // указываем ширину каждого элемента
+  grid-template-columns: min-content 1fr 100px;
+  min-height: 100vh;
+}
+
+.sidebar,
+.rightbar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar {
+  // указываем название контента
+  grid-area: sidebar;
+  max-width: 284px;
+  padding: 32px;
+}
+
+.content {
+  // указываем название контента
+  grid-area: content;
+  justify-self: center;
+
+  width: 100%;
+  max-width: 1200px;
+  padding-top: 32px;
+}
+
+.rightbar {
+  display: flex;
+
+  // указываем название контента
+  grid-area: rightbar;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+.toolbar {
+  width: 100%;
+  height: 100%;
+}

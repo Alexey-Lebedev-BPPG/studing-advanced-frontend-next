@@ -1,0 +1,10 @@
+# указываем, какие браузеры поддерживаем. Это уменьшит размер бандла в продакшене, т.к. babel не добавляет лишние полифилы
+# Browsers that we support (какие браузеры поддерживаем)
+[production]
+defaults
+not IE 11
+
+[development]
+last 2 Chrome version
+last 2 Firefox version
+last 1 Safari version

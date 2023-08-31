@@ -1,0 +1,43 @@
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  margin-left: 10px;
+  opacity: 1;
+}
+
+.icon {
+  fill: var(--inverted-primary-color);
+}
+
+.collapsed {
+  .link {
+    width: 0;
+    opacity: 0;
+    transition: 0.2s opacity;
+  }
+}
+
+.itemRedesigned {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.collapsedRedesigned {
+  padding: 0 8px;
+
+  .link {
+    width: 0;
+    margin-left: 0;
+    opacity: 0;
+  }
+}
+
+.active {
+  background: linear-gradient(89.97deg, rgb(94 211 243 / 30%) 1.15%, rgb(94 211 243 / 0%) 99.97%);
+  border-left: 1px var(--accent-redesigned);
+}

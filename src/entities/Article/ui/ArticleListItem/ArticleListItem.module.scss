@@ -1,0 +1,116 @@
+.BIG {
+  .views {
+    margin-left: auto;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+  }
+
+  .username {
+    margin-left: 8px;
+  }
+
+  .date {
+    margin-left: auto;
+  }
+
+  .title {
+    margin-top: 8px;
+  }
+
+  .img {
+    width: 100%;
+    max-height: 250px;
+    margin: 16px 0;
+    object-fit: cover;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .textBlock {
+    overflow-y: hidden;
+    min-height: 200px;
+  }
+}
+
+.SMALL {
+  cursor: pointer;
+  width: 230px;
+  transition: 0.2s;
+
+  .date {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+    opacity: 0.8;
+
+    .date {
+      display: block;
+    }
+  }
+
+  .imageWrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+
+  .img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .infoWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .types p {
+    overflow: hidden;
+    width: 115px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .views {
+    margin-right: 8px;
+    margin-left: auto;
+  }
+
+  .title {
+    margin-top: 8px;
+  }
+
+  .title p {
+    overflow: hidden;
+    width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.articleListItemRedesigned {
+  &.BIG {
+    width: 100%;
+  }
+
+  &.SMALL {
+    .card {
+      width: 240px;
+      height: 350px;
+    }
+  }
+}

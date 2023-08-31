@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Test clear theme 1`] = `
+<div
+  className="app app_light_theme"
+>
+  <div
+    className="flex justifyStart alignStart directionColumn gap32 nowrap"
+  >
+    <div
+      className="flex justifyStart alignCenter directionRow gap8 nowrap"
+    >
+      <div
+        className="skeleton"
+        style={
+          {
+            "borderRadius": "50%",
+            "height": 32,
+            "width": 32,
+          }
+        }
+      >
+        <div />
+      </div>
+      <div
+        className="textWrapper bold primary left size_m"
+      />
+      <div
+        className="textWrapper primary left size_m"
+      >
+        <p
+          className="text"
+          data-testid="Text.Paragraph"
+        >
+          22.10.2000
+        </p>
+      </div>
+    </div>
+    <button
+      className="button outline m normal"
+      onClick={[Function]}
+      type="button"
+    >
+      Редактировать
+    </button>
+    <div
+      className="textWrapper primary left size_m"
+    >
+      <p
+        className="text"
+        data-testid="Text.Paragraph"
+      >
+        10 просмотров
+      </p>
+    </div>
+  </div>
+</div>
+`;

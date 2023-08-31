@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text Test clear theme 1`] = `
+<div
+  className="textWrapper size_m primary left m"
+>
+  <p
+    className="text"
+    data-testid="Text.Paragraph"
+  >
+    TEST
+  </p>
+</div>
+`;

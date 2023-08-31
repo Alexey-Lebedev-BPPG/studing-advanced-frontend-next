@@ -1,0 +1,10 @@
+/node_modules
+/.git
+/.idea
+/.vscode
+/.github
+/build
+/storybook-static
+/reports
+/maintenance
+/helm-charts

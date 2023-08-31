@@ -1,0 +1,17 @@
+.card {
+  padding: 15px;
+  background: var(--card-bg);
+  border-radius: 12px;
+}
+
+.normal {
+  background: var(--card-bg);
+}
+
+.outline {
+  border: 1px solid var(--primary-color);
+}
+
+.fullWidth {
+  width: 100%;
+}

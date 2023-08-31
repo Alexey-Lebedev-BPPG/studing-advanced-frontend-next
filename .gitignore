@@ -1,0 +1,13 @@
+/build
+/build-next
+node_modules
+.idea
+/storybook-static
+.loki/report.html
+.loki/report.json
+/reports/unit
+/reports/dependency-graph
+/build-storybook.log
+/test-results/
+.vercel
+

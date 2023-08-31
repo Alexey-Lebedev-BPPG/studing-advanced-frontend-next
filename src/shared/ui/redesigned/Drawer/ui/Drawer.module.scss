@@ -1,0 +1,44 @@
+.Drawer {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.opened {
+  pointer-events: auto;
+  z-index: var(--modal-z-index);
+  opacity: 1;
+
+  .content {
+    transform: translateY(0%);
+  }
+}
+
+.sheet {
+  touch-action: none;
+
+  position: fixed;
+  z-index: var(--modal-z-index);
+  left: 2vw;
+
+  width: 96vw;
+  height: calc(100vh + 100px);
+  padding: 15px;
+
+  border-radius: 12px 12px 0;
+}
+
+.oldDrawer {
+  .sheet {
+    background-color: var(--bg-color);
+  }
+}
+
+.newDrawer {
+  .sheet {
+    background-color: var(--light-bg-redesigned);
+  }
+}

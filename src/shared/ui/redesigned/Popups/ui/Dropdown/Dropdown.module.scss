@@ -1,0 +1,22 @@
+.menu {
+  position: absolute;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--dark-bg-redesigned);
+}
+
+.item {
+  cursor: pointer;
+
+  width: 100%;
+  padding: 10px 25px;
+
+  color: var(--text-redesigned);
+
+  background: none;
+  border: none;
+  outline: none;
+}

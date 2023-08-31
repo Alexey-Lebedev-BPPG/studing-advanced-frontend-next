@@ -1,0 +1,61 @@
+.inputWrapper {
+  display: flex;
+}
+
+.placeholder {
+  margin-right: 15px;
+}
+
+.input {
+  width: 100%;
+
+  // скрываем браузерную каретку по ум.
+  color: transparent;
+  text-shadow: 0 0 0 var(--primary-color);
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.caretWrapper {
+  position: relative;
+
+  // растянуть на всю свободную площадь
+  flex-grow: 1;
+}
+
+.caret {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 9px;
+  height: 3px;
+
+  background-color: var(--primary-color);
+
+  animation: blink 0.7s forwards infinite;
+}
+
+.readonly {
+  opacity: 0.7;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.01;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

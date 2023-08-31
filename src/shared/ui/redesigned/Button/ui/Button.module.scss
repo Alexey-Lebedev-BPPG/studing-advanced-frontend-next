@@ -1,0 +1,113 @@
+.addonLeft,
+.addonRight {
+  display: flex;
+
+  svg {
+    color: var(--hint-redesigned);
+
+  }
+}
+
+.button {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  padding: 6px 16px;
+
+  color: var(--text-redesigned);
+
+  &:hover {
+    color: var(--accent-redesigned);
+
+    .addonLeft,
+    .addonRight {
+      svg {
+        color: var(--accent-redesigned);
+      }
+    }
+  }
+}
+
+.withAddon {
+  padding: 0 16px;
+}
+
+.clear {
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.filled {
+  background: var(--light-bg-redesigned);
+  border: none;
+  border-radius: 34px;
+  outline: none;
+}
+
+.outline {
+  background: none;
+  border-radius: 34px;
+  outline: none;
+
+  &:hover {
+    border: 2px solid var(--accent-redesigned);
+  }
+
+  &.normal {
+    border: 2px solid var(--icon-redesigned);
+  }
+
+  &.error {
+    border: 2px solid var(--cancel-redesigned);
+  }
+
+  &.success {
+    border: 2px solid var(--save-redesigned);
+  }
+}
+
+.square {
+  padding: 0;
+}
+
+.square.m {
+  width: var(--font-line-m);
+  height: var(--font-line-m);
+  font: var(--font-m);
+}
+
+.square.l {
+  width: var(--font-line-l);
+  height: var(--font-line-l);
+  font: var(--font-l);
+}
+
+.square.xl {
+  width: var(--font-line-xl);
+  height: var(--font-line-xl);
+  font: var(--font-xl);
+}
+
+.m {
+  font: var(--font-m-redesigned);
+}
+
+.l {
+  font: var(--font-l-redesigned);
+}
+
+.xl {
+  font: var(--font-xl-redesigned);
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.fullWidth {
+  width: 100%;
+}
