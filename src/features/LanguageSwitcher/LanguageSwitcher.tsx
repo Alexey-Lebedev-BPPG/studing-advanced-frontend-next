@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
 import { Button as ButtonDeprecated } from '@/shared/ui/deprecated/Button';

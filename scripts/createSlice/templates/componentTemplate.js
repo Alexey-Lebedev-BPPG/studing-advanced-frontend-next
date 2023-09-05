@@ -9,7 +9,7 @@ module.exports = componentName => {
   return `'use client';
 
 import { FC, memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import cls from './${nameToPascalCase}.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 

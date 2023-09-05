@@ -42,7 +42,7 @@ export const buildBabelLoader = ({ isDev, isTsx }: BuildBabelLoaderProps) => {
             isProd && [babelRemovePropsPlugin, { props: ['data-testid'] }],
           // добавляем плагин для горячей перезагрузки
           isDev && require.resolve('react-refresh/babel'),
-          // если у нас какой-то плагин не добавится из-за условий, то в массив добавляется false.чтоб не подхватить этот false, делаем фильтрацию трушных занчений
+          // если у нас какой-то плагин не добавится из-за условий, то в массив добавляется false.чтоб не подхватить этот false, делаем фильтрацию трушных значений
         ].filter(Boolean),
         // при этом использовать preset-env, чтоб преобразовывать новые форматы в старые
         presets: ['@babel/preset-env'],

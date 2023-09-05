@@ -7,7 +7,8 @@ import { Icon } from '../../Icon';
 import { Skeleton } from '../../Skeleton';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-interface IAvatarProps extends ImageProps {
+interface IAvatarProps extends Omit<ImageProps, 'alt'> {
+  alt?: string;
   className?: string;
   size?: number;
 }

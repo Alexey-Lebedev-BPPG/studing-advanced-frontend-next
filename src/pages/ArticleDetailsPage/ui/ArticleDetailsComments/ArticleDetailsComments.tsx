@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import { getArticleCommentsIsLoading } from '../../model/selectors/comments/comments';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';

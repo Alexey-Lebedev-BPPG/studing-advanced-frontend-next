@@ -1,14 +1,14 @@
 import { UserRole } from '../../../consts/consts';
-import { AboutPage } from '@/pages/AboutPage';
-import { AdminPanelPage } from '@/pages/AdminPanelPage';
-import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
-import { ArticleEditPage } from '@/pages/ArticleEditPage';
-import { ArticlesPage } from '@/pages/ArticlesPage';
-import { ForbiddenPage } from '@/pages/ForbiddenPage';
-import { MainPage } from '@/pages/MainPage';
-import { NotFoundPage } from '@/pages/NotFoundPage';
-import { ProfilePage } from '@/pages/ProfilePage';
-import { SettingsPage } from '@/pages/SettingsPage';
+import { AboutPageApp } from '@/pages/AboutPage';
+import { AdminPanelPageApp } from '@/pages/AdminPanelPage';
+import { ArticleDetailsPageApp } from '@/pages/ArticleDetailsPage';
+import { ArticleEditPageApp } from '@/pages/ArticleEditPage';
+import { ArticlesPageApp } from '@/pages/ArticlesPage';
+import { ForbiddenPageApp } from '@/pages/ForbiddenPage';
+import { MainPageApp } from '@/pages/MainPage';
+import { NotFoundPageApp } from '@/pages/NotFoundPage';
+import { ProfilePageApp } from '@/pages/ProfilePage';
+import { SettingsPageApp } from '@/pages/SettingsPage';
 import {
   AppRoutes,
   getRouteAbout,
@@ -26,58 +26,58 @@ import { AppRoutesProps } from '@/shared/types/router';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
-    element: <MainPage />,
+    element: <MainPageApp />,
     path: getRouteMain(),
   },
   [AppRoutes.ABOUT]: {
-    element: <AboutPage />,
+    element: <AboutPageApp />,
     path: getRouteAbout(),
   },
   [AppRoutes.SETTINGS]: {
-    element: <SettingsPage />,
+    element: <SettingsPageApp />,
     path: getRouteSettings(),
   },
   [AppRoutes.PROFILE]: {
     authOnly: true,
-    element: <ProfilePage />,
+    element: <ProfilePageApp />,
     // добавляем динамически id
     path: getRouteProfile(':id'),
   },
   [AppRoutes.ARTICLES]: {
     authOnly: true,
-    element: <ArticlesPage />,
+    element: <ArticlesPageApp />,
     path: getRouteArticles(),
   },
   [AppRoutes.ARTICLE_DETAILS]: {
     authOnly: true,
 
-    element: <ArticleDetailsPage />,
+    element: <ArticleDetailsPageApp />,
     // добавляем динамически id
     path: getRouteArticleDetails(':id'),
   },
   [AppRoutes.ARTICLE_CREATE]: {
     authOnly: true,
-    element: <ArticleEditPage />,
+    element: <ArticleEditPageApp />,
     path: getRouteArticleCreate(),
   },
   [AppRoutes.ARTICLE_EDIT]: {
     authOnly: true,
-    element: <ArticleEditPage />,
+    element: <ArticleEditPageApp />,
     path: getRouteArticleEdit(':id'),
   },
   [AppRoutes.ADMIN_PANEL]: {
     authOnly: true,
-    element: <AdminPanelPage />,
+    element: <AdminPanelPageApp />,
     path: getRouteAdminPanel(),
     // добавляем массив ролей, чтоб потом сделать проверку на них
     roles: [UserRole.MANAGER, UserRole.ADMIN],
   },
   [AppRoutes.FORBIDDEN]: {
-    element: <ForbiddenPage />,
+    element: <ForbiddenPageApp />,
     path: getRouteForbidden(),
   },
   [AppRoutes.NOT_FOUND]: {
-    element: <NotFoundPage />,
+    element: <NotFoundPageApp />,
     path: '*',
   },
 };

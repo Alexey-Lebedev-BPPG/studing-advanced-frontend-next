@@ -7,9 +7,10 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 
 type SvgProps = Omit<SVGProps<SVGSVGElement>, 'onClick'>;
 
-interface IIconBaseProps extends ImageProps {
+interface IIconBaseProps extends Omit<ImageProps, 'alt'> {
   // принимаем ссылку на свг
   // Svg: FC<SVGProps<SVGSVGElement>>;
+  alt?: string;
   className?: string;
 }
 
@@ -27,6 +28,7 @@ type IconProps = NoneClickableIconProps | ClickableIconProps;
 // обертка для свг, которая будет задавать цвета
 export const Icon: FC<IconProps> = props => {
   const {
+    alt = '',
     className,
     clickable,
     height = 32,
@@ -37,6 +39,7 @@ export const Icon: FC<IconProps> = props => {
   const icon = (
     // eslint-disable-next-line jsx-a11y/alt-text
     <Image
+      alt={alt}
       className={classNames(cls.icon, {}, [className])}
       {...otherProps}
       onClick={undefined}

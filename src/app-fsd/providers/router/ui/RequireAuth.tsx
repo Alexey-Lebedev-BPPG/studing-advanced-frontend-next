@@ -1,7 +1,8 @@
+import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { UserRole } from '../../../consts/consts';
-import { getUserAuthData, getUserRoles } from '@/entities/User';
+import { User, getUserRoles } from '@/entities/User';
 import { getRouteForbidden, getRouteMain } from '@/shared/const/router';
 import { useAppSelector } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 
@@ -15,7 +16,8 @@ export const RequireAuth = (props: RequireAuthProps) => {
   const { children, roles } = props;
 
   // проверяем авторизован ли пользователь
-  const auth = useAppSelector(getUserAuthData);
+  const { data: dataSession } = useSession();
+  const authData = (dataSession?.user || undefined) as User;
   const location = useLocation();
   const userRoles = useAppSelector(getUserRoles);
 
@@ -30,7 +32,7 @@ export const RequireAuth = (props: RequireAuthProps) => {
     });
   }, [roles, userRoles]);
 
-  if (!auth)
+  if (!authData)
     return <Navigate replace to={getRouteMain()} state={{ from: location }} />;
 
   if (!hasRequireRoles)

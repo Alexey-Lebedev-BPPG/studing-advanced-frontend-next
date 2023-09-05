@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import cls from './SettingsPage.module.scss';
 import { UiDesignSwitcher } from '@/features/UiDesignSwitcher';
 import { classNames } from '@/shared/lib/classNames/classNames';

@@ -25,14 +25,19 @@ export const ArticleListItemRedesigned: FC<IArticleListItemProps> = props => {
 
   const userInfo = (
     <>
-      <Avatar size={32} src={article.user.avatar} className={cls.avatar} />
+      <Avatar
+        size={32}
+        src={article.user.avatar || ''}
+        className={cls.avatar}
+        alt=''
+      />
       <Text bold text={article.user.username} />
     </>
   );
 
   const views = (
     <HStack gap='8'>
-      <Icon src={EyeIcon} />
+      <Icon src={EyeIcon} alt='' />
       <Text text={String(article.views)} className={cls.views} />
     </HStack>
   );

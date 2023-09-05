@@ -1,12 +1,10 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { FC, useState } from 'react';
-import { getUserAuthData } from '@/entities/User';
+import { User } from '@/entities/User';
 import { getFeatureFlags, updateFeatureFlags } from '@/shared/lib/features';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 import { ListBox } from '@/shared/ui/redesigned/Popups';
 import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
@@ -23,7 +21,8 @@ export const UiDesignSwitcher: FC<IUiDesignSwitcherProps> = props => {
   const forceUpdate = useForceUpdate();
 
   const isAppRedesign = getFeatureFlags('isAppRedesigned');
-  const authData = useAppSelector(getUserAuthData);
+  const { data: dataSession } = useSession();
+  const authData = (dataSession?.user || undefined) as User;
   const [isLoading, setIsLoading] = useState(false);
 
   const items = [

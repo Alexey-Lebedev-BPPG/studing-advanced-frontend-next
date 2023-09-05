@@ -1,11 +1,15 @@
-// import { LOCAL_STORAGE_LAST_DESIGN_KEY } from '@/shared/const/localStorage';
+import { forLocalStorage } from '../../store';
+import { LOCAL_STORAGE_LAST_DESIGN_KEY } from '@/shared/const/localStorage';
 import { FeatureFlags } from '@/shared/types/featureFlags';
 
 // задаем дефолтное значение для фичи
 const defaultFeatureFlags: FeatureFlags = {
   isAppRedesigned:
     // localStorage.getItem(LOCAL_STORAGE_LAST_DESIGN_KEY) === 'new',
-    true,
+    forLocalStorage({
+      key: LOCAL_STORAGE_LAST_DESIGN_KEY,
+      method: 'get',
+    }) === 'new',
   isTest: true,
 };
 

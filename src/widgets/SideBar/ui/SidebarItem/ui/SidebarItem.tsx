@@ -1,12 +1,12 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { FC } from 'react';
 import cls from './SidebarItem.module.scss';
 import { SidebarItemType } from '../../../model/types/sidebar';
-import { getUserAuthData } from '@/entities/User';
+import { User } from '@/entities/User';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
-import { useAppSelector } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { AppLink as AppLinkDeprecated } from '@/shared/ui/deprecated/AppLink';
 import { AppLink } from '@/shared/ui/redesigned/AppLink';
 import { Icon } from '@/shared/ui/redesigned/Icon';
@@ -19,9 +19,10 @@ interface ISidebarItemProps {
 export const SidebarItem: FC<ISidebarItemProps> = props => {
   const { collapsed, item } = props;
 
-  const isAuth = useAppSelector(getUserAuthData);
+  const { data: dataSession } = useSession();
+  const authData = (dataSession?.user || undefined) as User;
 
-  if (item.authOnly && !isAuth) return null;
+  if (item.authOnly && !authData) return null;
 
   return (
     <ToggleFeatures

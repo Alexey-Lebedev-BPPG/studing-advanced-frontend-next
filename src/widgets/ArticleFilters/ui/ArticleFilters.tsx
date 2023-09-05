@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import cls from './articleFilters.module.scss';
 import { ArticleSortFields, ArticleType } from '@/entities/Article';
 import { ArticleSortSelector } from '@/features/ArticleSortSelector';

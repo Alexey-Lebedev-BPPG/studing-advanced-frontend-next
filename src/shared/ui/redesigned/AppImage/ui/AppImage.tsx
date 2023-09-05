@@ -6,7 +6,8 @@ import {
   useState,
 } from 'react';
 
-export interface IAppImageProps extends ImageProps {
+export interface IAppImageProps extends Omit<ImageProps, 'alt'> {
+  alt?: string;
   className?: string;
   // компонент для отрисовки при ошибке загрузки
   errorFallback?: ReactElement;

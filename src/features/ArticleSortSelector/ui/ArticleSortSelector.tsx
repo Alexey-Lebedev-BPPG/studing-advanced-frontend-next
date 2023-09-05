@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import cls from './ArticleSortSelector.module.scss';
 import { ArticleSortFields } from '@/entities/Article';
 import { classNames } from '@/shared/lib/classNames/classNames';

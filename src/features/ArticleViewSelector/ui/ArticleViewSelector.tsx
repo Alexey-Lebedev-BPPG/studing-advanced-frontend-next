@@ -58,6 +58,7 @@ export const ArticleViewSelector: FC<IArticleViewSelectorProps> = props => {
             >
               <IconDeprecated
                 src={viewType.icon}
+                alt=''
                 width={24}
                 height={24}
                 className={classNames(

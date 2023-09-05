@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import { ValidateProfileError } from '../../model/consts/consts';
 import {
   getProfileForm,

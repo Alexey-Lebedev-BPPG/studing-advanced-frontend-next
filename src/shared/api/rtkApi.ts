@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
+import { forLocalStorage } from '../lib/store';
+import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 
 export const rtkApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -9,7 +10,10 @@ export const rtkApi = createApi({
     // добавляем заголовки в каждый запрос
     prepareHeaders: headers => {
       // const token = localStorage.getItem(USER_LOCALSTORAGE_KEY) || '';
-      const token = '';
+      const token = forLocalStorage({
+        key: USER_LOCALSTORAGE_KEY,
+        method: 'get',
+      });
       if (token) headers.set('Authorization', token);
 
       return headers;

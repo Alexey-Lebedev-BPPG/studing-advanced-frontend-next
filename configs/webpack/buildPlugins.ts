@@ -104,7 +104,7 @@ export const buildPlugins = ({
     // }),
   ];
 
-  // данные плагины добавляем, только если не продакш сборка
+  // данные плагины добавляем, только если не продакшн сборка
   if (isDev) {
     // добавляем плагин для hot reload
     plugins.push(new ReactRefreshWebpackPlugin());

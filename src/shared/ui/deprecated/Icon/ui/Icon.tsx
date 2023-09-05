@@ -5,9 +5,10 @@ import { FC } from 'react';
 import cls from './Icon.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-interface IIconProps extends ImageProps {
+interface IIconProps extends Omit<ImageProps, 'alt'> {
   // принимаем ссылку на свг
   // Svg: VFC<SVGProps<SVGSVGElement>>;
+  alt?: string;
   className?: string;
   inverted?: boolean;
 }
@@ -18,7 +19,7 @@ interface IIconProps extends ImageProps {
  */
 // обертка для свг, которая будет задавать цвета
 export const Icon: FC<IIconProps> = props => {
-  const { className, inverted, ...otherProps } = props;
+  const { alt = '', className, inverted, ...otherProps } = props;
 
   return (
     // <Svg
@@ -29,6 +30,7 @@ export const Icon: FC<IIconProps> = props => {
     // />
     // eslint-disable-next-line jsx-a11y/alt-text
     <Image
+      alt={alt}
       className={classNames(inverted ? cls.inverted : cls.icon, {}, [
         className,
       ])}

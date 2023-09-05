@@ -12,7 +12,8 @@ import {
   ArticleType,
   ArticleView,
 } from '@/entities/Article';
-// import { ARTICLE_VIEW_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
+import { ARTICLE_VIEW_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
+import { forLocalStorage } from '@/shared/lib/store';
 import { SortOrder } from '@/shared/types/sort';
 
 // делаем через подход нормализации данных в redux toolkit (https://redux-toolkit.js.org/api/createEntityAdapter#crud-functions)
@@ -85,7 +86,10 @@ const articlesPageSlice = createSlice({
       // const view = localStorage.getItem(
       //   ARTICLE_VIEW_LOCALSTORAGE_KEY,
       // ) as ArticleView;
-      const view = 'SMALL' as ArticleView;
+      const view = forLocalStorage({
+        key: ARTICLE_VIEW_LOCALSTORAGE_KEY,
+        method: 'get',
+      }) as ArticleView;
       state.view = view;
       state.limit = view === 'BIG' ? 4 : 9;
       state._inited = true;
@@ -108,6 +112,11 @@ const articlesPageSlice = createSlice({
     setView: (state, { payload }: PayloadAction<ArticleView>) => {
       state.view = payload;
       // localStorage.setItem(ARTICLE_VIEW_LOCALSTORAGE_KEY, payload);
+      forLocalStorage({
+        key: ARTICLE_VIEW_LOCALSTORAGE_KEY,
+        method: 'set',
+        value: payload,
+      });
     },
   },
 });

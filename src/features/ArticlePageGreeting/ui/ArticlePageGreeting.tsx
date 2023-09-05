@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { saveJsonSettings, useJsonSettings } from '@/entities/User';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useDetectDevice } from '@/shared/lib/hooks/useDetectDevice/useDetectDevice';

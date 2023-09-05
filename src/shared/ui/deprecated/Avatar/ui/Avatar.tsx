@@ -7,7 +7,8 @@ import { Icon } from '../../Icon';
 import { Skeleton } from '../../Skeleton';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-interface IAvatarProps extends ImageProps {
+interface IAvatarProps extends Omit<ImageProps, 'alt'> {
+  alt?: string;
   className?: string;
   // для использования в компонентах, где инвертированы цвета
   fallbackInverted?: boolean;
@@ -33,7 +34,7 @@ export const Avatar: FC<IAvatarProps> = props => {
 
   const errorFallback = (
     <Icon
-      alt=''
+      alt={alt}
       inverted={fallbackInverted}
       width={size}
       height={size}

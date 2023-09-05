@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Counter } from '@/entities/Counter';
 import { Input } from '@/shared/ui/deprecated/Input';
 import { Page } from '@/widgets/Page';

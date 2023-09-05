@@ -3,10 +3,11 @@ import i18next from 'i18next';
 import { getUserDataByIdQuery } from '../../api/userApi';
 import { User } from '../types/UserSchema';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
-// import {
-//   LOCAL_STORAGE_LAST_DESIGN_KEY,
-//   USER_LOCALSTORAGE_KEY,
-// } from '@/shared/const/localStorage';
+import {
+  LOCAL_STORAGE_LAST_DESIGN_KEY,
+  USER_LOCALSTORAGE_KEY,
+} from '@/shared/const/localStorage';
+import { forLocalStorage } from '@/shared/lib/store';
 
 // первым аргументом дженерика - что возвращаем, второй - что передаем, а третьим можно передать свои типизацию объекта thunkAPI, в котором есть методы для использования в thunk-e
 export const initAuthData = createAsyncThunk<User, void, ThunkConfig<string>>(
@@ -15,7 +16,10 @@ export const initAuthData = createAsyncThunk<User, void, ThunkConfig<string>>(
     const { dispatch, rejectWithValue } = thunkApi;
 
     // const userId = localStorage.getItem(USER_LOCALSTORAGE_KEY);
-    const userId = '1';
+    const userId = forLocalStorage({
+      key: USER_LOCALSTORAGE_KEY,
+      method: 'get',
+    });
 
     if (!userId) return rejectWithValue('USERIDERROR');
 
@@ -28,6 +32,11 @@ export const initAuthData = createAsyncThunk<User, void, ThunkConfig<string>>(
       //   LOCAL_STORAGE_LAST_DESIGN_KEY,
       //   response.features?.isAppRedesigned ? 'new' : 'old',
       // );
+      forLocalStorage({
+        key: LOCAL_STORAGE_LAST_DESIGN_KEY,
+        method: 'set',
+        value: response.features?.isAppRedesigned ? 'new' : 'old',
+      });
 
       return response;
     } catch (error) {

@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import { buildBabelLoader } from './loaders/buildBabelLoader';
 import { buildCssLoaders } from './loaders/buildCssLoaders';
-// import { buildTypesciptLoader } from "./loaders/buildTypesciptLoader";
+// import { buildTypescriptLoader } from "./loaders/buildTypescriptLoader";
 import { buildFileLoader } from './loaders/buildFileLoader';
 import { buildMjsLoader } from './loaders/buildMjsLoader';
 import { buildSvgLoader } from './loaders/buildSvgLoader';
@@ -17,8 +17,8 @@ export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
   // добавив их в регулярку)
   const fileLoader = buildFileLoader();
 
-  // typescript loader (используем, если не настраиваем babel-loader, который сможет выполнять задачи ts-loadera)
-  // const typescriptLoader = buildTypesciptLoader();
+  // typescript loader (используем, если не настраиваем babel-loader, который сможет выполнять задачи ts-loader-a)
+  // const typescriptLoader = buildTypescriptLoader();
 
   // babelLoader для обычных файлов (.ts, .js)
   const codeBabelLoader = buildBabelLoader({ ...options, isTsx: false });
@@ -31,7 +31,7 @@ export const buildLoaders = (options: BuildOptions): webpack.RuleSetRule[] => {
   const scssLoaders = buildCssLoaders(options.isDev);
 
   return [
-    // если писать на нативном js (без typescript), то нужно установить @babel/preset-reactnpm run build вместо typescriptLoader
+    // если писать на нативном js (без typescript), то нужно установить @babel/preset-react npm run build вместо typescriptLoader
     fileLoader,
     svgLoader,
     codeBabelLoader,

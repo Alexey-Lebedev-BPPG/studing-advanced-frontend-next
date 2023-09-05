@@ -1,4 +1,4 @@
-export const buildTypesciptLoader = () => ({
+export const buildTypescriptLoader = () => ({
   // исключаем node_modules
   exclude: /node_modules/,
   // ловим файлы с .ts, .tsx

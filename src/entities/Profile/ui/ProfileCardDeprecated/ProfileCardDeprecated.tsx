@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import cls from './ProfileCardDeprecated.module.scss';
 import { Profile } from '../../model/types/profile';
 import { Country, CountrySelect } from '@/entities/Country';

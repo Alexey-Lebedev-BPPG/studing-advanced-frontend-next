@@ -1,8 +1,8 @@
 import path from 'path';
 import { Configuration, DefinePlugin, RuleSetRule } from 'webpack';
-import { buildCssLoaders } from '../build/loaders/buildCssLoaders';
-import { buildSvgLoader } from '../build/loaders/buildSvgLoader';
-import { BuildPaths } from '../build/types/config';
+import { BuildPaths } from '../webpack/build/types/config';
+import { buildCssLoaders } from '../webpack/loaders/buildCssLoaders';
+import { buildSvgLoader } from '../webpack/loaders/buildSvgLoader';
 
 const config = {
   addons: [
@@ -42,10 +42,10 @@ const config = {
     options: { builder: { lazyCompilation: true }, fastRefresh: true },
   },
   // чтоб переводы работали корректно
-  staticDirs: ['../../../public'],
+  staticDirs: ['../../public'],
   stories: [
     {
-      directory: '../../../src',
+      directory: '../../src',
       files: '**/*.stories.@(js|jsx|ts|tsx|mdx)',
     },
   ],
@@ -59,7 +59,7 @@ const config = {
       html: '',
       locales: '',
       // добавляем путь (выходим на 2 уровня вверх и берем src)
-      src: path.resolve(__dirname, '..', '..', '..', 'src'),
+      src: path.resolve(__dirname, '..', '..', 'src'),
     };
     // добавляем путь в конфиг
     configWebpack!.resolve!.modules!.push(paths.src);

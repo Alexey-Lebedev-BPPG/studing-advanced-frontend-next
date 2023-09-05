@@ -1,16 +1,16 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import cls from './Navbar.module.scss';
-import { getUserAuthData } from '@/entities/User';
+import { User } from '@/entities/User';
 import { LoginModal } from '@/features/AuthByUsername';
 import { AvatarDropdown } from '@/features/AvatarDropdown';
 import { NotificationButton } from '@/features/NotificationButton';
 import { getRouteArticleCreate } from '@/shared/const/router';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures, toggleFeatures } from '@/shared/lib/features';
-import { useAppSelector } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { AppLink } from '@/shared/ui/deprecated/AppLink';
 import { Button as ButtonDeprecated } from '@/shared/ui/deprecated/Button';
 import { Text } from '@/shared/ui/deprecated/Text';
@@ -26,7 +26,8 @@ interface NavbarProps {
 export const Navbar = (props: NavbarProps) => {
   const { className } = props;
   const { t } = useTranslation();
-  const authData = useAppSelector(getUserAuthData);
+  const { data: dataSession } = useSession();
+  const authData = (dataSession?.user || undefined) as User;
   const [isAuthModal, setIsAuthModal] = useState(false);
 
   // все функции, которые будут передаваться пропсами, ОБЯЗАТЕЛЬНО помещаем в useCallback, чтоб сохранять ссылку на эту функцию

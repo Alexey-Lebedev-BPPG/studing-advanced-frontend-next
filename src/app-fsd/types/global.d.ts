@@ -1,3 +1,5 @@
+// eslint-disable-next-line unused-imports/no-unused-imports
+// import NextAuth from 'next-auth';
 // добавляем, чтоб typescript начал понимать модули
 declare module '*.module.scss' {
   const value: Record<string, string>;
@@ -28,6 +30,17 @@ declare module '*.svg' {
   const SVG: FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>;
   export default SVG;
 }
+
+// чтоб кастомный объект юзера в сессию записать
+// declare module 'next-auth' {
+//   import { User } from '@/entities/User';
+//   /**
+//    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
+//    */
+//   interface Session {
+//     user: User;
+//   }
+// }
 
 // декларируем константу из вебпака
 declare const __IS_DEV__: boolean;

@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { FC, useMemo, useState } from 'react';
 import cls from './SideBar.module.scss';
 import { useSidebarItems } from '../../model/selectors/getSidebarItems';
@@ -20,6 +21,8 @@ interface ISideBarProps {
 
 export const SideBar: FC<ISideBarProps> = props => {
   const { className } = props;
+  const session = useSession();
+  console.log('session', session);
 
   const [collapsed, setCollapsed] = useState(false);
   const sidebarItemsList = useSidebarItems();

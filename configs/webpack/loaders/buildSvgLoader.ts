@@ -6,7 +6,7 @@ export const buildSvgLoader = () => ({
     {
       loader: '@svgr/webpack',
       options: {
-        // добавляем, чтоб заменять рамеры иконок (по ум. 1em)
+        // добавляем, чтоб заменять размеры иконок (по ум. 1em)
         icon: true,
         // добавляем плагин, чтоб автоматически заменять все цвета svg на currentColor
         svgoConfig: {

@@ -1,8 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'next-i18next';
 import { FC, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import { getCanEditArticle } from '../../model/selectors/article/article';
 import { getArticleDetailsData } from '@/entities/Article';
 import { getRouteArticleEdit, getRouteArticles } from '@/shared/const/router';

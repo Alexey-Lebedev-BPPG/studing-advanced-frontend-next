@@ -1,14 +1,14 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { FC, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   useArticleRating,
   useCreateArticleRating,
 } from '../api/articleRatingApi';
 import { RatingCard } from '@/entities/Rating';
-import { getUserAuthData } from '@/entities/User';
-import { useAppSelector } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { User } from '@/entities/User';
 import { Skeleton } from '@/shared/ui/deprecated/Skeleton';
 
 export interface IArticleRatingProps {
@@ -20,10 +20,11 @@ const ArticleRating: FC<IArticleRatingProps> = props => {
   const { articleId, className } = props;
 
   const { t } = useTranslation();
-  const userData = useAppSelector(getUserAuthData);
+  const { data: dataSession } = useSession();
+  const authData = (dataSession?.user || undefined) as User;
   const { data, isLoading } = useArticleRating({
     articleId,
-    userId: userData?.id || '',
+    userId: authData?.id || '',
   });
   // использование запроса на создание
   const [rateArticleMutation, { isLoading: isLoadingCreate }] =
@@ -39,13 +40,13 @@ const ArticleRating: FC<IArticleRatingProps> = props => {
           articleId,
           feedback,
           rate: starCount,
-          userId: userData?.id || '',
+          userId: authData?.id || '',
         });
       } catch (error) {
         console.log('error', error);
       }
     },
-    [articleId, rateArticleMutation, userData?.id],
+    [articleId, rateArticleMutation, authData?.id],
   );
 
   const onAccept = useCallback(

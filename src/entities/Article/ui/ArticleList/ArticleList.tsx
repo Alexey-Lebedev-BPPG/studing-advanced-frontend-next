@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC, HTMLAttributeAnchorTarget } from 'react';
-import { useTranslation } from 'react-i18next';
 // import { List, ListRowProps, WindowScroller } from "react-virtualized";
 import cls from './ArticleList.module.scss';
 import { Article, ArticleView } from '../../model/types/article';

@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Country } from '../model/types/types';
 import { ToggleFeatures } from '@/shared/lib/features';
 import { ListBox as ListBoxDeprecated } from '@/shared/ui/deprecated/Popups';

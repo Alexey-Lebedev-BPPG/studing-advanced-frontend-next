@@ -30,7 +30,7 @@ export default () => {
       // добавляем поддержку алиасов
       '^@/(.*)$': '<rootDir>/src/$1',
     },
-    modulePathIgnorePatterns: ['node_modules', '../../../reports/unit'],
+    modulePathIgnorePatterns: ['node_modules', '../../reports/unit'],
     // альтернативным вариантом, чтоб абсолютные пути заработали будет добавление такого свойства
     modulePaths: ['<rootDir>src'],
     // чтоб появлялся отчет о пройденных unit тестах на отдельной странице
@@ -47,10 +47,10 @@ export default () => {
       ],
     ],
     // т.к. файл конфигурации лежит не в корне, то нужно выйти в корень проекта
-    rootDir: '../../../',
+    rootDir: '../../',
     // добавляем файл импорта @testing-library/jest-dom, предварительно создав для него файл импорта
-    setupFilesAfterEnv: ['<rootDir>configs/webpack/jest/setupTests.ts'],
-    snapshotResolver: '<rootDir>/configs/webpack/jest/snapshotResolve.ts',
+    setupFilesAfterEnv: ['<rootDir>configs/jest/setupTests.ts'],
+    snapshotResolver: '<rootDir>/configs/jest/snapshotResolve.ts',
     // тестовые переменные, которые используются при тестировании
     testEnvironment: 'jsdom',
     // регулярка для поиска файлов тестирования (rootDir заменяется на вышестоящий путь)

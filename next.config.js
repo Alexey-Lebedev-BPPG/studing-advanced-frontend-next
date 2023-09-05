@@ -1,4 +1,4 @@
-// const i18n = require('./src/shared/config/i18n/i18n.ts');
+const i18n = require('./next-i18next.config.js');
 
 // функция на получение дефолтного апи адреса
 const getApiUrl = (mode, apiUrl) => {
@@ -33,6 +33,7 @@ const nextConfig = {
       },
     ],
   },
+  trailingSlash: true,
   webpack: (config, { buildId, defaultLoaders, dev, isServer, webpack }) =>
     // const mode = process.env?.mode || 'development';
     // const PORT = Number(process.env?.PORT) || 3000;

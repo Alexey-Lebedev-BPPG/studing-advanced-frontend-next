@@ -1,7 +1,7 @@
 'use client';
 
+import { useTranslation } from 'next-i18next';
 import { FC, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import cls from './AddCommentForm.module.scss';
 import { getAddCommentFormText } from '../model/selectors/getAddCommentForm/getAddCommentForm';
 import {
