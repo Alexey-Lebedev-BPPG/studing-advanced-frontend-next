@@ -9,7 +9,6 @@ import { StateSchema } from './stateSchema';
 import { CounterReducer } from '@/entities/Counter';
 import { userReducer } from '@/entities/User';
 import { scrollSaveReducer } from '@/features/ScrollSave';
-import { $api } from '@/shared/api/api';
 import { rtkApi } from '@/shared/api/rtkApi';
 
 // стандартное решение для редакса
@@ -44,14 +43,15 @@ export const createReduxStore = (
 
     // создаем мидлваер, что передать туда наш инстанс аксиоса
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware({
-        thunk: {
-          // сюда можно передать все что угодно
-          // extraArgument: { api: $api, navigate },
-          extraArgument: { api: $api },
-        },
-        // добавляем мидлваер для rtk запросов
-      }).concat(rtkApi.middleware),
+      getDefaultMiddleware().concat(rtkApi.middleware),
+    //   {
+    //   thunk: {
+    //     // сюда можно передать все что угодно
+    //     // extraArgument: { api: $api, navigate },
+    //     extraArgument: { api: $api },
+    //   },
+    //   // добавляем мидлваер для rtk запросов
+    // }
 
     // делаем инишиал стейт по ум.
     preloadedState: initialState,

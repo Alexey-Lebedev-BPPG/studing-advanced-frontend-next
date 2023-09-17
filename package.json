@@ -8,8 +8,8 @@
   "scripts": {
     "start": "webpack serve --env mode=development",
     "start:dev:server": "node ./json-server/index.js",
-    "start:next": "next dev",
-    "start:next:turbo": "next dev --turbo",
+    "start:next": "next dev -p 3000",
+    "start:next:turbo": "next dev --turbo -p 3000",
     "start:dev": "concurrently \"pnpm start\" \"pnpm run start:dev:server\"",
     "start:dev:next": "concurrently \"pnpm run start:next\" \"pnpm run start:dev:server\"",
     "start:dev:next:turbo": "concurrently \"pnpm run start:next:turbo\" \"pnpm run start:dev:server\"",

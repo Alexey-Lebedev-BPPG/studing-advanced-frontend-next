@@ -7,7 +7,14 @@ interface NextRequest<T, K> {
 }
 
 export const nextApi = async <T, K>(props: NextRequest<T, K>) => {
-  const { body, forAuth = false, headers, method = 'GET', url } = props;
+  const {
+    body,
+    forAuth = false,
+    headers,
+    method = 'GET',
+    url,
+    ...otherParams
+  } = props;
 
   const authHeaders = { authorization: forAuth ? '1' : '' };
 
@@ -15,6 +22,7 @@ export const nextApi = async <T, K>(props: NextRequest<T, K>) => {
     body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json', ...authHeaders, ...headers },
     method,
+    ...otherParams,
   });
 
   const data: K = await response.json();

@@ -36,8 +36,35 @@ export const authConfig: AuthOptions = {
           method: 'POST',
           url: 'login',
         });
+        if (user)
+          // console.log('userAction', user);
+          // const { dispatch, getState } = createReduxStore();
+          // console.log('getState', getState());
+          // dispatch(userActions.setAuthData(user));
+          // dispatch({
+          //   payload: 777,
+          //   type: 'ADD_USER_INPUT',
+          // });
+          // console.log('dispatch', dispatch);
+          // console.log(
+          //   `dispatch({
+          //   payload: 777,
+          //   type: 'ADD_USER_INPUT',
+          // });`,
+          //   dispatch({
+          //     payload: 777,
+          //     type: 'ADD_USER_INPUT',
+          //   }),
+          // );
+          // console.log('userActions', userActions);
+          // console.log(
+          //   'userActions.setAuthData(user).type',
+          //   userActions.setAuthData(user).type,
+          // );
+          return user;
+
         // чтоб добавился объект с кастомными полями, необходимо перезаписать его в функции jwt и session
-        return user || null;
+        return null;
       },
 
       // то, что мы будем спрашивать у пользователя
