@@ -1,6 +1,4 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './ArticleTextBlockComponent.module.scss';
 import { ArticleTextBlock } from '../../model/types/article';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -13,28 +11,31 @@ interface IArticleTextBlockComponentProps {
   className?: string;
 }
 
-export const ArticleTextBlockComponent: FC<
-  IArticleTextBlockComponentProps
-> = props => {
-  const { block, className } = props;
+export const ArticleTextBlockComponent: FC<IArticleTextBlockComponentProps> =
+  memo(props => {
+    const { block, className } = props;
 
-  return (
-    <div className={classNames(cls.articleTextBlockComponent, {}, [className])}>
-      {!!block.title && (
-        <ToggleFeatures
-          nameFeatures={'isAppRedesigned'}
-          off={<TextDeprecated title={block.title} className={cls.title} />}
-          on={<Text title={block.title} className={cls.title} />}
-        />
-      )}
-      {block.paragraphs.map((paragraph, index) => (
-        <ToggleFeatures
-          key={index + paragraph.slice(0, 5)}
-          nameFeatures={'isAppRedesigned'}
-          off={<TextDeprecated text={paragraph} className={cls.paragraph} />}
-          on={<Text text={paragraph} className={cls.paragraph} />}
-        />
-      ))}
-    </div>
-  );
-};
+    return (
+      <div
+        className={classNames(cls['article-text-block-component'], {}, [
+          className,
+        ])}
+      >
+        {!!block.title && (
+          <ToggleFeatures
+            nameFeatures={'isAppRedesigned'}
+            off={<TextDeprecated title={block.title} className={cls.title} />}
+            on={<Text title={block.title} className={cls.title} />}
+          />
+        )}
+        {block.paragraphs.map((paragraph, index) => (
+          <ToggleFeatures
+            key={index + paragraph.slice(0, 5)}
+            nameFeatures={'isAppRedesigned'}
+            off={<TextDeprecated text={paragraph} className={cls.paragraph} />}
+            on={<Text text={paragraph} className={cls.paragraph} />}
+          />
+        ))}
+      </div>
+    );
+  });

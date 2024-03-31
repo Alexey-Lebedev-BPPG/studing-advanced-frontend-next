@@ -1,6 +1,4 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './NotificationList.module.scss';
 import { useNotification } from '../../api/notificationApi';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
@@ -14,7 +12,7 @@ interface INotificationListProps {
   className?: string;
 }
 
-export const NotificationList: FC<INotificationListProps> = props => {
+export const NotificationList: FC<INotificationListProps> = memo(props => {
   const { className } = props;
 
   const { data, isLoading } = useNotification(null, {
@@ -33,7 +31,7 @@ export const NotificationList: FC<INotificationListProps> = props => {
       <VStack
         max
         gap='16'
-        className={classNames(cls.notificationList, {}, [className])}
+        className={classNames(cls['notification-list'], {}, [className])}
       >
         <Skeleton width='100%' border='8px' height='80px' />
         <Skeleton width='100%' border='8px' height='80px' />
@@ -45,9 +43,9 @@ export const NotificationList: FC<INotificationListProps> = props => {
     <VStack
       max
       gap='16'
-      className={classNames(cls.notificationList, {}, [className])}
+      className={classNames(cls['notification-list'], {}, [className])}
     >
       {data?.map(item => <NotificationItem key={item.id} item={item} />)}
     </VStack>
   );
-};
+});

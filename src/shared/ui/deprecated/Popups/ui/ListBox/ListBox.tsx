@@ -1,5 +1,3 @@
-'use client';
-
 import { Listbox as HListbox } from '@headlessui/react';
 import { FC, Fragment, ReactNode } from 'react';
 import cls from './ListBox.module.scss';

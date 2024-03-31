@@ -9,7 +9,7 @@
   border: 1px solid var(--primary-color);
 }
 
-.codeRedesigned {
+.code-redesigned {
   position: relative;
 
   overflow: auto;
@@ -21,12 +21,12 @@
   border-radius: 16px;
 }
 
-.copyBtn {
+.copy-btn {
   position: absolute;
   top: 20px;
   right: 20px;
 }
 
-.copyIcon path {
+.copy-icon path {
   stroke: var(--primary-color);
 }

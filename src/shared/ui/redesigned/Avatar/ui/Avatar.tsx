@@ -1,4 +1,3 @@
-import { ImageProps } from 'next/image';
 import { CSSProperties, FC, useMemo } from 'react';
 import cls from './Avatar.module.scss';
 import UserIcon from '../../../../assets/icons/user-filled.svg';
@@ -7,10 +6,11 @@ import { Icon } from '../../Icon';
 import { Skeleton } from '../../Skeleton';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-interface IAvatarProps extends Omit<ImageProps, 'alt'> {
+interface IAvatarProps {
   alt?: string;
   className?: string;
   size?: number;
+  src?: string;
 }
 
 export const Avatar: FC<IAvatarProps> = props => {
@@ -24,14 +24,13 @@ export const Avatar: FC<IAvatarProps> = props => {
     [size],
   );
   const fallback = <Skeleton width={size} height={size} border='50%' />;
-  const errorFallback = (
-    <Icon width={size} height={size} src={UserIcon} alt='' />
-  );
+  const errorFallback = <Icon width={size} height={size} Svg={UserIcon} />;
 
   return (
     <AppImage
       fallback={fallback}
       errorFallback={errorFallback}
+      // @ts-ignore
       src={src}
       style={styles}
       className={classNames(cls.avatar, {}, [className])}

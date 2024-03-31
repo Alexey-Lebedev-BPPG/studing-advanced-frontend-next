@@ -1,6 +1,4 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './Text.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
@@ -20,9 +18,9 @@ const mapSizeToHeaderTag: Record<TextSize, HeaderTagType> = {
 };
 
 const mapSizeClass: Record<TextSize, string> = {
-  l: cls.size_l,
-  m: cls.size_m,
-  s: cls.size_s,
+  l: cls['size-l'],
+  m: cls['size-m'],
+  s: cls['size-s'],
 };
 
 interface ITextProps {
@@ -39,7 +37,7 @@ interface ITextProps {
  * Устарел, используем новые компоненты из папки redesigned
  * @deprecated
  */
-export const Text: FC<ITextProps> = props => {
+export const Text: FC<ITextProps> = memo(props => {
   const {
     align = 'left',
     className,
@@ -55,11 +53,12 @@ export const Text: FC<ITextProps> = props => {
 
   return (
     <div
-      className={classNames(cls.textWrapper, {}, [
+      className={classNames(cls['text-wrapper'], {}, [
         className,
         mapSizeClass[size],
-        cls[theme],
+        // cls[theme],
         cls[align],
+        // @ts-ignore
         cls[size],
       ])}
     >
@@ -75,4 +74,4 @@ export const Text: FC<ITextProps> = props => {
       )}
     </div>
   );
-};
+});

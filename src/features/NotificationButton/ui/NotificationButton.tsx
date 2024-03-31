@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, useCallback, useState } from 'react';
+import { FC, memo, useCallback, useState } from 'react';
 import cls from './NotificationButton.module.scss';
 import { NotificationList } from '@/entities/Notification';
 import NotificationIconDeprecated from '@/shared/assets/icons/notification-20-20.svg';
@@ -19,7 +17,7 @@ export interface INotificationButtonProps {
   className?: string;
 }
 
-export const NotificationButton: FC<INotificationButtonProps> = props => {
+export const NotificationButton: FC<INotificationButtonProps> = memo(props => {
   const { className } = props;
 
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
@@ -31,10 +29,10 @@ export const NotificationButton: FC<INotificationButtonProps> = props => {
   const trigger = (
     <ToggleFeatures
       nameFeatures={'isAppRedesigned'}
-      on={<Icon clickable src={NotificationIcon} onClick={onOpenDrawer} />}
+      on={<Icon clickable Svg={NotificationIcon} onClick={onOpenDrawer} />}
       off={
         <ButtonDeprecated theme='clear' onClick={onOpenDrawer}>
-          <IconDeprecated inverted src={NotificationIconDeprecated} />
+          <IconDeprecated inverted Svg={NotificationIconDeprecated} />
         </ButtonDeprecated>
       }
     />
@@ -72,4 +70,4 @@ export const NotificationButton: FC<INotificationButtonProps> = props => {
       )}
     </div>
   );
-};
+});

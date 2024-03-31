@@ -1,4 +1,3 @@
-import { ImageProps } from 'next/image';
 import { CSSProperties, FC, useMemo } from 'react';
 import cls from './Avatar.module.scss';
 import UserIcon from '../../../../assets/icons/user-filled.svg';
@@ -7,12 +6,13 @@ import { Icon } from '../../Icon';
 import { Skeleton } from '../../Skeleton';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-interface IAvatarProps extends Omit<ImageProps, 'alt'> {
+interface IAvatarProps {
   alt?: string;
   className?: string;
   // для использования в компонентах, где инвертированы цвета
   fallbackInverted?: boolean;
   size?: number;
+  src?: string;
 }
 
 /**
@@ -34,11 +34,10 @@ export const Avatar: FC<IAvatarProps> = props => {
 
   const errorFallback = (
     <Icon
-      alt={alt}
       inverted={fallbackInverted}
       width={size}
       height={size}
-      src={UserIcon}
+      Svg={UserIcon}
     />
   );
 
@@ -46,6 +45,7 @@ export const Avatar: FC<IAvatarProps> = props => {
     <AppImage
       fallback={fallback}
       errorFallback={errorFallback}
+      // @ts-ignore
       src={src}
       style={styles}
       className={classNames(cls.avatar, {}, [className])}

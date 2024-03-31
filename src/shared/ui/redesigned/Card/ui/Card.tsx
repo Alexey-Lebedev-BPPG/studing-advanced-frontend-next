@@ -1,12 +1,10 @@
-'use client';
-
 import { FC, HTMLAttributes, ReactNode } from 'react';
 import cls from './Card.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 type CardTheme = 'normal' | 'outline' | 'light';
 type CardPadding = '0' | '8' | '16' | '24';
-type CardBorder = 'round' | 'normalBorder' | 'partial';
+type CardBorder = 'round' | 'normal-border' | 'partial';
 
 export interface ICardProps extends HTMLAttributes<HTMLDivElement> {
   border?: CardBorder;
@@ -19,10 +17,10 @@ export interface ICardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const mapPaddingToClass: Record<CardPadding, string> = {
-  '0': 'gap_0',
-  '8': 'gap_8',
-  '16': 'gap_16',
-  '24': 'gap_24',
+  '0': 'gap-0',
+  '8': 'gap-8',
+  '16': 'gap-16',
+  '24': 'gap-24',
 };
 
 export const Card: FC<ICardProps> = props => {
@@ -43,7 +41,8 @@ export const Card: FC<ICardProps> = props => {
     <div
       className={classNames(
         cls.card,
-        { [cls.fullWidth]: fullWidth, [cls.fullHeight]: fullHeight },
+        { [cls['full-width']]: fullWidth, [cls['full-height']]: fullHeight },
+        // @ts-ignore
         [className, cls[variant], cls[paddings], cls[border]],
       )}
       {...otherProps}

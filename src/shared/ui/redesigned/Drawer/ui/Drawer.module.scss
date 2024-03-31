@@ -1,4 +1,4 @@
-.Drawer {
+.drawer {
   position: fixed;
   z-index: 100;
   inset: 0;
@@ -31,13 +31,13 @@
   border-radius: 12px 12px 0;
 }
 
-.oldDrawer {
+.old-drawer {
   .sheet {
     background-color: var(--bg-color);
   }
 }
 
-.newDrawer {
+.new-drawer {
   .sheet {
     background-color: var(--light-bg-redesigned);
   }

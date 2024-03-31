@@ -1,17 +1,15 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC, useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo, useEffect, useState } from 'react';
 import { saveJsonSettings, useJsonSettings } from '@/entities/User';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch } from '@/shared/lib/hooks/redux';
 import { useDetectDevice } from '@/shared/lib/hooks/useDetectDevice/useDetectDevice';
 import { Text } from '@/shared/ui/deprecated/Text';
 import { Drawer } from '@/shared/ui/redesigned/Drawer';
 import { Modal } from '@/shared/ui/redesigned/Modal';
 
 // модалка с приветственным сообщением, когда пользователь зашел первый раз на страницу
-export const ArticlePageGreeting: FC = () => {
-  const { t } = useTranslation();
+export const ArticlePageGreeting: FC = memo(() => {
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const { isArticlePageWasOpened } = useJsonSettings();
   const isMobile = useDetectDevice();
@@ -48,4 +46,4 @@ export const ArticlePageGreeting: FC = () => {
       {text}
     </Modal>
   );
-};
+});

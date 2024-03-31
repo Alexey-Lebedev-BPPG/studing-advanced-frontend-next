@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 // import { useDispatch } from "react-redux";
 import { useCounterValue } from '../model/selectors/getCounterValue/getCounterValue';

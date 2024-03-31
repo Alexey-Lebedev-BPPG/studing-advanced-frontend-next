@@ -1,10 +1,10 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { AppImage } from './AppImage';
-import UserIcon from '../../../assets/icons/user-filled.svg';
+import UserIcon from '../../../../assets/icons/user-filled.svg';
 import { Icon } from '../../Icon';
 import { Skeleton } from '../../Skeleton';
-import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
-import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { StoreDecorator } from '@/shared/configs/storybook/StoreDecorator/StoreDecorator';
+import { ThemeDecorator } from '@/shared/configs/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '@/shared/const/theme';
 
 export default {
@@ -47,7 +47,7 @@ ErrorAltDark.decorators = [StoreDecorator({}), ThemeDecorator(Theme.DARK)];
 
 export const ErrorFallback = Template.bind({});
 ErrorFallback.args = {
-  errorFallback: <Icon width={300} height={300} src={UserIcon} />,
+  errorFallback: <Icon width={300} height={300} Svg={UserIcon} />,
   fallback: <Skeleton width='100%' height='100%' />,
   src: 'https://cdn.pixabay.come-736885__480.jpg',
 };
@@ -55,7 +55,7 @@ ErrorFallback.decorators = [StoreDecorator({})];
 
 export const ErrorFallbackDark = Template.bind({});
 ErrorFallbackDark.args = {
-  errorFallback: <Icon width={300} height={300} src={UserIcon} />,
+  errorFallback: <Icon width={300} height={300} Svg={UserIcon} />,
   fallback: <Skeleton width='100%' height='100%' />,
   src: 'https://cdn.pixabay.come-736885__480.jpg',
 };

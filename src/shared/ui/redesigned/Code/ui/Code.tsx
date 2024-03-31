@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import cls from './Code.module.scss';
 import { Button as ButtonDeprecated } from '../../../deprecated/Button';
 import { Icon } from '../../Icon';
@@ -14,7 +12,7 @@ interface ICodeProps {
   text: string;
 }
 
-export const Code: FC<ICodeProps> = props => {
+export const Code: FC<ICodeProps> = memo(props => {
   const { className, text } = props;
 
   const onCopy = useCallback(() => {
@@ -28,22 +26,22 @@ export const Code: FC<ICodeProps> = props => {
         // pre позволяет сохранять пробелы и переносы для кода
         <pre className={classNames(cls.code, {}, [className])}>
           <ButtonDeprecated
-            className={cls.copyBtn}
+            className={cls['copy-btn']}
             theme='clear'
             onClick={onCopy}
           >
-            <CopyIcon className={cls.copyIcon} />
+            <CopyIcon className={cls['copy-icon']} />
           </ButtonDeprecated>
           <code>{text}</code>
         </pre>
       }
       on={
         // pre позволяет сохранять пробелы и переносы для кода
-        <pre className={classNames(cls.codeRedesigned, {}, [className])}>
+        <pre className={classNames(cls['code-redesigned'], {}, [className])}>
           <Icon
             clickable
-            className={cls.copyBtn}
-            src={CopyIconNew}
+            className={cls['copy-btn']}
+            Svg={CopyIconNew}
             onClick={onCopy}
           />
           <code>{text}</code>
@@ -51,4 +49,4 @@ export const Code: FC<ICodeProps> = props => {
       }
     />
   );
-};
+});

@@ -1,0 +1,16 @@
+/build
+/build-esbuild
+/.loki
+/node_modules
+/.git
+/.idea
+/.vscode
+/.github
+/storybook-static
+/reports
+/coverage
+
+# *.html
+# *.css
+# *.scss
+

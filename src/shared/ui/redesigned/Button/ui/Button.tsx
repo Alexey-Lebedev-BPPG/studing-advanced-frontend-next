@@ -64,8 +64,8 @@ export const Button: FC<IButtonProps> = forwardRef(
     const mods = {
       [cls.square]: square,
       [cls.disabled]: readonly,
-      [cls.fullWidth]: fullWidth,
-      [cls.withAddon]: Boolean(addonLeft) || Boolean(addonRight),
+      [cls['full-width']]: fullWidth,
+      [cls['with-addon']]: Boolean(addonLeft) || Boolean(addonRight),
     };
 
     return (
@@ -80,9 +80,9 @@ export const Button: FC<IButtonProps> = forwardRef(
         {...otherProps}
         ref={ref}
       >
-        {!!addonLeft && <div className={cls.addonLeft}>{addonLeft}</div>}
+        {!!addonLeft && <div className={cls['addon-left']}>{addonLeft}</div>}
         {children}
-        {!!addonRight && <div className={cls.addonRight}>{addonRight}</div>}
+        {!!addonRight && <div className={cls['addon-right']}>{addonRight}</div>}
       </button>
     );
   },

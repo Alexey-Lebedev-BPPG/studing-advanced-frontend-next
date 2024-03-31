@@ -1,10 +1,8 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './Text.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-type TextVariant = 'error' | 'accent' | 'primary';
+type TextVariant = 'error' | 'accent';
 
 type TextAlign = 'center' | 'left' | 'right';
 
@@ -14,9 +12,9 @@ type HeaderTagType = 'h1' | 'h2' | 'h3';
 
 // маппер, который определяет размер
 const mapSizeToClass: Record<TextSize, string> = {
-  l: cls.size_l,
-  m: cls.size_m,
-  s: cls.size_s,
+  l: cls['size-l'],
+  m: cls['size-m'],
+  s: cls['size-s'],
 };
 
 // маппер, который определяет тег в зависимости от размера
@@ -38,18 +36,18 @@ interface ITextProps {
   variant?: TextVariant;
 }
 
-export const Text: FC<ITextProps> = props => {
+export const Text: FC<ITextProps> = memo(props => {
   const {
     align = 'left',
     bold,
-    // ввиду того, что такое свойство не позволительно деструктуризировать, нужно переименовать его
     className,
+    // ввиду того, что такое свойство не позволительно деструктуризировать, нужно переименовать его
     'data-testid': dataTestId = 'Text',
     nowrap = false,
     size = 'm',
     text,
     title,
-    variant = 'primary',
+    variant = 'accent',
   } = props;
 
   const HeaderTag = mapSizeToHeaderTag[size];
@@ -60,7 +58,7 @@ export const Text: FC<ITextProps> = props => {
   return (
     <div
       className={classNames(
-        cls.textWrapper,
+        '',
         { [cls.bold]: bold, [cls.wrap]: nowrap },
         additionalClasses,
       )}
@@ -77,4 +75,4 @@ export const Text: FC<ITextProps> = props => {
       )}
     </div>
   );
-};
+});

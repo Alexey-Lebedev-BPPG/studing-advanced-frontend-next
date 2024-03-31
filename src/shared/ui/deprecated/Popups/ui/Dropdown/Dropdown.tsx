@@ -1,9 +1,7 @@
-'use client';
-
 import { Menu } from '@headlessui/react';
 import { FC, Fragment, ReactNode } from 'react';
 import cls from './Dropdown.module.scss';
-import { AppLink } from '../../../AppLink';
+import { AppLink } from '../../../../redesigned/AppLink';
 import { mapDirectionClass } from '../../styles/consts';
 import popupCls from '../../styles/popups.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';

@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import LoginForm from './LoginForm';
-import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
+import { StoreDecorator } from '@/shared/configs/storybook/StoreDecorator/StoreDecorator';
 
 export default {
   argTypes: { backgroundColor: { control: 'color' } },

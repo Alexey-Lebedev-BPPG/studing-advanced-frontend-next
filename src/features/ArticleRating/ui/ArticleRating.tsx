@@ -1,14 +1,12 @@
-'use client';
-
-import { useSession } from 'next-auth/react';
-import { useTranslation } from 'next-i18next';
-import { FC, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo, useCallback } from 'react';
 import {
   useArticleRating,
   useCreateArticleRating,
 } from '../api/articleRatingApi';
 import { RatingCard } from '@/entities/Rating';
-import { User } from '@/entities/User';
+import { getUserAuthData } from '@/entities/User';
+import { useAppSelector } from '@/shared/lib/hooks/redux';
 import { Skeleton } from '@/shared/ui/deprecated/Skeleton';
 
 export interface IArticleRatingProps {
@@ -16,15 +14,14 @@ export interface IArticleRatingProps {
   className?: string;
 }
 
-const ArticleRating: FC<IArticleRatingProps> = props => {
+const ArticleRating: FC<IArticleRatingProps> = memo(props => {
   const { articleId, className } = props;
 
-  const { t } = useTranslation();
-  const { data: dataSession } = useSession();
-  const authData = (dataSession?.user || undefined) as User;
+  const t = useTranslations();
+  const userData = useAppSelector(getUserAuthData);
   const { data, isLoading } = useArticleRating({
     articleId,
-    userId: authData?.id || '',
+    userId: userData?.id || '',
   });
   // использование запроса на создание
   const [rateArticleMutation, { isLoading: isLoadingCreate }] =
@@ -40,13 +37,13 @@ const ArticleRating: FC<IArticleRatingProps> = props => {
           articleId,
           feedback,
           rate: starCount,
-          userId: authData?.id || '',
+          userId: userData?.id || '',
         });
       } catch (error) {
         console.log('error', error);
       }
     },
-    [articleId, rateArticleMutation, authData?.id],
+    [articleId, rateArticleMutation, userData?.id],
   );
 
   const onAccept = useCallback(
@@ -75,6 +72,6 @@ const ArticleRating: FC<IArticleRatingProps> = props => {
       onCancel={onCancel}
     />
   );
-};
+});
 
 export default ArticleRating;

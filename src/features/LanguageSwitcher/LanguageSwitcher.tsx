@@ -1,9 +1,9 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { FC, memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
+import { useAppNavigation } from '@/shared/lib/hooks/useAppNavigation/useAppNavigation';
+import { useAppPathname } from '@/shared/lib/router/navigation';
 import { Button as ButtonDeprecated } from '@/shared/ui/deprecated/Button';
 import { Button } from '@/shared/ui/redesigned/Button';
 
@@ -13,14 +13,27 @@ interface ILanguageSwitcherProps {
   short?: boolean;
 }
 
-export const LanguageSwitcher: FC<ILanguageSwitcherProps> = props => {
+export const LanguageSwitcher: FC<ILanguageSwitcherProps> = memo(props => {
   const { className, short } = props;
 
-  const { i18n, t } = useTranslation();
+  const t = useTranslations();
+  const language = useLocale();
+  const pathname = useAppPathname();
+  const { replace } = useAppNavigation();
 
   // вызываем функцию перевода и в ней меняем язык на противоположный
-  const toggle = () =>
-    i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru');
+  const onChangeLanguage = () => {
+    replace({
+      options: {
+        locale: language === 'ru' || language === 'ru-RU' ? 'en' : 'ru',
+      },
+      path: pathname,
+    });
+    localStorage.setItem(
+      'i18nextLng',
+      language === 'ru' || language === 'ru-RU' ? 'en' : 'ru',
+    );
+  };
 
   return (
     <ToggleFeatures
@@ -29,16 +42,16 @@ export const LanguageSwitcher: FC<ILanguageSwitcherProps> = props => {
         <ButtonDeprecated
           theme='clear'
           className={classNames('', {}, [className])}
-          onClick={toggle}
+          onClick={onChangeLanguage}
         >
           {t(short ? 'Короткий язык' : 'Язык')}
         </ButtonDeprecated>
       }
       on={
-        <Button variant='clear' onClick={toggle}>
+        <Button variant='clear' onClick={onChangeLanguage}>
           {t(short ? 'Короткий язык' : 'Язык')}
         </Button>
       }
     />
   );
-};
+});

@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/react';
 import { ListBox } from './ListBox';
-import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { ThemeDecorator } from '@/shared/configs/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '@/shared/const/theme';
 
 export default {

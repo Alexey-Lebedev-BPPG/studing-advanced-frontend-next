@@ -1,4 +1,4 @@
-.inputWrapper {
+.input-wrapper {
   display: flex;
   align-items: center;
 
@@ -30,22 +30,22 @@
 .focused {
   border: 2px solid var(--accent-redesigned);
 
-  .addonLeft svg,
-  .addonRight svg {
+  .addon-left svg,
+  .addon-right svg {
     color: var(--accent-redesigned);
   }
 }
 
-.addonLeft,
-.addonRight {
+.addon-left,
+.addon-right {
   display: flex;
 }
 
-.withAddonLeft {
+.with-addon-left {
   padding-left: 8px;
 }
 
-.withAddonRight {
+.with-addon-right {
   padding-right: 8px;
 }
 

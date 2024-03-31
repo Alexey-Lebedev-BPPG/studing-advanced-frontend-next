@@ -1,21 +1,15 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
-
 import { FC, MutableRefObject, ReactNode, UIEvent, useRef } from 'react';
 import cls from './Page.module.scss';
-import type { StateSchema } from '@/app-fsd/providers/StoreProvider';
+import { StateSchema } from '@/app-fsd/providers/StoreProvider';
 import { getScrollSavePath, scrollSaveActions } from '@/features/ScrollSave';
 import { PAGE_ID } from '@/shared/const/pageId';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { toggleFeatures } from '@/shared/lib/features';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/redux';
 import { useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll/useInfiniteScroll';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useThrottle } from '@/shared/lib/hooks/useThrottle/useThrottle';
+import { useAppPathname } from '@/shared/lib/router/navigation';
 import { TestProps } from '@/shared/types/tests';
 
 export interface IPageProps extends TestProps {
@@ -30,14 +24,14 @@ export const Page: FC<IPageProps> = props => {
   const { children, className, onScrollEnd, ...otherProps } = props;
 
   const dispatch = useAppDispatch();
-  const pathname = usePathname();
+  const pathname = useAppPathname();
 
   const wrapperRef = useRef() as MutableRefObject<HTMLElement>;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   // получаем позицию скролла из редакса по нашей странице
   const scrollPosition = useAppSelector(
-    (state: StateSchema) => getScrollSavePath(state, pathname || ''),
+    (state: StateSchema) => getScrollSavePath(state, pathname),
     // eslint-disable-next-line function-paren-newline
   );
 
@@ -62,7 +56,7 @@ export const Page: FC<IPageProps> = props => {
     // получаем значение в пикселях от крайней точки сверху и записываем в редакс
     dispatch(
       scrollSaveActions.setScrollPosition({
-        path: pathname || '',
+        path: pathname,
         position: event.currentTarget.scrollTop,
       }),
     );
@@ -78,7 +72,7 @@ export const Page: FC<IPageProps> = props => {
         toggleFeatures({
           name: 'isAppRedesigned',
           off: () => cls.page,
-          on: () => cls.pageRedesigned,
+          on: () => cls['page-redesigned'],
         }),
         {},
         [className],

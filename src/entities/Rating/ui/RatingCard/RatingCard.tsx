@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC, useCallback, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo, useCallback, useState } from 'react';
 import cls from './RatingCard.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
@@ -33,7 +31,7 @@ interface IRatingCardProps {
   title: string;
 }
 
-export const RatingCard: FC<IRatingCardProps> = props => {
+export const RatingCard: FC<IRatingCardProps> = memo(props => {
   const {
     className,
     feedbackTitle,
@@ -44,7 +42,7 @@ export const RatingCard: FC<IRatingCardProps> = props => {
     title,
   } = props;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
   const isMobile = useDetectDevice();
 
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -192,4 +190,4 @@ export const RatingCard: FC<IRatingCardProps> = props => {
       }
     />
   );
-};
+});

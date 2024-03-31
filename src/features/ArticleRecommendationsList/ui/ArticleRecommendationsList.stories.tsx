@@ -1,8 +1,8 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { ArticleRecommendationsList } from './ArticleRecommendationsList';
 import { Article } from '@/entities/Article';
-import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
-import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { StoreDecorator } from '@/shared/configs/storybook/StoreDecorator/StoreDecorator';
+import { ThemeDecorator } from '@/shared/configs/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '@/shared/const/theme';
 
 export default {
@@ -43,8 +43,7 @@ Normal.parameters = {
         { ...mockArticle, id: '3' },
       ],
       status: 200,
-      // url: `${process.env?.NEXT_PUBLIC_API_URL}/articles?_limit=3`,
-      url: `${'https://ulbi-example-back.vercel.app'}/articles?_limit=3`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/articles?_limit=3`,
     },
   ],
 };

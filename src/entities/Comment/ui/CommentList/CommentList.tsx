@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo } from 'react';
 import { Comment } from '../../model/types/comment';
 import { CommentCard } from '../CommentCard/CommentCard';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -16,9 +14,9 @@ interface ICommentListProps {
   isLoading?: boolean;
 }
 
-export const CommentList: FC<ICommentListProps> = props => {
+export const CommentList: FC<ICommentListProps> = memo(props => {
   const { className, comments, isLoading } = props;
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   if (isLoading)
     return (
@@ -48,4 +46,4 @@ export const CommentList: FC<ICommentListProps> = props => {
       )}
     </VStack>
   );
-};
+});

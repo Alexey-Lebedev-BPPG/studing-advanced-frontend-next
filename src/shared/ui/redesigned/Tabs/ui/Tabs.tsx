@@ -3,6 +3,7 @@ import cls from './Tabs.module.scss';
 import { Card } from '../../Card';
 import { Flex, FlexDirection } from '../../Stack';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { typedMemo } from '@/shared/lib/typedMemo/typedMemo';
 
 export interface ITabItem<T> {
   content: ReactNode;
@@ -17,7 +18,7 @@ export interface ITabsProps<T> {
   tabs: ITabItem<T>[];
 }
 
-export const Tabs = <T extends string>(props: ITabsProps<T>) => {
+export const Tabs = typedMemo(<T extends string>(props: ITabsProps<T>) => {
   const {
     className,
     direction = 'row',
@@ -58,4 +59,4 @@ export const Tabs = <T extends string>(props: ITabsProps<T>) => {
       })}
     </Flex>
   );
-};
+});

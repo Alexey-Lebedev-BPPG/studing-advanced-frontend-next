@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    // "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"],
+    "isolatedModules": false
+  },
+  "include": [
+    // добавляем это, что в сапрессе работали все типы + которые в приложении
+    "../configs/jest/setupTests.ts",
+    "../src/**/*.ts",
+    "../src/**/*.tsx",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  // расширяем типизацию сайпресса, чтоб в нем был наш конфиг приложения
+  "extends": "../tsconfig"
+}

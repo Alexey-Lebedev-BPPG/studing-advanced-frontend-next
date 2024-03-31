@@ -1,5 +1,3 @@
-'use client';
-
 import { FC, HTMLAttributes, ReactNode } from 'react';
 import cls from './Card.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -28,7 +26,7 @@ export const Card: FC<ICardProps> = props => {
 
   return (
     <div
-      className={classNames(cls.card, { [cls.fullWidth]: fullWidth }, [
+      className={classNames(cls.card, { [cls['full-width']]: fullWidth }, [
         className,
         cls[theme],
       ])}

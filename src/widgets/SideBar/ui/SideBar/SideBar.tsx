@@ -1,7 +1,4 @@
-'use client';
-
-import { useSession } from 'next-auth/react';
-import { FC, useMemo, useState } from 'react';
+import { FC, memo, useMemo, useState } from 'react';
 import cls from './SideBar.module.scss';
 import { useSidebarItems } from '../../model/selectors/getSidebarItems';
 import { SidebarItem } from '../SidebarItem';
@@ -19,10 +16,8 @@ interface ISideBarProps {
   className?: string;
 }
 
-export const SideBar: FC<ISideBarProps> = props => {
+export const SideBar: FC<ISideBarProps> = memo(props => {
   const { className } = props;
-  const session = useSession();
-  console.log('session', session);
 
   const [collapsed, setCollapsed] = useState(false);
   const sidebarItemsList = useSidebarItems();
@@ -46,12 +41,12 @@ export const SideBar: FC<ISideBarProps> = props => {
         <aside
           data-testid='sidebar'
           className={classNames(
-            cls.sideBarRedesigned,
-            { [cls.collapsedRedesigned]: collapsed },
+            cls['sidebar-redesigned'],
+            { [cls['collapsed-redesigned']]: collapsed },
             [className],
           )}
         >
-          <AppLogo size={collapsed ? 30 : 50} className={cls.appLogo} />
+          <AppLogo size={collapsed ? 30 : 50} className={cls['app-logo']} />
           <VStack role='navigation' gap='8' className={cls.items}>
             {/* рендерим наши ссылки сайдбара */}
             {itemsList}
@@ -59,8 +54,8 @@ export const SideBar: FC<ISideBarProps> = props => {
           <Icon
             clickable
             data-testid='sidebar-toggle'
-            className={cls.collapsedBtn}
-            src={ArrowIcon}
+            className={cls['collapsed-btn']}
+            Svg={ArrowIcon}
             onClick={onToggle}
           />
           <div className={cls.switchers}>
@@ -72,15 +67,17 @@ export const SideBar: FC<ISideBarProps> = props => {
       off={
         <aside
           data-testid='sidebar'
-          className={classNames(cls.sideBar, { [cls.collapsed]: collapsed }, [
-            className,
-          ])}
+          className={classNames(
+            cls['side-bar'],
+            { [cls.collapsed]: collapsed },
+            [className],
+          )}
         >
           <Button
             square
             type='button'
             data-testid='sidebar-toggle'
-            className={cls.collapsedBtn}
+            className={cls['collapsed-btn']}
             theme='backgroundInverted'
             size='l'
             onClick={onToggle}
@@ -99,4 +96,4 @@ export const SideBar: FC<ISideBarProps> = props => {
       }
     />
   );
-};
+});

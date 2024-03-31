@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo, useMemo } from 'react';
 import cls from './ArticleSortSelector.module.scss';
 import { ArticleSortFields } from '@/entities/Article';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -20,69 +18,78 @@ export interface IArticleSortSelectorProps {
   sort: ArticleSortFields;
 }
 
-export const ArticleSortSelector: FC<IArticleSortSelectorProps> = props => {
-  const { className, onChangeOrder, onChangeSort, order, sort } = props;
+export const ArticleSortSelector: FC<IArticleSortSelectorProps> = memo(
+  props => {
+    const { className, onChangeOrder, onChangeSort, order, sort } = props;
 
-  const { t } = useTranslation();
+    const t = useTranslations();
 
-  const orderOption = useMemo<SelectOption<SortOrder>[]>(
-    () => [
-      { content: t('возрастанию'), valueOpt: 'asc' },
-      { content: t('убыванию'), valueOpt: 'desc' },
-    ],
-    [t],
-  );
+    const orderOption = useMemo<SelectOption<SortOrder>[]>(
+      () => [
+        { content: t('возрастанию'), valueOpt: 'asc' },
+        { content: t('убыванию'), valueOpt: 'desc' },
+      ],
+      [t],
+    );
 
-  const sortFieldOption = useMemo<SelectOption<ArticleSortFields>[]>(
-    () => [
-      { content: t('дате создания'), valueOpt: 'createdAt' },
-      { content: t('названию'), valueOpt: 'title' },
-      { content: t('просмотрам'), valueOpt: 'views' },
-    ],
-    [t],
-  );
+    const sortFieldOption = useMemo<SelectOption<ArticleSortFields>[]>(
+      () => [
+        { content: t('дате создания'), valueOpt: 'createdAt' },
+        { content: t('названию'), valueOpt: 'title' },
+        { content: t('просмотрам'), valueOpt: 'views' },
+      ],
+      [t],
+    );
 
-  return (
-    <ToggleFeatures
-      nameFeatures={'isAppRedesigned'}
-      off={
-        <div className={classNames(cls.articleSortSelector, {}, [className])}>
-          <Select
-            options={sortFieldOption}
-            label={`${t('Сортировать ПО')}`}
-            value={sort}
-            onChange={onChangeSort}
-          />
-          <Select
-            options={orderOption}
-            label={`${t('по')}`}
-            value={order}
-            className={cls.order}
-            onChange={onChangeOrder}
-          />
-        </div>
-      }
-      on={
-        <div
-          className={classNames(cls.articleSortSelectorRedesigned, {}, [
-            className,
-          ])}
-        >
-          <VStack gap='8'>
-            <Text text={t('Сортировать по:')} />
-            <ListBox
-              items={sortFieldOption}
+    return (
+      <ToggleFeatures
+        nameFeatures={'isAppRedesigned'}
+        off={
+          <div
+            className={classNames(cls['article-sort-selector'], {}, [
+              className,
+            ])}
+          >
+            <Select
+              options={sortFieldOption}
+              label={`${t('Сортировать ПО')}`}
               value={sort}
               onChange={onChangeSort}
             />
-            <ListBox
-              items={orderOption}
+            <Select
+              options={orderOption}
+              label={`${t('по')}`}
               value={order}
+              className={cls.order}
               onChange={onChangeOrder}
             />
-          </VStack>
-        </div>
-      }
-    />
-  );
-};
+          </div>
+        }
+        on={
+          <div
+            className={classNames(
+              // cls.articleSortSelectorRedesigned,
+              '',
+              {},
+              [className],
+            )}
+          >
+            <VStack gap='8'>
+              <Text text={t('Сортировать по:')} />
+              <ListBox
+                items={sortFieldOption}
+                value={sort}
+                onChange={onChangeSort}
+              />
+              <ListBox
+                items={orderOption}
+                value={order}
+                onChange={onChangeOrder}
+              />
+            </VStack>
+          </div>
+        }
+      />
+    );
+  },
+);

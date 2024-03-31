@@ -1,8 +1,10 @@
+'use client';
+
 import {
-  AnyAction,
   combineReducers,
   Reducer,
   ReducersMapObject,
+  UnknownAction,
 } from '@reduxjs/toolkit';
 import {
   MountedReducers,
@@ -41,15 +43,19 @@ export function createReducerManager(
     getReducerMap: () => reducers,
 
     // обычная функция, которая проверяет, что если какие-то редьюсеры есть в keysToRemove, то она их удаляет из стейта
-    reduce: (state: StateSchema, action: AnyAction) => {
+    reduce: (state: StateSchema, action: UnknownAction) => {
       if (keysToRemove.length > 0) {
         state = { ...state };
         keysToRemove.forEach(key => delete state[key]);
         // после цикла очищаем массив
         keysToRemove = [];
       }
+
+      if (action.type === 'USER_LOGOUT')
+        return combinedReducer(undefined, action);
+
       // и возвращаем новый редьюсер, в который передаем новый стейт без ненужных ключей
-      return combinedReducer(state, action);
+      return combinedReducer(state as never, action);
     },
     // эту функция добавляет ключ в массив для удаления и удаляет его из главного редьюсера
     remove: (key: StateSchemaKey) => {

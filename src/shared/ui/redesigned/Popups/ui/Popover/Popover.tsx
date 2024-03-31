@@ -1,11 +1,9 @@
-'use client';
-
 import { Popover as PopoverHeadless } from '@headlessui/react';
 import { FC, ReactNode } from 'react';
 import cls from './Popover.module.scss';
 import { DropDownDirection } from '../../../../../types/ui';
 import { mapDirectionClass } from '../../styles/consts';
-import popupCls from '../../styles/popups.module.scss';
+import popupCls from '../../styles/popups.module.css';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 export interface IPopoverProps {

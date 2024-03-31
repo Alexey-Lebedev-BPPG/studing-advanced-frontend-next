@@ -1,10 +1,15 @@
-coverage
-/node_modules/
+/build
+/.loki
+/node_modules
 /.git
 /.idea
 /.vscode
 /.github
-/build
-*.html
-*.css
-*.scss
+/storybook-static
+/reports
+/coverage
+
+# *.html
+# *.css
+# *.scss
+

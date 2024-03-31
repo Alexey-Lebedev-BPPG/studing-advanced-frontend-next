@@ -1,4 +1,4 @@
-.mainLayout {
+.main-layout {
   display: grid;
 
   // указываем порядок отображения
@@ -41,7 +41,6 @@
   flex-direction: column;
   align-items: flex-end;
 }
-
 
 .toolbar {
   width: 100%;

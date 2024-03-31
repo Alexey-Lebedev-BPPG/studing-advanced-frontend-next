@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC, useCallback, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo, useCallback, useMemo } from 'react';
 import { ArticleType } from '@/entities/Article';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
@@ -14,10 +12,10 @@ export interface IArticleTypeTabsProps {
   selectedValue: ArticleType;
 }
 
-export const ArticleTypeTabs: FC<IArticleTypeTabsProps> = props => {
+export const ArticleTypeTabs: FC<IArticleTypeTabsProps> = memo(props => {
   const { className, onChangeType, selectedValue } = props;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   const tabs = useMemo<ITabItem<ArticleType>[]>(
     () => [
@@ -56,4 +54,4 @@ export const ArticleTypeTabs: FC<IArticleTypeTabsProps> = props => {
       }
     />
   );
-};
+});

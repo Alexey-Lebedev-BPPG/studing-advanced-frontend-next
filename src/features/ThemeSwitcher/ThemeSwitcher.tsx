@@ -1,12 +1,10 @@
-'use client';
-
-import { FC, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { saveJsonSettings } from '@/entities/User';
 import ThemeIconDeprecated from '@/shared/assets/icons/theme-light.svg';
 import ThemeIcon from '@/shared/assets/icons/theme.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch } from '@/shared/lib/hooks/redux';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { Button as ButtonDeprecated } from '@/shared/ui/deprecated/Button';
 import { Icon as IconDeprecated } from '@/shared/ui/deprecated/Icon';
@@ -16,7 +14,7 @@ interface IThemeSwitcherProps {
   className?: string;
 }
 
-export const ThemeSwitcher: FC<IThemeSwitcherProps> = props => {
+export const ThemeSwitcher: FC<IThemeSwitcherProps> = memo(props => {
   const { className } = props;
 
   const { theme, toggleTheme } = useTheme();
@@ -31,7 +29,7 @@ export const ThemeSwitcher: FC<IThemeSwitcherProps> = props => {
   return (
     <ToggleFeatures
       nameFeatures={'isAppRedesigned'}
-      on={<Icon clickable src={ThemeIcon} onClick={onToggleHandler} />}
+      on={<Icon clickable Svg={ThemeIcon} onClick={onToggleHandler} />}
       off={
         <ButtonDeprecated
           theme='clear'
@@ -40,7 +38,7 @@ export const ThemeSwitcher: FC<IThemeSwitcherProps> = props => {
         >
           <IconDeprecated
             inverted
-            src={ThemeIconDeprecated}
+            Svg={ThemeIconDeprecated}
             width={40}
             height={40}
           />
@@ -48,4 +46,4 @@ export const ThemeSwitcher: FC<IThemeSwitcherProps> = props => {
       }
     />
   );
-};
+});

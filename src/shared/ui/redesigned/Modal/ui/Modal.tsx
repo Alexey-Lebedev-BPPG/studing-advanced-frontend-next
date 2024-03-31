@@ -1,5 +1,3 @@
-'use client';
-
 import { FC, ReactNode } from 'react';
 import cls from './Modal.module.scss';
 import { Overlay } from '../../Overlay';
@@ -29,7 +27,7 @@ export const Modal: FC<IModalProps> = props => {
 
   const mods = {
     [cls.opened]: isOpen,
-    [cls.isClosing]: isClosing,
+    [cls['is-closing']]: isClosing,
   };
   // если lazy и компонент не вмонтирован, то модалку не отрисовываем
   if (lazy && !isMounting) return null;
@@ -40,11 +38,11 @@ export const Modal: FC<IModalProps> = props => {
         className={classNames(cls.modal, mods, [
           className,
           theme,
-          'app_modal',
+          'app-modal',
           toggleFeatures({
             name: 'isAppRedesigned',
-            off: () => cls.oldModal,
-            on: () => cls.newModal,
+            off: () => cls['old-modal'],
+            on: () => cls['new-modal'],
           }),
         ])}
       >

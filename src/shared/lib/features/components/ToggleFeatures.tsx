@@ -1,5 +1,3 @@
-'use client';
-
 import { FC, ReactElement } from 'react';
 import { getFeatureFlags } from '../lib/setGetFeatures';
 import { FeatureFlags } from '@/shared/types/featureFlags';

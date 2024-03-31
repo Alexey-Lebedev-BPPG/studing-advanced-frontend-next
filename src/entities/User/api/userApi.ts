@@ -37,5 +37,6 @@ const userApi = rtkApi.injectEndpoints({
 // также в редаксе есть возможность отправлять запросы без хуков. для этого достаем метод initiate, чтоб его потом использовать в thunk-е
 export const setJsonSettingsMutation =
   userApi.endpoints.saveJsonSettings.initiate;
-
 export const getUserDataByIdQuery = userApi.endpoints.getUserDataById.initiate;
+
+// StartQueryActionCreator<QueryDefinition<void, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>, never, NewLocation, "rtkApi">>

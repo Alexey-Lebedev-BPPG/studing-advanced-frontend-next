@@ -1,6 +1,4 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './ArticleImageBlockComponent.module.scss';
 import { ArticleImageBlock } from '../../model/types/article';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -14,23 +12,24 @@ interface IArticleImageBlockComponentProps {
   className?: string;
 }
 
-export const ArticleImageBlockComponent: FC<
-  IArticleImageBlockComponentProps
-> = props => {
-  const { block, className } = props;
+export const ArticleImageBlockComponent: FC<IArticleImageBlockComponentProps> =
+  memo(props => {
+    const { block, className } = props;
 
-  return (
-    <div
-      className={classNames(cls.articleImageBlockComponent, {}, [className])}
-    >
-      <AppImage src={block.src} className={cls.img} alt={block.title} />
-      {!!block.title && (
-        <ToggleFeatures
-          nameFeatures={'isAppRedesigned'}
-          on={<Text title={block.title} align='center' />}
-          off={<TextDeprecated title={block.title} align='center' />}
-        />
-      )}
-    </div>
-  );
-};
+    return (
+      <div
+        className={classNames(cls['article-image-block-component'], {}, [
+          className,
+        ])}
+      >
+        <AppImage src={block.src} className={cls.img} alt={block.title} />
+        {!!block.title && (
+          <ToggleFeatures
+            nameFeatures={'isAppRedesigned'}
+            on={<Text title={block.title} align='center' />}
+            off={<TextDeprecated title={block.title} align='center' />}
+          />
+        )}
+      </div>
+    );
+  });

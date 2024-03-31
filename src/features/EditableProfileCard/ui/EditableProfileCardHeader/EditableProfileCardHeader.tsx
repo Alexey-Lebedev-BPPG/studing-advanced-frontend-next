@@ -1,7 +1,4 @@
-'use client';
-
-import { useSession } from 'next-auth/react';
-import { useTranslation } from 'next-i18next';
+import { useTranslations } from 'next-intl';
 import { FC, useCallback } from 'react';
 import {
   getProfileData,
@@ -9,13 +6,10 @@ import {
 } from '../../model/selectors/getEditableProfileCard';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 import { profileActions } from '../../model/slice/profileSlice';
-import { User } from '@/entities/User';
+import { getUserAuthData } from '@/entities/User';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/redux';
 import { Button as ButtonDeprecated } from '@/shared/ui/deprecated/Button';
 import { Text as TextDeprecated } from '@/shared/ui/deprecated/Text';
 import { Button } from '@/shared/ui/redesigned/Button';
@@ -30,10 +24,9 @@ interface IEditableProfileCardHeaderProps {
 export const EditableProfileCardHeader: FC<IEditableProfileCardHeaderProps> = ({
   className,
 }) => {
-  const { t } = useTranslation('profile');
+  const t = useTranslations();
   const dispatch = useAppDispatch();
-  const { data: dataSession } = useSession();
-  const authData = (dataSession?.user || undefined) as User;
+  const authData = useAppSelector(getUserAuthData);
   const profileData = useAppSelector(getProfileData);
   const readonly = useAppSelector(getProfileIsReadonly);
 

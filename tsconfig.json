@@ -7,7 +7,7 @@
     // указываем модульную систему
     "module": "ESNext",
     // во что компилируем
-    "target": "ES6",
+    "target": "es2021",
     // позволяет использовать jsx (если указать react-jsx, то не нужно в каждый файл импортить React) + Нажать комбинацию
     // клавиш "CTRL + Shift + P", в палитре команд ввести "typescript version" и выбрать "Использовать версию рабочей
     // области" ("Use workspace version")
@@ -21,37 +21,31 @@
     // для абсолютных импортов (без соплей)
     "baseUrl": ".",
     // добавляем алиасы для абсолютных импортов
-    "paths": {
-      "@/*": ["./src/*"]
-    },
+    "paths": { "crypto": ["node_modules/crypto-js"], "@/*": ["./src/*"] },
     // для использования привычных импортов (вместо commonjs(require()))
     "esModuleInterop": true,
     // для использования привычных default импортов (вместо import * as ...)
     "allowSyntheticDefaultImports": true,
     // позволяет выносить типы тайпскрипта в отдельные модули, чтоб упростить сборку бейблом (при этом типы нужно будет экспортить как export type {} from "...). Обязательное поле при использовании esbuild !!!
     "isolatedModules": true,
-    // чтоб сработал автокомплит для модулей
-    "plugins": [
-      { "name": "next" },
-      { "name": "typescript-plugin-css-modules" }
-    ],
     "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "noEmit": true,
     "resolveJsonModule": true,
-    "incremental": true
+    "incremental": true,
+    // чтоб сработал автокомплит для модулей
+    "plugins": [{ "name": "typescript-plugin-css-modules" }, { "name": "next" }]
   },
   // чтоб при сборке не ругался на импорты
   "ts-node": { "compilerOptions": { "module": "CommonJS" } },
+  // добавляем путь к файлу, где импортится @testing-library/jest-dom, чтоб пользоваться функциями, а также добавляем еще места, чтоб подхватывались типы для этих файлов
   "include": [
     "next-env.d.ts",
-    "./src/app-fsd/types/global.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
     ".next/types/**/*.ts",
     "./configs/jest/setupTests.ts",
-    "./src/shared/config/storybook/Storybook.ts",
-    "build-next/types/**/*.ts"
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "src/shared/configs/storybook/Storybook.ts"
   ],
   "exclude": ["node_modules"]
 }

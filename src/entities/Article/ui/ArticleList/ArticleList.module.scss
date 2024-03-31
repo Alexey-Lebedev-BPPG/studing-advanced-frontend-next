@@ -1,14 +1,16 @@
-.articleList {
+.article-list {
+  color: inherit;
+
   // height: 100%;
 }
 
-.BIG {
+.big {
   .card {
     margin-bottom: 30px;
   }
 }
 
-.SMALL {
+.small {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;

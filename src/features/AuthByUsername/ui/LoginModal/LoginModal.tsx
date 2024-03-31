@@ -1,5 +1,3 @@
-'use client';
-
 import { FC, Suspense } from 'react';
 import cls from './LoginModal.module.scss';
 import { LoginFormAsync } from '../LoginForm/LoginForm.async';
@@ -19,7 +17,7 @@ export const LoginModal: FC<ILoginModalProps> = ({
   onClose,
 }) => (
   <Modal
-    className={classNames(cls.loginModal, {}, [className])}
+    className={classNames(cls['login-modal'], {}, [className])}
     isOpen={isOpen}
     onClose={onClose}
   >

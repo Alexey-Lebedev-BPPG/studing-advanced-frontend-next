@@ -1,6 +1,6 @@
 import { getUserRoles, isUserAdmin, isUserManager } from './roleSelectors';
-import { UserRole } from '@/app-fsd/consts/consts';
 import { StateSchema } from '@/app-fsd/providers/StoreProvider';
+import { UserRole } from '@/shared/const/app';
 
 describe('getUserRoles', () => {
   test('should return data', () => {

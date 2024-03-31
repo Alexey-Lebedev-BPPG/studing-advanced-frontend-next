@@ -2,7 +2,6 @@ import { useContext } from 'react';
 // import { LOCAL_STORAGE_THEME_KEY } from '../../../const/localStorage';
 import { Theme } from '../../../const/theme';
 import { ThemeContext } from '../../context/ThemeContext';
-// import { forLocalStorage } from '../../store';
 
 interface UseThemeResult {
   theme: Theme;
@@ -24,13 +23,7 @@ export const useTheme = (): UseThemeResult => {
     // делаем такой вызов, что указать, что функция существует
     setTheme?.(newTheme);
     // сохраняем данные темы ()
-    // localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
-    // forLocalStorage({
-    //   key: LOCAL_STORAGE_THEME_KEY,
-    //   method: 'set',
-    //   value: newTheme,
-    // });
-    // или более универсально
+    // localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme); или более универсально
     saveFunction(newTheme);
   };
 

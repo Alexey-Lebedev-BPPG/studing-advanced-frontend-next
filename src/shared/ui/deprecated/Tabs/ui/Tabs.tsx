@@ -2,6 +2,7 @@ import { ReactNode, useCallback } from 'react';
 import cls from './Tabs.module.scss';
 import { Card } from '../../Card';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { typedMemo } from '@/shared/lib/typedMemo/typedMemo';
 
 export interface ITabItem<T> {
   content: ReactNode;
@@ -19,7 +20,7 @@ export interface ITabsProps<T> {
  * Устарел, используем новые компоненты из папки redesigned
  * @deprecated
  */
-export const Tabs = <T extends string>(props: ITabsProps<T>) => {
+export const Tabs = typedMemo(<T extends string>(props: ITabsProps<T>) => {
   const { className, onTabClick, selectedValue, tabs } = props;
   // используем замыкание, чтоб в JSX не указывать коллбек
   const clickHandle = useCallback(
@@ -43,4 +44,4 @@ export const Tabs = <T extends string>(props: ITabsProps<T>) => {
       ))}
     </div>
   );
-};
+});

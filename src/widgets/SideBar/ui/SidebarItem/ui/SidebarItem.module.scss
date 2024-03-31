@@ -20,14 +20,14 @@
   }
 }
 
-.itemRedesigned {
+.item-redesigned {
   display: flex;
   align-items: center;
   width: 100%;
   padding: 0 16px;
 }
 
-.collapsedRedesigned {
+.collapsed-redesigned {
   padding: 0 8px;
 
   .link {
@@ -38,6 +38,10 @@
 }
 
 .active {
-  background: linear-gradient(89.97deg, rgb(94 211 243 / 30%) 1.15%, rgb(94 211 243 / 0%) 99.97%);
+  background: linear-gradient(
+    89.97deg,
+    rgb(94 211 243 / 30%) 1.15%,
+    rgb(94 211 243 / 0%) 99.97%
+  );
   border-left: 1px var(--accent-redesigned);
 }

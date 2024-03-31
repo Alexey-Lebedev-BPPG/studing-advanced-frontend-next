@@ -11,7 +11,7 @@ const initialState: LoginSchema = {
 export const loginSlice = createSlice({
   // используется для асинхронного изменения стейта
   extraReducers: builder => {
-    // у каждого thunka есть 3 состояния: 1. pending, 2. fulfilled, 3. rejected
+    // у каждого thunk-a есть 3 состояния: 1. pending, 2. fulfilled, 3. rejected
     // все 3 состояния можно здесь обработать
     builder
       // используем наш thunk
@@ -25,7 +25,7 @@ export const loginSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginByUsername.rejected, (state, action) => {
-        // action - поле, которое мы возвращаем из thunka при ошибке(3 аргумент в дженерике)
+        // action - поле, которое мы возвращаем из thunk-a при ошибке(3 аргумент в дженерике)
         state.isLoading = false;
         state.error = action.payload;
       });
@@ -42,7 +42,7 @@ export const loginSlice = createSlice({
       state.password = payload;
     },
 
-    // такиой синтаксис является полным
+    // такой синтаксис является полным
     setUserName: (state, action: PayloadAction<string>) => {
       state.username = action.payload;
     },

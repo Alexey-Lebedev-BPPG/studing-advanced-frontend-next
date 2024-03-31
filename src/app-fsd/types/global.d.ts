@@ -1,46 +1,11 @@
-// eslint-disable-next-line unused-imports/no-unused-imports
-// import NextAuth from 'next-auth';
 // добавляем, чтоб typescript начал понимать модули
-declare module '*.module.scss' {
-  const value: Record<string, string>;
-  export default value;
-}
-
-declare module '*.module.sass' {
-  const value: Record<string, string>;
-  export default value;
-}
-
-declare module '*.module.css' {
-  const value: Record<string, string>;
-  export default value;
-}
-
-declare module '*.png';
-declare module '*.jpeg';
-declare module '*.jpg';
-declare module '*.webp';
-declare module '*.avif';
-declare module '*.bmp';
-declare module '*.gif';
-
+declare module '*.mp4';
 declare module '*.svg' {
   import { SVGProps, FunctionComponent } from 'react';
 
   const SVG: FunctionComponent<SVGProps<SVGSVGElement> & { title?: string }>;
   export default SVG;
 }
-
-// чтоб кастомный объект юзера в сессию записать
-// declare module 'next-auth' {
-//   import { User } from '@/entities/User';
-//   /**
-//    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-//    */
-//   interface Session {
-//     user: User;
-//   }
-// }
 
 // декларируем константу из вебпака
 declare const __IS_DEV__: boolean;
@@ -59,3 +24,28 @@ type DeepPartial<T> = T extends object
 type OptionalRecord<K extends keyof any, T> = {
   [P in K]?: T;
 };
+
+type ValidRowModel = {
+  [key: string]: any;
+};
+
+// service
+interface IResponse<R = unknown> {
+  data: R;
+  status: number;
+  success?: boolean;
+}
+
+interface IAction<P = unknown> {
+  type: string;
+  payload?: P;
+}
+
+interface IMessage {
+  message: string;
+}
+
+interface IErrorMessage extends IMessage {
+  error: string;
+  statusCode: number;
+}

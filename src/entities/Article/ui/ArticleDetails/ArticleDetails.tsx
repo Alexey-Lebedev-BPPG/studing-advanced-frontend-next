@@ -1,6 +1,4 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './ArticleDetails.module.scss';
 import { DeprecatedContent } from './DeprecatedContent/DeprecatedContent';
 import { RedesignedContent } from './RedesignedContent/RedesignedContent';
@@ -13,7 +11,7 @@ import {
   ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { ToggleFeatures } from '@/shared/lib/features';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch } from '@/shared/lib/hooks/redux';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { VStack } from '@/shared/ui/redesigned/Stack';
 
@@ -27,7 +25,7 @@ const reducers: ReducersList = {
   articleDetails: articleDetailsReducer,
 };
 
-export const ArticleDetails: FC<IArticleDetailsProps> = props => {
+export const ArticleDetails: FC<IArticleDetailsProps> = memo(props => {
   const { className, id } = props;
   const dispatch = useAppDispatch();
 
@@ -41,7 +39,7 @@ export const ArticleDetails: FC<IArticleDetailsProps> = props => {
       <VStack
         max
         gap='16'
-        className={classNames(cls.articleDetails, {}, [className])}
+        className={classNames(cls['article-details'], {}, [className])}
       >
         <ToggleFeatures
           nameFeatures={'isAppRedesigned'}
@@ -51,4 +49,4 @@ export const ArticleDetails: FC<IArticleDetailsProps> = props => {
       </VStack>
     </DynamicModuleLoader>
   );
-};
+});

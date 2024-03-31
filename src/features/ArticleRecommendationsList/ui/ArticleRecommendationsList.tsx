@@ -1,7 +1,5 @@
-'use client';
-
 import { t } from 'i18next';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { useArticleRecommendationsList } from '../api/articleRecommendationApi';
 import { ArticleList } from '@/entities/Article';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -14,36 +12,35 @@ export interface IArticleRecommendationsListProps {
   className?: string;
 }
 
-export const ArticleRecommendationsList: FC<
-  IArticleRecommendationsListProps
-> = props => {
-  const { className } = props;
-  // передаем в хук наш лимит и получаем поля по умолчанию (data, isLoading, error и т.д)
-  const {
-    data: recommendations,
-    error,
-    isLoading,
-  } = useArticleRecommendationsList(3);
+export const ArticleRecommendationsList: FC<IArticleRecommendationsListProps> =
+  memo(props => {
+    const { className } = props;
+    // передаем в хук наш лимит и получаем поля по умолчанию (data, isLoading, error и т.д)
+    const {
+      data: recommendations,
+      error,
+      isLoading,
+    } = useArticleRecommendationsList(3);
 
-  if (isLoading || error || !recommendations) return null;
+    if (isLoading || error || !recommendations) return null;
 
-  return (
-    <VStack
-      data-testid='ArticleRecommendationsList'
-      gap='8'
-      className={classNames('', {}, [className])}
-    >
-      <ToggleFeatures
-        nameFeatures={'isAppRedesigned'}
-        on={<Text size='l' title={`${t('Рекомендуем')}`} />}
-        off={<TextDeprecated size='l' title={`${t('Рекомендуем')}`} />}
-      />
-      <ArticleList
-        target='_blank'
-        articles={recommendations}
-        isLoading={isLoading}
-        virtualized={false}
-      />
-    </VStack>
-  );
-};
+    return (
+      <VStack
+        data-testid='ArticleRecommendationsList'
+        gap='8'
+        className={classNames('', {}, [className])}
+      >
+        <ToggleFeatures
+          nameFeatures={'isAppRedesigned'}
+          on={<Text size='l' title={`${t('Рекомендуем')}`} />}
+          off={<TextDeprecated size='l' title={`${t('Рекомендуем')}`} />}
+        />
+        <ArticleList
+          target='_blank'
+          articles={recommendations}
+          isLoading={isLoading}
+          virtualized={false}
+        />
+      </VStack>
+    );
+  });

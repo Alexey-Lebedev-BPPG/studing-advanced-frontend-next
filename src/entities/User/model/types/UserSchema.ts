@@ -1,5 +1,5 @@
 import { JsonSettings } from './jsonSetting';
-import { UserRole } from '../../../../app-fsd/consts/consts';
+import { UserRole } from '@/shared/const/app';
 import { FeatureFlags } from '@/shared/types/featureFlags';
 
 export interface User {

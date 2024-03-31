@@ -1,5 +1,3 @@
-'use client';
-
 import { Popover as PopoverHeadless } from '@headlessui/react';
 import { FC, ReactNode } from 'react';
 import cls from './Popover.module.scss';

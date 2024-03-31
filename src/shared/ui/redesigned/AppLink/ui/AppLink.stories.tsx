@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { AppLink } from './AppLink';
-import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { ThemeDecorator } from '@/shared/configs/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '@/shared/const/theme';
 
 export default {
@@ -17,7 +17,7 @@ export const Primary = Template.bind({});
 Primary.args = { children: 'Text', variant: 'primary' };
 
 export const Secondary = Template.bind({});
-Secondary.args = { children: 'Text', variant: 'secondary' };
+Secondary.args = { children: 'Text' };
 
 export const PrimaryDark = Template.bind({});
 PrimaryDark.args = { children: 'Text', variant: 'primary' };

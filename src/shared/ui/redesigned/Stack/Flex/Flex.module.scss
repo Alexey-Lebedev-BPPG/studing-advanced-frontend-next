@@ -2,39 +2,39 @@
   display: flex;
 }
 
-.justifyStart {
+.justify-start {
   justify-content: flex-start;
 }
 
-.justifyCenter {
+.justify-center {
   justify-content: center;
 }
 
-.justifyEnd {
+.justify-end {
   justify-content: flex-end;
 }
 
-.justifyBetween {
+.justify-between {
   justify-content: space-between;
 }
 
-.alignStart {
+.align-start {
   align-items: flex-start;
 }
 
-.alignCenter {
+.align-center {
   align-items: center;
 }
 
-.alignEnd {
+.align-end {
   align-items: flex-end;
 }
 
-.directionRow {
+.direction-row {
   flex-direction: row;
 }
 
-.directionColumn {
+.direction-column {
   flex-direction: column;
 }
 

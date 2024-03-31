@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo, useCallback } from 'react';
 import cls from './AddCommentForm.module.scss';
 import { getAddCommentFormText } from '../model/selectors/getAddCommentForm/getAddCommentForm';
 import {
@@ -14,10 +12,7 @@ import {
   ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { ToggleFeatures } from '@/shared/lib/features';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/redux';
 import { Button as ButtonDeprecated } from '@/shared/ui/deprecated/Button';
 import { Input as InputDeprecated } from '@/shared/ui/deprecated/Input';
 import { Button } from '@/shared/ui/redesigned/Button';
@@ -34,10 +29,10 @@ const reducers: ReducersList = {
   addCommentForm: addCommentFormReducer,
 };
 
-const AddCommentForm: FC<IAddCommentFormProps> = props => {
+const AddCommentForm: FC<IAddCommentFormProps> = memo(props => {
   const { className, onSendComment } = props;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const text = useAppSelector(getAddCommentFormText);
 
@@ -59,7 +54,7 @@ const AddCommentForm: FC<IAddCommentFormProps> = props => {
           <HStack
             max
             justify='between'
-            className={classNames(cls.addCommentForm, {}, [className])}
+            className={classNames(cls['add-comment-form'], {}, [className])}
             data-testid='AddCommentForm'
           >
             <InputDeprecated
@@ -84,9 +79,12 @@ const AddCommentForm: FC<IAddCommentFormProps> = props => {
               gap='16'
               justify='between'
               data-testid='AddCommentForm'
-              className={classNames(cls.addCommentFormRedesigned, {}, [
-                className,
-              ])}
+              className={classNames(
+                // cls.addCommentFormRedesigned,
+                '',
+                {},
+                [className],
+              )}
             >
               <Input
                 placeholder={`${t('Введите текст комментария')}`}
@@ -107,6 +105,6 @@ const AddCommentForm: FC<IAddCommentFormProps> = props => {
       />
     </DynamicModuleLoader>
   );
-};
+});
 
 export default AddCommentForm;

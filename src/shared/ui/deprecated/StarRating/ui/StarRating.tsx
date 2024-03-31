@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
 import cls from './StarRating.module.scss';
 import { Icon } from '../../../redesigned/Icon';
 import { Icon as IconDeprecated } from '../../Icon';
@@ -23,7 +21,7 @@ const stars = [1, 2, 3, 4, 5];
  * Устарел, используем новые компоненты из папки redesigned
  * @deprecated
  */
-export const StarRating: FC<IStartRatingProps> = props => {
+export const StarRating: FC<IStartRatingProps> = memo(props => {
   const { className, onSelect, selectedStars = 0, size = 30 } = props;
   // состояние, указывающее, сколько звезд подсвечивать при наведении
   const [currentStarsCount, setCurrentStarsCount] = useState(selectedStars);
@@ -50,8 +48,8 @@ export const StarRating: FC<IStartRatingProps> = props => {
       className={classNames(
         toggleFeatures({
           name: 'isAppRedesigned',
-          off: () => cls.starRating,
-          on: () => cls.starRatingRedesigned,
+          off: () => cls['star-rating'],
+          on: () => cls['star-rating-redesigned'],
         }),
         {},
         [className],
@@ -60,9 +58,11 @@ export const StarRating: FC<IStartRatingProps> = props => {
       {stars.map(starNumber => {
         const commonProps = {
           Svg: StarIcon,
-          className: classNames(cls.starItem, { [cls.selected]: isSelected }, [
-            currentStarsCount >= starNumber ? cls.hovered : cls.normal,
-          ]),
+          className: classNames(
+            cls['star-item'],
+            { [cls.selected]: isSelected },
+            [currentStarsCount >= starNumber ? cls.hovered : cls.normal],
+          ),
           // для проверки количества выбранных звезд
           'data-selected': currentStarsCount >= starNumber,
           'data-testid': `StarRating.${starNumber}`,
@@ -84,4 +84,4 @@ export const StarRating: FC<IStartRatingProps> = props => {
       })}
     </div>
   );
-};
+});

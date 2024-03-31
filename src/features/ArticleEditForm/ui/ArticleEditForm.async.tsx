@@ -1,5 +1,3 @@
-'use client';
-
 import { FC, lazy } from 'react';
 import { IArticleEditFormProps } from './ArticleEditForm';
 

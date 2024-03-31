@@ -1,6 +1,4 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './ScrollToTopButton.module.scss';
 import CircleIcon from '@/shared/assets/icons/circle-up.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -10,7 +8,7 @@ export interface IScrollToTopButtonProps {
   className?: string;
 }
 
-export const ScrollToTopButton: FC<IScrollToTopButtonProps> = props => {
+export const ScrollToTopButton: FC<IScrollToTopButtonProps> = memo(props => {
   const { className } = props;
 
   const onClick = () => window.scrollTo({ behavior: 'smooth', top: 0 });
@@ -18,11 +16,11 @@ export const ScrollToTopButton: FC<IScrollToTopButtonProps> = props => {
   return (
     <Icon
       clickable
-      src={CircleIcon}
+      Svg={CircleIcon}
       width={32}
       height={32}
-      className={classNames(cls.scrollToTopButton, {}, [className])}
+      className={classNames(cls['scroll-to-top-button'], {}, [className])}
       onClick={onClick}
     />
   );
-};
+});

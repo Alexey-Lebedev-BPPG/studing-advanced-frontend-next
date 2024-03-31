@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { Dropdown } from './Dropdown';
 import { Button } from '../../../Button';
-import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { ThemeDecorator } from '@/shared/configs/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '@/shared/const/theme';
 
 export default {

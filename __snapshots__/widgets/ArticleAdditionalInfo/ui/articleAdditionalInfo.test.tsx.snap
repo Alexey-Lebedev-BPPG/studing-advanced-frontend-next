@@ -2,7 +2,7 @@
 
 exports[`Button Test clear theme 1`] = `
 <div
-  className="app app_light_theme"
+  className="app app-light-theme"
 >
   <div
     className="flex justifyStart alignStart directionColumn gap32 nowrap"
@@ -23,10 +23,10 @@ exports[`Button Test clear theme 1`] = `
         <div />
       </div>
       <div
-        className="textWrapper bold primary left size_m"
+        className=" bold accent left size_m"
       />
       <div
-        className="textWrapper primary left size_m"
+        className=" accent left size_m"
       >
         <p
           className="text"
@@ -44,7 +44,7 @@ exports[`Button Test clear theme 1`] = `
       Редактировать
     </button>
     <div
-      className="textWrapper primary left size_m"
+      className=" accent left size_m"
     >
       <p
         className="text"

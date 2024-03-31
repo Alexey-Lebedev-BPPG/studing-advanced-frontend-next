@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { CommentCard } from './CommentCard';
-import { FeaturesFlagsDecorator } from '@/shared/config/storybook/FeaturesFlagsDecorator/FeaturesFlagsDecorator';
+import { FeaturesFlagsDecorator } from '@/shared/configs/storybook/FeaturesFlagsDecorator/FeaturesFlagsDecorator';
 
 export default {
   argTypes: { backgroundColor: { control: 'color' } },

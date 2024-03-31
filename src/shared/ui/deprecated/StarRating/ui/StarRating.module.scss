@@ -1,10 +1,10 @@
-.starRating {
+.star-rating {
   .hovered {
     fill: var(--primary-color);
   }
 }
 
-.starRatingRedesigned {
+.star-rating-redesigned {
   .hovered {
     fill: var(--icon-redesigned);
   }
@@ -14,8 +14,7 @@
   fill: none;
 }
 
-
-.starItem {
+.star-item {
   cursor: pointer;
 }
 

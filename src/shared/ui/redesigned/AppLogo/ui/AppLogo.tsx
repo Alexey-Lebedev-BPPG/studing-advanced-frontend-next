@@ -1,7 +1,4 @@
-'use client';
-
-import Image from 'next/image';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './appLogo.module.scss';
 import { HStack } from '../../Stack';
 import AppSvg from '@/shared/assets/icons/app-image.svg';
@@ -12,25 +9,23 @@ interface IAppLogoProps {
   size?: number;
 }
 
-export const AppLogo: FC<IAppLogoProps> = props => {
+export const AppLogo: FC<IAppLogoProps> = memo(props => {
   const { className, size = 50 } = props;
 
   return (
     <HStack
       max
       justify='center'
-      className={classNames(cls.appLogoWrapper, {}, [className])}
+      className={classNames(cls['app-logo-wrapper'], {}, [className])}
     >
-      <Image
-        src={AppSvg}
+      <AppSvg
         width={size}
         height={size}
         color='black'
-        className={cls.appLogo}
-        alt=''
+        className={cls['app-logo']}
       />
-      <div className={cls.gradientBig} />
-      <div className={cls.gradientSmall} />
+      <div className={cls['gradient-big']} />
+      <div className={cls['gradient-small']} />
     </HStack>
   );
-};
+});

@@ -1,27 +1,36 @@
-import { Suspense, useEffect } from 'react';
-import { useAppToolbar } from './lib/useAppToolbar';
-import { withTheme } from './providers/ThemeProvider';
-import { AppRouter } from './providers/router';
+'use client';
+
+import { FC, ReactNode, useEffect } from 'react';
+// для google tag manager
+// для GA
+// для hotjar
+// для выбора языка по геолокации
+// для редакса
+// для темы
 import { getUserInited, initAuthData } from '@/entities/User';
 import { AppLoadLayout } from '@/shared/layouts/AppLoadLayout';
 import { MainLayout } from '@/shared/layouts/MainLayout';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/redux';
 import { Navbar } from '@/widgets/Navbar';
 import { PageLoader } from '@/widgets/PageLoader';
 import { SideBar } from '@/widgets/SideBar';
 
-const App = () => {
-  const { theme } = useTheme();
+interface IAppProps {
+  children?: ReactNode;
+}
+
+export const App: FC<IAppProps> = props => {
+  const { children } = props;
+
+  // const pathname = useAppPathname();
+  // const isLocal = process.env.NEXT_PUBLIC_APP_ENV === 'local';
+
   const dispatch = useAppDispatch();
   const inited = useAppSelector(getUserInited);
   // получаем компонент, который необходимо показывать на текущей странице
-  const toolbar = useAppToolbar();
+  // const toolbar = useAppToolbar();
 
   // при инициализации приложения проверяем авторизованность юзера из локал стораджа
   useEffect(() => {
@@ -34,12 +43,12 @@ const App = () => {
       <ToggleFeatures
         nameFeatures={'isAppRedesigned'}
         off={
-          <div id='app' className={classNames('app', {}, [theme])}>
+          <div id='app' className='app'>
             <PageLoader />
           </div>
         }
         on={
-          <div id='app' className={classNames('app-redesigned', {}, [theme])}>
+          <div id='app' className={classNames('app-redesigned', {}, [])}>
             <AppLoadLayout />
           </div>
         }
@@ -51,32 +60,25 @@ const App = () => {
     <ToggleFeatures
       nameFeatures='isAppRedesigned'
       off={
-        <div id='app' className={classNames('app', {}, [theme])}>
-          {/* оборачиваем приложение в Suspense, чтоб корректно работали переводы */}
-          <Suspense fallback=''>
-            <Navbar />
-            <div className='content-page'>
-              <SideBar />
-              <AppRouter />
-            </div>
-          </Suspense>
+        <div id='app' className='app'>
+          <Navbar />
+          <div className='content-page'>
+            <SideBar />
+            {children}
+          </div>
         </div>
       }
       on={
-        <div id='app' className={classNames('app-redesigned', {}, [theme])}>
-          {/* оборачиваем приложение в Suspense, чтоб корректно работали переводы */}
-          <Suspense fallback=''>
-            <MainLayout
-              content={<AppRouter />}
-              header={<Navbar />}
-              sidebar={<SideBar />}
-              toolbar={toolbar}
-            />
-          </Suspense>
+        <div id='app' className={classNames('app-redesigned', {}, [])}>
+          <MainLayout
+            // @ts-ignore
+            content={children}
+            header={<Navbar />}
+            sidebar={<SideBar />}
+            // toolbar={toolbar}
+          />
         </div>
       }
     />
   );
 };
-
-export default withTheme(App);

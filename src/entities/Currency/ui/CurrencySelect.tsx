@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo, useCallback } from 'react';
 import { Currency } from '../model/types/types';
 import { ToggleFeatures } from '@/shared/lib/features';
 import { ListBox as ListBoxDeprecated } from '@/shared/ui/deprecated/Popups';
@@ -21,10 +19,10 @@ const options = [
   { content: 'USD', valueOpt: 'USD' },
 ];
 
-export const CurrencySelect: FC<ICurrencyProps> = props => {
+export const CurrencySelect: FC<ICurrencyProps> = memo(props => {
   const { className, onChange, readonly, value } = props;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   // явно преобразовываем значения из onChange в наш тип
   const onChangeHandler = useCallback(
@@ -50,4 +48,4 @@ export const CurrencySelect: FC<ICurrencyProps> = props => {
       on={<ListBox {...childrenProps} />}
     />
   );
-};
+});

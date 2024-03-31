@@ -1,9 +1,8 @@
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { VFC, SVGProps } from 'react';
 
 export interface SidebarItemType {
   // ввиду того, что компоненты пишутся с большой буквы, поле icon пишем также с большой буквы
-  // Icon: VFC<SVGProps<SVGSVGElement>>;
-  Icon: string | StaticImport;
+  Icon: VFC<SVGProps<SVGSVGElement>>;
   authOnly?: boolean;
   path: string;
   text: string;

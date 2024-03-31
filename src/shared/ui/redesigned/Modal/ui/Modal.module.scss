@@ -26,13 +26,13 @@
   transition: 0.3s transform;
 }
 
-.oldModal {
+.old-modal {
   .content {
     background-color: var(--bg-color);
   }
 }
 
-.newModal {
+.new-modal {
   .content {
     background-color: var(--light-bg-redesigned);
   }
@@ -49,7 +49,7 @@
   }
 }
 
-.isClosing {
+.is-closing {
   .content {
     transform: scale(0.2);
   }

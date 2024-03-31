@@ -10,21 +10,21 @@ type FlexGap = '4' | '8' | '16' | '24' | '32';
 
 // делаем сопоставлении пропса с классом, который хотим потом повесить
 const justifyClasses: Record<FlexJustify, string> = {
-  between: cls.justifyBetween,
-  center: cls.justifyCenter,
-  end: cls.justifyEnd,
-  start: cls.justifyStart,
+  between: cls['justify-between'],
+  center: cls['justify-center'],
+  end: cls['justify-end'],
+  start: cls['justify-start'],
 };
 
 const alignClasses: Record<FlexAlign, string> = {
-  center: cls.alignCenter,
-  end: cls.alignEnd,
-  start: cls.alignStart,
+  center: cls['align-center'],
+  end: cls['align-end'],
+  start: cls['align-start'],
 };
 
 const directionClasses: Record<FlexDirection, string> = {
-  column: cls.directionColumn,
-  row: cls.directionRow,
+  column: cls['direction-column'],
+  row: cls['direction-row'],
 };
 
 const gapClasses: Record<FlexGap, string> = {

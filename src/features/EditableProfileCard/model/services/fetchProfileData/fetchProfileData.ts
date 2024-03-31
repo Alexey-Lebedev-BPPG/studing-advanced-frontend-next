@@ -20,7 +20,7 @@ export const fetchProfileData = createAsyncThunk<
 
     return response.data;
   } catch (error) {
-    process.env?.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
+    process.env.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
     // для обработки ошибок
     return rejectWithValue(i18next.t('LOGIN_ERROR'));
   }

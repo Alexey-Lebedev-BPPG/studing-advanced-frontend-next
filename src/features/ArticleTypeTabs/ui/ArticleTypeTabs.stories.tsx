@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { ArticleTypeTabs } from './ArticleTypeTabs';
-import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { ThemeDecorator } from '@/shared/configs/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '@/shared/const/theme';
 
 export default {

@@ -1,0 +1,11 @@
+/build
+/build-esbuild
+/.loki
+/node_modules
+/.git
+/.idea
+/.vscode
+/.github
+/storybook-static
+/reports
+/coverage

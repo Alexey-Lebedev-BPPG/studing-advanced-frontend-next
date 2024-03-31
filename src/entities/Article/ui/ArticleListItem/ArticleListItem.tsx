@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, HTMLAttributeAnchorTarget } from 'react';
+import { FC, HTMLAttributeAnchorTarget, memo } from 'react';
 import { ArticleListItemDeprecated } from './ArticleListItemDeprecated/ArticleListItemDeprecated';
 import { ArticleListItemRedesigned } from './ArticleListItemRedesigned/ArticleListItemRedesigned';
 import { Article, ArticleView } from '../../model/types/article';
@@ -13,10 +11,10 @@ export interface IArticleListItemProps {
   view: ArticleView;
 }
 
-export const ArticleListItem: FC<IArticleListItemProps> = props => (
+export const ArticleListItem: FC<IArticleListItemProps> = memo(props => (
   <ToggleFeatures
     nameFeatures={'isAppRedesigned'}
     off={<ArticleListItemDeprecated {...props} />}
     on={<ArticleListItemRedesigned {...props} />}
   />
-);
+));

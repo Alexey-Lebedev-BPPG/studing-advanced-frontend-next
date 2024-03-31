@@ -10,7 +10,7 @@
   box-shadow: 0 2px 10px 0 var(--light-bg-redesigned);
 
   &::before {
-    content: "";
+    content: '';
 
     position: absolute;
     top: 0;
@@ -21,7 +21,12 @@
     width: 80%;
     height: 100%;
 
-    background: linear-gradient(to right, transparent 0%, var(--dark-bg-redesigned) 50%, transparent 100%);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--dark-bg-redesigned) 50%,
+      transparent 100%
+    );
 
     animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }

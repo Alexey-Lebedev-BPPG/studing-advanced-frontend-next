@@ -1,0 +1,23 @@
+.menu-top-left {
+  right: 0;
+  bottom: 100%;
+  width: 100%;
+}
+
+.menu-top-right {
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.menu-bottom-left {
+  top: 100%;
+  right: 0;
+  width: 100%;
+}
+
+.menu-bottom-right {
+  top: 100%;
+  left: 0;
+  width: 100%;
+}

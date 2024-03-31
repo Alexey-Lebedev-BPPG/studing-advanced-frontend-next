@@ -1,5 +1,5 @@
 export enum Theme {
-  DARK = 'app_dark_theme',
-  LIGHT = 'app_light_theme',
-  ORANGE = 'app_orange_theme',
+  DARK = 'app-dark-theme',
+  LIGHT = 'app-light-theme',
+  ORANGE = 'app-orange-theme',
 }

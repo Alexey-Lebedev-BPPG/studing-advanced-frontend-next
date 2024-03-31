@@ -39,8 +39,7 @@ export const updateFeatureFlags = createAsyncThunk<
       return undefined;
     } catch (error) {
       // чтоб не показывался консоль при тестах
-      // process.env?.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
-      console.log(error);
+      process.env.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
       // для обработки ошибок
       return rejectWithValue(i18next.t('updateFeatureFlags_ERROR'));
     }

@@ -1,16 +1,12 @@
-'use client';
-
-import Image, { ImageProps } from 'next/image';
-import { FC, SVGProps } from 'react';
+import { FC, memo, SVGProps } from 'react';
 import cls from './Icon.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 type SvgProps = Omit<SVGProps<SVGSVGElement>, 'onClick'>;
 
-interface IIconBaseProps extends Omit<ImageProps, 'alt'> {
+interface IIconBaseProps extends SvgProps {
   // принимаем ссылку на свг
-  // Svg: FC<SVGProps<SVGSVGElement>>;
-  alt?: string;
+  Svg: FC<SVGProps<SVGSVGElement>>;
   className?: string;
 }
 
@@ -26,20 +22,20 @@ interface ClickableIconProps extends IIconBaseProps {
 type IconProps = NoneClickableIconProps | ClickableIconProps;
 
 // обертка для свг, которая будет задавать цвета
-export const Icon: FC<IconProps> = props => {
+export const Icon: FC<IconProps> = memo(props => {
   const {
-    alt = '',
     className,
     clickable,
     height = 32,
+    Svg,
     width = 32,
     ...otherProps
   } = props;
 
   const icon = (
-    // eslint-disable-next-line jsx-a11y/alt-text
-    <Image
-      alt={alt}
+    <Svg
+      width={width}
+      height={height}
       className={classNames(cls.icon, {}, [className])}
       {...otherProps}
       onClick={undefined}
@@ -52,7 +48,6 @@ export const Icon: FC<IconProps> = props => {
         style={{ height, width }}
         type='button'
         className={cls.button}
-        // eslint-disable-next-line react/destructuring-assignment
         onClick={props.onClick}
       >
         {icon}
@@ -60,4 +55,4 @@ export const Icon: FC<IconProps> = props => {
     );
 
   return icon;
-};
+});

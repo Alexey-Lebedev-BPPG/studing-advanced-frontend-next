@@ -1,4 +1,4 @@
-import { useAppSelector } from '../hooks/useAppDispatch/useAppDispatch';
+import { useAppSelector } from '../hooks/redux';
 import { StateSchema } from '@/app-fsd/providers/StoreProvider';
 
 // добавляем возможность прокидывать доп аргументы

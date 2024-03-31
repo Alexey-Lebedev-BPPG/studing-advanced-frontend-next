@@ -1,7 +1,6 @@
 'use client';
 
 import { ReducersMapObject } from '@reduxjs/toolkit';
-
 import { FC, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 // import { useNavigate } from "react-router-dom";
@@ -31,5 +30,19 @@ export const StoreProvider: FC<IStoreProviderProps> = ({
     // navigate
   );
 
+  // для persist
+  // const { store, persist } = createReduxStore(
+  //   initialState as DeepPartial<StateSchema>,
+  //   asyncReducers as ReducersMapObject<StateSchema>,
+  // );
+
   return <Provider store={store}>{children}</Provider>;
+  // для persist
+  // return (
+  //   <Provider store={store}>
+  //     <PersistGate loading={null} persistor={persist}>
+  //       {children}
+  //     </PersistGate>
+  //   </Provider>
+  // );
 };

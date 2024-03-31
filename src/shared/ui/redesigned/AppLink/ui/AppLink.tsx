@@ -1,15 +1,32 @@
-'use client';
+import { LinkProps } from 'next/link';
+import { useLocale } from 'next-intl';
+import {
+  AnchorHTMLAttributes,
+  FC,
+  ForwardedRef,
+  ReactNode,
+  forwardRef,
+  useMemo,
+} from 'react';
+import cls from './AppLink.module.scss';
+import { getRouteMain } from '@/shared/const/router';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { AppLink as AppLinkNAv } from '@/shared/lib/router/navigation';
+import { SizeElement } from '@/shared/types/ui';
 
-import Link, { LinkProps } from 'next/link';
-import { FC, ForwardedRef, ReactNode, forwardRef } from 'react';
-
-export type AppLinkVariant = 'primary' | 'secondary' | 'red';
-
-interface AppLinkProps extends LinkProps {
+export type AppLinkVariant = 'primary' | 'red';
+export type TagLink = 'span' | 'div';
+type BaseLinkProps = Omit<LinkProps, 'locale'> &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps>;
+interface AppLinkProps extends BaseLinkProps {
   activeClassName?: string;
-  children?: ReactNode;
   className?: string;
+  as?: TagLink;
   variant?: AppLinkVariant;
+  startIcon?: boolean;
+  endIcon?: boolean;
+  size?: SizeElement;
+  children?: ReactNode;
 }
 
 // не используем memo в компонентах, где у нас есть children
@@ -20,27 +37,47 @@ export const AppLink: FC<AppLinkProps> = forwardRef(
     ref: ForwardedRef<HTMLAnchorElement>,
   ) => {
     const {
+      href,
       activeClassName = '',
-      children,
-      className,
+      as = 'div',
       variant = 'primary',
+      className,
+      children,
+      startIcon = false,
+      endIcon = false,
+      size = 'large',
       ...otherProps
     } = props;
 
+    const currentTo = useMemo(() => {
+      if (typeof href === 'number') return href as unknown as string;
+      return href;
+    }, [href]);
+
+    const language = useLocale();
+    const matcherPath = window.location.pathname.replace(`/${language}`, '');
+
+    const isActive = useMemo(
+      () =>
+        href === matcherPath || (href === getRouteMain() && matcherPath === ''),
+      [matcherPath, href],
+    );
+
     return (
-      // навлинк позволяет отслеживать активную ссылку
-      <Link
+      <AppLinkNAv
         ref={ref}
-        // className={({ isActive }) =>
-        //   classNames(cls.appLink, { [activeClassName]: isActive }, [
-        //     className,
-        //     cls[variant],
-        //   ])
-        // }
+        href={currentTo}
+        className={classNames(
+          cls['app-link'],
+          { [activeClassName]: isActive, [cls.span]: as === 'span' },
+          [className, cls[variant]],
+        )}
         {...otherProps}
       >
+        {/* {!!startIcon && <Icon Svg={LeftOutlinedSVG} />} */}
         {children}
-      </Link>
+        {/* {!!endIcon && <Icon Svg={RightOutlinedSVG} />} */}
+      </AppLinkNAv>
     );
   },
 );

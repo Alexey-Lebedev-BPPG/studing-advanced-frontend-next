@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, memo } from 'react';
 import cls from './stickyLayout.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
@@ -11,14 +9,14 @@ export interface IStickyLayoutProps {
   right?: ReactElement;
 }
 
-export const StickyLayout: FC<IStickyLayoutProps> = props => {
+export const StickyLayout: FC<IStickyLayoutProps> = memo(props => {
   const { className, content, left, right } = props;
 
   return (
-    <div className={classNames(cls.stickyLayout, {}, [className])}>
+    <div className={classNames(cls['sticky-layout'], {}, [className])}>
       {!!left && <div className={cls.left}>{left}</div>}
       <div className={cls.content}>{content}</div>
       {!!right && <div className={cls.right}>{right}</div>}
     </div>
   );
-};
+});

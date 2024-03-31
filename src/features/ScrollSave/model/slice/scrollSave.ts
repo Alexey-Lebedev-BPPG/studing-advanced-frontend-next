@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { ScrollSaveSchema } from '../types/scrollSave';
+import { ScrollSaveSchema } from '../types/scrollSave';
 
 const initialState: ScrollSaveSchema = {
   scroll: {},

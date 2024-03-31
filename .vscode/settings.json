@@ -1,5 +1,12 @@
 {
   "i18n-ally.localesPaths": ["public/locales", "src/shared/config/i18n"],
   "svg.preview.background": "dark-transparent",
-  "i18n-ally.keystyle": "flat"
+  "i18n-ally.keystyle": "flat",
+  "typescript.tsdk": "node_modules/typescript/lib"
+  // "eslint.options": {
+  //   "overrideConfigFile": "./configs/common/.eslintrc.js",
+  //   "ignorePath": "./configs/common/.eslintignore"
+  // },
+  // "prettier.configPath": "./configs/common/.prettierrc",
+  // "prettier.ignorePath": "./configs/common/.prettierignore"
 }

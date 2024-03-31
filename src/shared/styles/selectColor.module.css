@@ -1,0 +1,31 @@
+.orange {
+  background: var(--o-400);
+  fill: var(--secondary-dark-blue);
+}
+
+.blue {
+  background: var(--b-400);
+  fill: var(--secondary-blue);
+}
+
+.green {
+  background: var(--main-green);
+  fill: var(--success-500);
+}
+
+.red {
+  background: var(--error-500);
+  fill: var(--error-700);
+}
+
+.white-blue {
+  background-color: var(--info-300);
+}
+
+.gray {
+  background-color: var(--g-50);
+}
+
+.transparent {
+  background: inherit;
+}

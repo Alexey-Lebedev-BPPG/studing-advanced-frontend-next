@@ -1,6 +1,4 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './NotificationItem.module.scss';
 import { Notification } from '../../model/types/notification';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -15,7 +13,7 @@ interface INotificationItemProps {
   item: Notification;
 }
 
-export const NotificationItem: FC<INotificationItemProps> = props => {
+export const NotificationItem: FC<INotificationItemProps> = memo(props => {
   const { className, item } = props;
 
   const content = (
@@ -24,13 +22,13 @@ export const NotificationItem: FC<INotificationItemProps> = props => {
       off={
         <CardDeprecated
           theme='outline'
-          className={classNames(cls.notificationItem, {}, [className])}
+          className={classNames(cls['notification-item'], {}, [className])}
         >
           <TextDeprecated title={item.title} text={item.description} />
         </CardDeprecated>
       }
       on={
-        <Card className={classNames(cls.notificationItem, {}, [className])}>
+        <Card className={classNames(cls['notification-item'], {}, [className])}>
           <Text title={item.title} text={item.description} />
         </Card>
       }
@@ -45,4 +43,4 @@ export const NotificationItem: FC<INotificationItemProps> = props => {
     );
 
   return content;
-};
+});

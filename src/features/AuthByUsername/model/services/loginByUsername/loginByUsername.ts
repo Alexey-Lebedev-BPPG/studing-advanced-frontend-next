@@ -33,8 +33,7 @@ export const loginByUsername = createAsyncThunk<
     return response.data;
   } catch (error) {
     // чтоб не показывался консоль при тестах
-    // process.env?.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
-    console.log(error);
+    process.env.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
     // для обработки ошибок
     return rejectWithValue(i18next.t('LOGIN_ERROR'));
   }

@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*" # все роуты
+  to = "/index.html" # чтоб проксировались в index.js 
+  status = 200

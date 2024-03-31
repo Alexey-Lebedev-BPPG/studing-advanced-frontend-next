@@ -8,7 +8,6 @@ import {
   USER_LOCALSTORAGE_KEY,
 } from '@/shared/const/localStorage';
 import { setFeatureFlags } from '@/shared/lib/features';
-import { forLocalStorage } from '@/shared/lib/store';
 
 const initialState: UserSchema = {
   _inited: false,
@@ -48,34 +47,19 @@ export const userSlice = createSlice({
   reducers: {
     logout: state => {
       state.authData = undefined;
-      // localStorage.removeItem(USER_LOCALSTORAGE_KEY);
-      forLocalStorage({
-        key: USER_LOCALSTORAGE_KEY,
-        method: 'remove',
-      });
+      localStorage.removeItem(USER_LOCALSTORAGE_KEY);
     },
     setAuthData: (state, { payload }: PayloadAction<User>) => {
       state.authData = payload;
       // когда авторизовались, то меняем фичи-флаг
       setFeatureFlags(payload.features);
       // добавляем данные в локальное хранилище (аналог токена)
-      // localStorage.setItem(USER_LOCALSTORAGE_KEY, payload.id);
-      forLocalStorage({
-        key: USER_LOCALSTORAGE_KEY,
-        method: 'set',
-        value: payload.id,
-      });
-
+      localStorage.setItem(USER_LOCALSTORAGE_KEY, payload.id);
       // сохраняем в локал сторадж данные о выбранной фиче у пользователя
-      // localStorage.setItem(
-      //   LOCAL_STORAGE_LAST_DESIGN_KEY,
-      //   payload.features?.isAppRedesigned ? 'new' : 'old',
-      // );
-      forLocalStorage({
-        key: LOCAL_STORAGE_LAST_DESIGN_KEY,
-        method: 'set',
-        value: payload.features?.isAppRedesigned ? 'new' : 'old',
-      });
+      localStorage.setItem(
+        LOCAL_STORAGE_LAST_DESIGN_KEY,
+        payload.features?.isAppRedesigned ? 'new' : 'old',
+      );
     },
   },
 });

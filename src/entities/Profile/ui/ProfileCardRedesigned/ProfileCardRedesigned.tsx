@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo } from 'react';
 import { IProfileCardProps } from '../ProfileCardDeprecated/ProfileCardDeprecated';
 import cls from '../ProfileCardDeprecated/ProfileCardDeprecated.module.scss';
 import { CountrySelect } from '@/entities/Country';
@@ -15,7 +13,7 @@ import { VStack, HStack } from '@/shared/ui/redesigned/Stack';
 import { Text } from '@/shared/ui/redesigned/Text';
 
 export const ProfileCardRedesignedError = () => {
-  const { t } = useTranslation('profile');
+  const t = useTranslations();
 
   return (
     <HStack
@@ -57,7 +55,7 @@ export const ProfileCardRedesignedSkeleton = () => (
   </Card>
 );
 
-export const ProfileCardRedesigned: FC<IProfileCardProps> = props => {
+export const ProfileCardRedesigned: FC<IProfileCardProps> = memo(props => {
   const {
     className,
     data,
@@ -74,7 +72,7 @@ export const ProfileCardRedesigned: FC<IProfileCardProps> = props => {
     readonly,
   } = props;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <Card
@@ -147,4 +145,4 @@ export const ProfileCardRedesigned: FC<IProfileCardProps> = props => {
       </VStack>
     </Card>
   );
-};
+});

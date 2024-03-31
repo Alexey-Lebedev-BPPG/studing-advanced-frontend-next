@@ -1,0 +1,123 @@
+/* stylelint-disable selector-class-pattern */
+.text {
+  color: inherit;
+}
+
+/* 300	SFMono-Light */
+
+/* 400	SFMono-Regular */
+
+/* 500	SFMono-Medium */
+
+/* 600	SFMono-Semibold */
+
+/* 700	SFMono-Bold */
+
+/* Headers */
+.H1 {
+  font-family: SFMono-Bold, sans-serif;
+  font-size: 3.875rem;
+  line-height: 4.625rem;
+
+  @media screen and (width < 1440px) {
+    font-family: SFMono-Bold, sans-serif;
+    font-size: 2.25rem;
+    line-height: 2.625rem;
+  }
+}
+
+.H2 {
+  font-family: SFMono-Medium, sans-serif;
+  font-size: 2.25rem;
+  line-height: 2.625rem;
+
+  @media screen and (width < 1440px) {
+    font-family: SFMono-Medium, sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+}
+
+.H3 {
+  font-family: SFMono-Semibold, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+
+  @media screen and (width < 1440px) {
+    font-family: SFMono-Semibold, sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+}
+
+/* Paragraphs */
+.Subheading {
+  font-family: SFMono-Regular, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+
+  @media screen and (width < 1440px) {
+    font-family: SFMono-Regular, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+}
+
+.BodyL {
+  font-family: SFMono-Regular, sans-serif;
+  font-size: 1rem;
+  line-height: 1.563rem;
+
+  @media screen and (width < 1440px) {
+    font-family: SFMono-Regular, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.563rem;
+  }
+}
+
+.BodyM {
+  font-family: SFMono-Light, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+
+  @media screen and (width < 1440px) {
+    font-family: SFMono-Light, sans-serif;
+    font-size: 0.75rem;
+    line-height: 1.375rem;
+  }
+}
+
+/* Tables */
+.Table {
+  font-family: SFMono-Regular, sans-serif;
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  text-transform: uppercase;
+}
+
+/* Buttons */
+.Button {
+  font-family: SFMono-Regular, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.Button-CL {
+  font-family: SFMono-Regular, sans-serif;
+  font-size: 1rem;
+  line-height: 1.563rem;
+  text-transform: uppercase;
+}
+
+/* Inputs */
+.Input1 {
+  font-family: SFMono-Medium, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.313rem;
+}
+
+.Input2 {
+  font-family: SFMono-Light, sans-serif;
+  font-size: 1rem;
+  line-height: 1.188rem;
+}

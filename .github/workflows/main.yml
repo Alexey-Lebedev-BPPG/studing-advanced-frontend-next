@@ -1,0 +1,163 @@
+# name: linting, testing, building
+# run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+# on:
+#   push:
+#     branches: [master]
+#   pull_request:
+#     branches: [master]
+# jobs:
+#   pipelines:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [16.x]
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Starting Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#       - name: install modules
+#         run: npm ci --force
+#       - name: build production project
+#         run: npm run build:prod
+#         if: always()
+#       - name: linting typescript
+#         run: npm run lint:ts
+#         if: always()
+#       - name: linting scss
+#         run: npm run lint:scss
+#         if: always()
+#       - name: linting unit testing
+#         run: npm run test:unit
+#         if: always()
+#       - name: build storybook
+#         run: npm run storybook:build
+#         if: always()
+#       - name: screenshot testing
+#         run: npm run test:ui:ci
+#         if: always()
+
+# чтоб не было проблем с скриншотными тестами, обновляем пайплайны
+# название экшена
+name: linting, testing, building
+# когда будут включаться
+on:
+  # при пуше
+  push:
+    branches: [master]
+  # при создании пул реквеста
+  pull_request:
+    branches: [master]
+# определенные разрешения
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+# настройка последовательности действий
+jobs:
+  # джоба для проверок, которые требуют сборку проекта
+  build-and-ui-testing:
+    # для работы экшена выбираем ОС
+    runs-on: ubuntu-latest
+    # добавляем для конкурентного режима
+    concurrency: ci-${{ github.ref }}
+    # берется переменная из результата выполнения шага - name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      # позволяет делать чекаут на наш репозиторий
+      - uses: actions/checkout@v2
+      # устанавливаем npm
+      - uses: npm/action-setup@v2
+        with:
+          version: 8
+      # устанавливаем ноду
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      # устанавливаем пакеты
+      - name: install modules
+        run: npm install
+      # делаем сборку
+      - name: build production project
+        run: npm run build:prod
+        if: always()
+      # собираем сторибук
+      - name: build storybook
+        run: npm run build-storybook
+        if: always()
+        # запускаем скриншотные тесты
+      # - name: screenshot testing
+      #   run: npm run test:ui:ci
+      #   if: always()
+      # запускаем тесты
+      - name: unit testing
+        if: always()
+        run: npm run test:unit
+        # запускаем хроматик
+      # - name: chromatic testing
+      #   if: always()
+      #   run: npm run chromatic
+      # # генерерируем отчет по тестам
+      # - name: Generate HTML report
+      #   run: npm run test:ui:report
+      #   if: always()
+        # генерируем отчет скриншотных тестов
+      # - name: move loki
+      #   run: mv .loki reports/
+      #   if: always()
+        # конфигурирование github pages
+      # - name: Setup Pages
+      #   uses: actions/configure-pages@v2
+      #   if: always()
+      # загрузка артифактов (то, что собирали - билд, болд сторибука и т.д.)
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        if: always()
+        with:
+          path: 'storybook-static'
+      # деплоим в пейджи
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+        id: deployment
+        if: always()
+
+  # джоба для проверок, которые не требуют сборку проекта
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      # позволяет делать чекаут на наш репозиторий
+      - uses: actions/checkout@v2
+      # устанавливаем npm
+      - uses: npm/action-setup@v2
+        with:
+          version: 8
+      # устанавливаем ноду
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      # устанавливаем пакеты
+      - name: install modules
+        run: npm install
+      # проверка ес линтом
+      - name: linting typescript
+        run: npm run lint:ts
+        if: always()
+      # проверка стайл линтом
+      - name: linting css
+        run: npm run lint:scss

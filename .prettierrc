@@ -4,9 +4,5 @@
   "trailingComma": "all",
   "arrowParens": "avoid",
   "bracketSpacing": true,
-  "endOfLine": "auto",
-  "printWidth": 80,
-  "tabWidth": 2,
-  "tabs": false,
-  "quoteProps": "as-needed"
+  "endOfLine": "auto"
 }

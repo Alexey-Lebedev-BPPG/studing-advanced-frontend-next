@@ -1,31 +1,59 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { forLocalStorage } from '../lib/store';
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  FetchBaseQueryMeta,
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 
-export const rtkApi = createApi({
-  baseQuery: fetchBaseQuery({
-    // указываем базовый урл
-    // baseUrl: process.env?.NEXT_PUBLIC_API_URL,
-    baseUrl: 'https://ulbi-example-back.vercel.app',
-    // добавляем заголовки в каждый запрос
-    prepareHeaders: headers => {
-      // const token = localStorage.getItem(USER_LOCALSTORAGE_KEY) || '';
-      const token = forLocalStorage({
-        key: USER_LOCALSTORAGE_KEY,
-        method: 'get',
-      });
-      if (token) headers.set('Authorization', token);
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-      return headers;
-    },
-  }),
+const baseQuery = fetchBaseQuery({
+  // указываем базовый урл
+  baseUrl: apiUrl,
+  // don't need for others api, but need for auth
+  // credentials: 'include',
+  credentials: 'same-origin',
+  // добавляем заголовки в каждый запрос
+  prepareHeaders: (headers, api) => {
+    headers.set('Content-Type', 'application/json');
+    headers.set('Accept', 'application/json, text/plain, */*');
 
-  // указываем пустые ендпоинты, чтоб потом их при вызове rtkApi указывать динамически с помощью injectEndpoints
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  endpoints: builder => ({}),
+    // тоб добавить язык в хедер каждого запроса
+    // addLanguageHeaderExceptWhiteListForRTK(headers, api);
 
-  // указываем редьюсер, в котором будут отображаться все данные rtk запрос(в редаксе)
-  reducerPath: 'api',
+    const token = localStorage.getItem(USER_LOCALSTORAGE_KEY) || '';
+    if (token) headers.set('Authorization', token);
+
+    return headers;
+  },
 });
 
-const testing: DeepPartial<{ test: string }> = {};
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError,
+  {},
+  FetchBaseQueryMeta
+> = async (args, api, extraOptions) => {
+  const result = await baseQuery(args, api, extraOptions);
+  const { dispatch } = api;
+  if (result.error?.status === 401) {
+    const typeConnect = localStorage.getItem('typeConnect');
+    dispatch({ type: 'USER_LOGOUT' });
+    localStorage.clear();
+    await baseQuery('auth/exit', api, extraOptions);
+    localStorage.setItem('typeConnect', typeConnect || '');
+  }
+  return result;
+};
+
+export const rtkApi = createApi({
+  baseQuery: baseQueryWithReauth,
+  // указываем пустые ендпоинты, чтоб потом их при вызове rtkApi указывать динамически с помощью injectEndpoints
+  endpoints: builder => ({}),
+  // указываем редьюсер, в котором будут отображаться все данные rtk запрос(в редаксе)
+  reducerPath: 'rtkApi',
+});

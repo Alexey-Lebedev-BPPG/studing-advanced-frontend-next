@@ -1,10 +1,7 @@
-'use client';
-
-import { useSession } from 'next-auth/react';
-import { FC, useState } from 'react';
-import { User } from '@/entities/User';
+import { FC, memo, useState } from 'react';
+import { getUserAuthData } from '@/entities/User';
 import { getFeatureFlags, updateFeatureFlags } from '@/shared/lib/features';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/redux';
 import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 import { ListBox } from '@/shared/ui/redesigned/Popups';
 import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
@@ -15,14 +12,13 @@ export interface IUiDesignSwitcherProps {
   className?: string;
 }
 
-export const UiDesignSwitcher: FC<IUiDesignSwitcherProps> = props => {
+export const UiDesignSwitcher: FC<IUiDesignSwitcherProps> = memo(props => {
   const { className } = props;
   const dispatch = useAppDispatch();
   const forceUpdate = useForceUpdate();
 
   const isAppRedesign = getFeatureFlags('isAppRedesigned');
-  const { data: dataSession } = useSession();
-  const authData = (dataSession?.user || undefined) as User;
+  const authData = useAppSelector(getUserAuthData);
   const [isLoading, setIsLoading] = useState(false);
 
   const items = [
@@ -61,4 +57,4 @@ export const UiDesignSwitcher: FC<IUiDesignSwitcherProps> = props => {
       )}
     </HStack>
   );
-};
+});

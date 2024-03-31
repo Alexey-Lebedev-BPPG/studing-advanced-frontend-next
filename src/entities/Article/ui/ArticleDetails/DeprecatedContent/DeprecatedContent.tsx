@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo } from 'react';
 import {
   getArticleDetailsData,
   getArticleDetailsError,
@@ -11,18 +9,18 @@ import cls from '../ArticleDetails.module.scss';
 import { renderArticleBlock } from '../renderBlock';
 import CalendarIcon from '@/shared/assets/icons/calendar-20-20.svg';
 import EyeIcon from '@/shared/assets/icons/eye-20-20.svg';
-import { useAppSelector } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppSelector } from '@/shared/lib/hooks/redux';
 import { Avatar } from '@/shared/ui/deprecated/Avatar';
 import { Icon } from '@/shared/ui/deprecated/Icon';
 import { Skeleton } from '@/shared/ui/deprecated/Skeleton';
 import { Text } from '@/shared/ui/deprecated/Text';
 import { HStack, VStack } from '@/shared/ui/redesigned/Stack';
 
-export const DeprecatedContent: FC = props => {
+export const DeprecatedContent: FC = memo(props => {
   const isLoading = useAppSelector(getArticleDetailsIsLoading);
   const article = useAppSelector(getArticleDetailsData);
   const error = useAppSelector(getArticleDetailsError);
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   if (isLoading)
     return (
@@ -43,7 +41,7 @@ export const DeprecatedContent: FC = props => {
   if (error)
     return (
       <Text
-        title={`${t('Произошла ошибка при загрузке статьи.')}`}
+        title={`${t('Произошла ошибка при загрузке статьи')}`}
         align='center'
       />
     );
@@ -61,15 +59,15 @@ export const DeprecatedContent: FC = props => {
           size='l'
         />
         <HStack gap='8' className={cls.articleInfo}>
-          <Icon src={EyeIcon} className={cls.icon} alt='' />
+          <Icon Svg={EyeIcon} className={cls.icon} />
           <Text title={String(article?.views)} />
         </HStack>
         <HStack gap='8' className={cls.articleInfo}>
-          <Icon src={CalendarIcon} className={cls.icon} alt='' />
+          <Icon Svg={CalendarIcon} className={cls.icon} />
           <Text title={article?.createdAt} />
         </HStack>
       </VStack>
       {article?.blocks.map(renderArticleBlock)}
     </>
   );
-};
+});

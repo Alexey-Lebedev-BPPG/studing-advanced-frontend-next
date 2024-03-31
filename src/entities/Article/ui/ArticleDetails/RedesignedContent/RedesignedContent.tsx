@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo } from 'react';
 import {
   getArticleDetailsData,
   getArticleDetailsError,
@@ -9,17 +7,17 @@ import {
 } from '../../../model/selectors/articleDetails';
 import cls from '../ArticleDetails.module.scss';
 import { renderArticleBlock } from '../renderBlock';
-import { useAppSelector } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useAppSelector } from '@/shared/lib/hooks/redux';
 import { AppImage } from '@/shared/ui/redesigned/AppImage';
 import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
 import { VStack } from '@/shared/ui/redesigned/Stack';
 import { Text } from '@/shared/ui/redesigned/Text';
 
-export const RedesignedContent: FC = props => {
+export const RedesignedContent: FC = memo(props => {
   const isLoading = useAppSelector(getArticleDetailsIsLoading);
   const article = useAppSelector(getArticleDetailsData);
   const error = useAppSelector(getArticleDetailsError);
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   if (isLoading)
     return (
@@ -40,7 +38,7 @@ export const RedesignedContent: FC = props => {
   if (error)
     return (
       <Text
-        title={`${t('Произошла ошибка при загрузке статьи.')}`}
+        title={`${t('Произошла ошибка при загрузке статьи')}`}
         align='center'
       />
     );
@@ -51,10 +49,11 @@ export const RedesignedContent: FC = props => {
       <Text title={article?.subtitle} />
       <AppImage
         fallback={<Skeleton width='100%' height={420} border='16px' />}
+        // @ts-ignore
         src={article?.img}
         className={cls.img}
       />
       {article?.blocks.map(renderArticleBlock)}
     </>
   );
-};
+});

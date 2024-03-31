@@ -1,7 +1,5 @@
-// чтоб появился этот файл делаем pnpm init @eslint/config
 module.exports = {
   env: { browser: true, es2021: true, jest: true, node: true },
-  // расширяем стандартный плагин для реакта и подключаем модуль стандарта тайпскрипта и airbnb + автоматом добавился сторибук
   extends: [
     'plugin:react/recommended',
     'airbnb',
@@ -9,16 +7,17 @@ module.exports = {
     'plugin:storybook/recommended',
     'plugin:import/warnings',
     'prettier',
-    'plugin:typescript-sort-keys/recommended',
     'next/core-web-vitals',
+    'next',
   ],
   globals: {
-    __API__: true,
-    __IS_DEV__: true,
-    __IS_DEV_DEBUG__: true,
-    __PROJECT__: true,
+    __API__: false,
+    __GOOGLE_ANALYTICS__: false,
+    __IS_DEV__: false,
+    __IS_DEV_DEBUG__: false,
+    __LOCATION_TOKEN__: false,
+    __PROJECT__: false,
   },
-  // отключаем проверку необработанных слов в тестовых файлах
   overrides: [
     {
       files: ['**/src/**/*.{test,stories}.{ts, tsx}'],
@@ -36,41 +35,62 @@ module.exports = {
     '@typescript-eslint',
     'i18next',
     'prettier',
-    // чтоб зависимости useEffect подсвечивались
     'react-hooks',
-    // кастомный плагин для импортов
-    // 'path-checher-ulbi-example',
-    // неиспользуемые импорты
+    'path-checher-ulbi-example',
     'unused-imports',
-    // например настроить импорты по алфавиту
     'import',
     'sort-keys-fix',
-    'typescript-sort-keys',
-    'sort-destructure-keys',
   ],
   rules: {
     '@typescript-eslint/no-restricted-imports': [
-      'warn',
+      'error',
       {
         importNames: ['useSelector', 'useDispatch'],
         message:
           'Use typed hooks `useAppDispatch` and `useAppSelector` instead.',
         name: 'react-redux',
       },
+      {
+        importNames: [
+          'redirect',
+          'usePathname',
+          'useRouter',
+          'permanentRedirect',
+        ],
+        message:
+          'Use typed functions and hooks from the file "@/shared/lib/router/navigation".',
+        name: 'next/navigation',
+      },
+      {
+        importNames: ['useAppRouter'],
+        message:
+          'Use typed functions and hooks from the file "@/src/shared/lib/hooks/useAppNavigation/useAppNavigation".',
+        name: '@/shared/lib/router/navigation',
+      },
+      {
+        importNames: ['Link'],
+        message:
+          'Use typed component <Links /> from the file "src/shared/ui/Links/Links".',
+        name: 'next/link',
+      },
+      {
+        importNames: ['Image'],
+        message:
+          'Use typed component <AppImage /> from the file "src/shared/ui/AppImage/AppImage".',
+        name: 'next/image',
+      },
     ],
     '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-unused-vars': 'off',
-    camelcase: ['warn', { properties: 'always' }],
     'comma-dangle': ['warn', 'only-multiline'],
     'consistent-return': 'off',
     curly: ['warn', 'multi'],
-    // чтоб ругался на необработанные слова + отключаем плагин для атрибутов
-    // "i18next/no-literal-string": ["error", { markupOnly: true, ignoreAttribute: ["data-testid", "to"] }],
-    // отключаем, чтоб не ругался на необработанные слова
-    'i18next/no-literal-string': 0,
+    'i18next/no-literal-string': [
+      'error',
+      { ignoreAttribute: ['data-testid', 'to'], markupOnly: true },
+    ],
     'import/extensions': 'off',
-    // потом включить на warn
-    'import/no-cycle': 0,
+    'import/no-cycle': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'import/order': [
@@ -92,13 +112,13 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/media-has-caption': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'no-console': 'off',
     'no-debugger': 'warn',
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
-    'no-restricted-imports': 'off',
     'no-shadow': 'off',
     'no-undef': 'off',
     'no-underscore-dangle': 'off',
@@ -107,30 +127,33 @@ module.exports = {
     'nonblock-statement-body-position': 'off',
     'object-curly-newline': 'off',
     'operator-linebreak': 'off',
-    // 'path-checher-ulbi-example/layer-imports': [
-    //   'warn',
-    //   { alias: '@', ignoreImportPatterns: ['**/StoreProvider', '**/testing'] },
-    // ],
-    // 'path-checher-ulbi-example/path-checker': ['warn', { alias: '@' }],
-    // 'path-checher-ulbi-example/public-api-imports': [
-    //   'warn',
-    //   {
-    //     alias: '@',
-    //     testFilesPatterns: [
-    //       '**/*.test.*',
-    //       '**/*.stories.*',
-    //       '**/StoreDecorator.tsx',
-    //     ],
-    //   },
-    // ],
-    'prettier/prettier': [
-      'error',
-      { endOfLine: 'auto' },
-      { usePrettierrc: true },
+    'path-checher-ulbi-example/layer-imports': [
+      'warn',
+      {
+        alias: '@',
+        ignoreImportPatterns: ['**/StoreProvider', '**/testing'],
+        typeProject: 'next',
+      },
     ],
+    'path-checher-ulbi-example/path-checker': [
+      'warn',
+      { alias: '@', typeProject: 'next' },
+    ],
+    'path-checher-ulbi-example/public-api-imports': [
+      'warn',
+      {
+        alias: '@',
+        testFilesPatterns: [
+          '**/*.test.*',
+          '**/*.stories.*',
+          '**/StoreDecorator.tsx',
+        ],
+        typeProject: 'next',
+      },
+    ],
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
     quotes: [2, 'single', { avoidEscape: true }],
     radix: 'off',
-    // пока отключаем, потом включим
     'react/display-name': 'off',
     'react/function-component-definition': 'off',
     'react/jsx-child-element-spacing': 'off',
@@ -138,7 +161,7 @@ module.exports = {
     'react/jsx-curly-newline': 'off',
     'react/jsx-filename-extension': [
       2,
-      { extensions: ['.js', '.jsx', '.tsx', '.ts'] },
+      { extensions: ['.js', '.jsx', '.tsx'] },
     ],
     'react/jsx-newline': [1, { allowMultilines: false, prevent: true }],
     'react/jsx-no-leaked-render': [
@@ -165,19 +188,12 @@ module.exports = {
     ],
     'react/no-array-index-key': 'off',
     'react/no-typos': 'warn',
-    // позволяет создавать компоненты перед рендером родительского (где стейты)
-    'react/no-unstable-nested-components': 'warn',
     'react/no-unused-prop-types': 'warn',
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off',
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
-    'sort-destructure-keys/sort-destructure-keys': [
-      2,
-      { caseSensitive: false },
-    ],
-    // сортировка ключей объекта по алфавиту.
     'sort-keys-fix/sort-keys-fix': [
       'warn',
       'asc',

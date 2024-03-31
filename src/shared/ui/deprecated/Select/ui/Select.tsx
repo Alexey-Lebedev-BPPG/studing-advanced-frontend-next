@@ -1,6 +1,7 @@
 import { ChangeEvent, useMemo } from 'react';
 import cls from './Select.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { typedMemo } from '@/shared/lib/typedMemo/typedMemo';
 
 export interface SelectOption<T extends string> {
   // отображение опции
@@ -23,7 +24,7 @@ interface ISelectProps<T extends string> {
  * Устарел, используем новые компоненты из папки redesigned
  * @deprecated
  */
-export const Select = <T extends string>(props: ISelectProps<T>) => {
+export const Select = typedMemo(<T extends string>(props: ISelectProps<T>) => {
   const { className, label, onChange, options, readonly, value } = props;
 
   const optionList = useMemo(
@@ -40,7 +41,7 @@ export const Select = <T extends string>(props: ISelectProps<T>) => {
     onChange?.(event.target.value as T);
 
   return (
-    <div className={classNames(cls.selectWrapper, {}, [className])}>
+    <div className={classNames(cls['select-wrapper'], {}, [className])}>
       {label ? <span className={cls.label}>{`${label}>`}</span> : null}
       <select
         className={cls.select}
@@ -52,4 +53,4 @@ export const Select = <T extends string>(props: ISelectProps<T>) => {
       </select>
     </div>
   );
-};
+});

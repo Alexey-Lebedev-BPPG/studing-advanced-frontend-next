@@ -28,7 +28,7 @@ describe('articleEditFormSlice', () => {
     expect(
       articleEditFormReducer(
         state as ArticleEditFormSchema,
-        fetchArticleEditForm.pending,
+        fetchArticleEditForm.pending('', ''),
       ),
     ).toEqual({
       error: undefined,

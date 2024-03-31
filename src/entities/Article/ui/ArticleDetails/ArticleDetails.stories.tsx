@@ -1,7 +1,7 @@
 import { StoryFn, Meta } from '@storybook/react';
 import { ArticleDetails } from './ArticleDetails';
 import { Article } from '../../model/types/article';
-import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
+import { StoreDecorator } from '@/shared/configs/storybook/StoreDecorator/StoreDecorator';
 
 export default {
   argTypes: { backgroundColor: { control: 'color' } },

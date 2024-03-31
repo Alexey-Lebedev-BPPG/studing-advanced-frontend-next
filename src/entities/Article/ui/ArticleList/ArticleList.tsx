@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC, HTMLAttributeAnchorTarget } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, HTMLAttributeAnchorTarget, memo } from 'react';
 // import { List, ListRowProps, WindowScroller } from "react-virtualized";
 import cls from './ArticleList.module.scss';
 import { Article, ArticleView } from '../../model/types/article';
@@ -30,7 +28,7 @@ const getSkeletons = (view: ArticleView) =>
     ));
 
 // здесь внедряли виртуализацию списков, однако с ней проблема, т.к. не использовали react-virtuoso. В последствии нужно исправить
-export const ArticleList: FC<IArticleListProps> = props => {
+export const ArticleList: FC<IArticleListProps> = memo(props => {
   const {
     articles,
     className,
@@ -40,7 +38,7 @@ export const ArticleList: FC<IArticleListProps> = props => {
     virtualized = true,
   } = props;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   // const isBig = view === 'BIG';
   // // количество элементов в одной строке
@@ -79,7 +77,12 @@ export const ArticleList: FC<IArticleListProps> = props => {
 
   if (!isLoading && !articles.length)
     return (
-      <div className={classNames('', {}, [className, cls[view]])}>
+      <div
+        className={classNames('', {}, [
+          className,
+          cls[view === 'BIG' ? 'big' : 'small'],
+        ])}
+      >
         <Text size='l' title={`${t('Статьи не найдены')}`} />
       </div>
     );
@@ -92,7 +95,7 @@ export const ArticleList: FC<IArticleListProps> = props => {
           wrap='wrap'
           gap='16'
           data-testid='ArticleList'
-          className={classNames(cls.ArticleListRedesigned, {})}
+          // className={classNames(cls.ArticleListRedesigned, {})}
         >
           {articles.map(item => (
             <ArticleListItem
@@ -115,7 +118,6 @@ export const ArticleList: FC<IArticleListProps> = props => {
         //   />
         //   {isLoading && getSkeletons(view)}
         // </div>
-        // @ts-ignore
         // <WindowScroller
         //   scrollElement={document.getElementById(PAGE_ID) as Element}
         // >
@@ -129,8 +131,11 @@ export const ArticleList: FC<IArticleListProps> = props => {
         //   }) => (
         <div
           // ref={registerChild}
-          className={classNames(cls.ArticleList, {}, [className, cls[view]])}
           data-testid='ArticleList'
+          className={classNames(cls['article-list'], {}, [
+            className,
+            cls[view === 'BIG' ? 'big' : 'small'],
+          ])}
         >
           {/* {virtualized ? (
           <List
@@ -171,4 +176,4 @@ export const ArticleList: FC<IArticleListProps> = props => {
       }
     />
   );
-};
+});

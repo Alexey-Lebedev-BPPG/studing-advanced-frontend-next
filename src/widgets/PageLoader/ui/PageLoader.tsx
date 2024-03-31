@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import cls from './PageLoader.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -13,7 +11,7 @@ export const PageLoader: FC<IPageLoaderProps> = props => {
   const { className } = props;
 
   return (
-    <div className={classNames(cls.pageLoader, {}, [className])}>
+    <div className={classNames(cls['page-loader'], {}, [className])}>
       <Loader />
     </div>
   );

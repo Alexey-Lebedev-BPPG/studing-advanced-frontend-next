@@ -1,5 +1,3 @@
-'use client';
-
 import { FC, ReactNode, useCallback, useEffect } from 'react';
 import cls from './Drawer.module.scss';
 import { Overlay } from '../../Overlay';
@@ -20,7 +18,7 @@ interface DrawerProps {
   onClose?: () => void;
 }
 
-const height = window.innerHeight - 100;
+const height = typeof window !== 'undefined' ? window.innerHeight - 100 : 900;
 
 const DrawerContent: FC<DrawerProps> = props => {
   const { children, className, isOpen, lazy = true, onClose } = props;
@@ -71,19 +69,19 @@ const DrawerContent: FC<DrawerProps> = props => {
 
   if (!isOpen) return null;
 
-  const display = y.to(py => (py < height ? 'block' : 'none'));
+  const display = y.to((py: number) => (py < height ? 'block' : 'none'));
 
   return (
     <Portal>
       <div
-        className={classNames(cls.Drawer, {}, [
+        className={classNames(cls.drawer, {}, [
           className,
           theme,
-          'app_drawer',
+          'app-drawer',
           toggleFeatures({
             name: 'isAppRedesigned',
-            off: () => cls.oldDrawer,
-            on: () => cls.newDrawer,
+            off: () => cls['old-drawer'],
+            on: () => cls['new-drawer'],
           }),
         ])}
       >

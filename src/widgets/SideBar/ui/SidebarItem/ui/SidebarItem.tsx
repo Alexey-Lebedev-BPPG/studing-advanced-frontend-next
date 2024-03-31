@@ -1,13 +1,10 @@
-'use client';
-
-import { useSession } from 'next-auth/react';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './SidebarItem.module.scss';
 import { SidebarItemType } from '../../../model/types/sidebar';
-import { User } from '@/entities/User';
+import { getUserAuthData } from '@/entities/User';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ToggleFeatures } from '@/shared/lib/features';
-import { AppLink as AppLinkDeprecated } from '@/shared/ui/deprecated/AppLink';
+import { useAppSelector } from '@/shared/lib/hooks/redux';
 import { AppLink } from '@/shared/ui/redesigned/AppLink';
 import { Icon } from '@/shared/ui/redesigned/Icon';
 
@@ -16,39 +13,37 @@ interface ISidebarItemProps {
   item: SidebarItemType;
 }
 
-export const SidebarItem: FC<ISidebarItemProps> = props => {
+export const SidebarItem: FC<ISidebarItemProps> = memo(props => {
   const { collapsed, item } = props;
 
-  const { data: dataSession } = useSession();
-  const authData = (dataSession?.user || undefined) as User;
+  const isAuth = useAppSelector(getUserAuthData);
 
-  if (item.authOnly && !authData) return null;
+  if (item.authOnly && !isAuth) return null;
 
   return (
     <ToggleFeatures
       nameFeatures={'isAppRedesigned'}
       off={
-        <AppLinkDeprecated
+        <AppLink
           href={item.path}
-          theme='secondary'
           className={classNames(cls.item, { [cls.collapsed]: collapsed })}
         >
-          <Icon src={item.Icon} alt='' className={cls.icon} />
+          <item.Icon className={cls.icon} />
           <span className={cls.link}>{item.text}</span>
-        </AppLinkDeprecated>
+        </AppLink>
       }
       on={
         <AppLink
           href={item.path}
           activeClassName={cls.active}
-          className={classNames(cls.itemRedesigned, {
-            [cls.collapsedRedesigned]: collapsed,
+          className={classNames(cls['item-redesigned'], {
+            [cls['collapsed-redesigned']]: collapsed,
           })}
         >
-          <Icon src={item.Icon} alt='' />
+          <Icon Svg={item.Icon} />
           <span className={cls.link}>{item.text}</span>
         </AppLink>
       }
     />
   );
-};
+});

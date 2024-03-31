@@ -1,11 +1,15 @@
 import {
-  AnyAction,
-  CombinedState,
+  UnknownAction,
   EnhancedStore,
   Reducer,
   ReducersMapObject,
+  Tuple,
+  StoreEnhancer,
+  ThunkDispatch,
+  Store,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+import { createReducerManager } from './reducerManager';
 import { ArticleDetailsSchema } from '@/entities/Article';
 import { CounterSchema } from '@/entities/Counter';
 import { UserSchema } from '@/entities/User';
@@ -13,8 +17,8 @@ import { AddCommentFormSchema } from '@/features/AddCommentForm';
 import { LoginSchema } from '@/features/AuthByUsername';
 import { ProfileSchema } from '@/features/EditableProfileCard';
 import { ScrollSaveSchema } from '@/features/ScrollSave';
-import { ArticleDetailsPageSchema } from '@/pages/ArticleDetailsPage';
-import { ArticlesPageSchema } from '@/pages/ArticlesPage';
+import { ArticleDetailsPageSchema } from '@/pages-fsd/ArticleDetailsPage';
+import { ArticlesPageSchema } from '@/pages-fsd/ArticlesPage';
 import { rtkApi } from '@/shared/api/rtkApi';
 
 // типизация всего стейта
@@ -48,12 +52,28 @@ export interface ReducerManager {
   // поле для проверки, смонтирован редьюсер или нет. Используем кастомный тип, т.к. не все редьюсеры у нас обязательны. Указанное поле НЕ ОБЯЗАТЕЛЬНО, т.к. данный функционал можно использовать из поля getReducerMap
   getMountedReducers: () => MountedReducers;
   getReducerMap: () => ReducersMapObject<StateSchema>;
-  reduce: (state: StateSchema, action: AnyAction) => CombinedState<StateSchema>;
+  reduce: (state: StateSchema, action: UnknownAction) => StateSchema;
   remove: (key: StateSchemaKey) => void;
 }
 
 // типизация для стейта, который получен с помощью редьюсер-менеджера (наследуется от стандартного типа, который появляется при создании стора в файле store.ts (21 строка))
-export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> {
+export interface ReduxStoreWithManager
+  extends EnhancedStore<
+    StateSchema,
+    UnknownAction,
+    Tuple<
+      [
+        StoreEnhancer<{
+          dispatch: ThunkDispatch<
+            StateSchema,
+            { api: AxiosInstance },
+            UnknownAction
+          >;
+        }>,
+        StoreEnhancer,
+      ]
+    >
+  > {
   reducerManager: ReducerManager;
 }
 
@@ -70,3 +90,7 @@ export interface ThunkConfig<T> {
   // добавляем типы для стейта общего
   state: StateSchema;
 }
+
+export type TStore = {
+  reducerManager: ReturnType<typeof createReducerManager>;
+} & Store;

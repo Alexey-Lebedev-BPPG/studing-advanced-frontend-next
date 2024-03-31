@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo, useCallback } from 'react';
 import { Country } from '../model/types/types';
 import { ToggleFeatures } from '@/shared/lib/features';
 import { ListBox as ListBoxDeprecated } from '@/shared/ui/deprecated/Popups';
@@ -23,10 +21,10 @@ const options = [
   { content: 'Ukraine', valueOpt: 'Ukraine' },
 ];
 
-export const CountrySelect: FC<ICountryProps> = props => {
+export const CountrySelect: FC<ICountryProps> = memo(props => {
   const { className, onChange, readonly, value } = props;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   // явно преобразовываем значения из onChange в наш тип
   const onChangeHandler = useCallback(
@@ -52,4 +50,4 @@ export const CountrySelect: FC<ICountryProps> = props => {
       on={<ListBox {...childrenProps} />}
     />
   );
-};
+});

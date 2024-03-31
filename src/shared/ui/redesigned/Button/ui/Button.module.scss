@@ -1,10 +1,9 @@
-.addonLeft,
-.addonRight {
+.addon-left,
+.addon-right {
   display: flex;
 
   svg {
     color: var(--hint-redesigned);
-
   }
 }
 
@@ -21,8 +20,8 @@
   &:hover {
     color: var(--accent-redesigned);
 
-    .addonLeft,
-    .addonRight {
+    .addon-left,
+    .addon-right {
       svg {
         color: var(--accent-redesigned);
       }
@@ -30,7 +29,7 @@
   }
 }
 
-.withAddon {
+.with-addon {
   padding: 0 16px;
 }
 
@@ -108,6 +107,6 @@
   opacity: 0.5;
 }
 
-.fullWidth {
+.full-width {
   width: 100%;
 }

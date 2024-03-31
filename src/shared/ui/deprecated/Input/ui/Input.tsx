@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   FC,
   InputHTMLAttributes,
+  memo,
   SyntheticEvent,
   useEffect,
   useRef,
@@ -27,7 +28,7 @@ interface IInputProps extends HTMLInputProps {
  * @deprecated
  */
 // memo позволяет избежать лишних перерисовок
-export const Input: FC<IInputProps> = props => {
+export const Input: FC<IInputProps> = memo(props => {
   const {
     autofocus,
     className,
@@ -73,11 +74,11 @@ export const Input: FC<IInputProps> = props => {
   }, [autofocus]);
 
   return (
-    <div className={classNames(cls.inputWrapper, mods, [className])}>
+    <div className={classNames(cls['input-wrapper'], mods, [className])}>
       {!!placeholder && (
         <div className={cls.placeholder}>{`${placeholder}>`}</div>
       )}
-      <div className={cls.caretWrapper}>
+      <div className={cls['caret-wrapper']}>
         <input
           ref={ref}
           type={type}
@@ -99,4 +100,4 @@ export const Input: FC<IInputProps> = props => {
       </div>
     </div>
   );
-};
+});

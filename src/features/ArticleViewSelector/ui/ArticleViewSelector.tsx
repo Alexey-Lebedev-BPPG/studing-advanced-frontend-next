@@ -1,6 +1,4 @@
-'use client';
-
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import cls from './ArticleViewSelector.module.scss';
 import { ArticleView } from '@/entities/Article';
 import ListIcon from '@/shared/assets/icons/burger.svg';
@@ -39,63 +37,68 @@ const viewTypes = [
   },
 ];
 
-export const ArticleViewSelector: FC<IArticleViewSelectorProps> = props => {
-  const { className, onViewClick, view } = props;
+export const ArticleViewSelector: FC<IArticleViewSelectorProps> = memo(
+  props => {
+    const { className, onViewClick, view } = props;
 
-  // делаем замыкание (внешняя функция принимает отображение, а внутренняя уже срабатывает как событие)
-  const onClick = (newView: ArticleView) => () => onViewClick?.(newView);
+    // делаем замыкание (внешняя функция принимает отображение, а внутренняя уже срабатывает как событие)
+    const onClick = (newView: ArticleView) => () => onViewClick?.(newView);
 
-  return (
-    <ToggleFeatures
-      nameFeatures={'isAppRedesigned'}
-      off={
-        <div className={classNames(cls.articleViewSelector, {}, [className])}>
-          {viewTypes.map(viewType => (
-            <ButtonDeprecated
-              key={viewType.view}
-              theme='clear'
-              onClick={onClick(viewType.view as ArticleView)}
-            >
-              <IconDeprecated
-                src={viewType.icon}
-                alt=''
+    return (
+      <ToggleFeatures
+        nameFeatures={'isAppRedesigned'}
+        off={
+          <div
+            className={classNames(cls['article-view-selector'], {}, [
+              className,
+            ])}
+          >
+            {viewTypes.map(viewType => (
+              <ButtonDeprecated
+                key={viewType.view}
+                theme='clear'
+                onClick={onClick(viewType.view as ArticleView)}
+              >
+                <IconDeprecated
+                  Svg={viewType.icon}
+                  width={24}
+                  height={24}
+                  className={classNames(
+                    '',
+                    { [cls['not-selected']]: viewType.view !== view },
+                    [],
+                  )}
+                />
+              </ButtonDeprecated>
+            ))}
+          </div>
+        }
+        on={
+          <Card
+            border='round'
+            className={classNames(cls['article-view-selector-redesigned'], {}, [
+              className,
+              cls['get-h-stack'],
+            ])}
+          >
+            {viewTypes.map(viewType => (
+              <Icon
+                key={viewType.view}
+                clickable
+                Svg={viewType.icon}
                 width={24}
                 height={24}
                 className={classNames(
                   '',
-                  { [cls.notSelected]: viewType.view !== view },
+                  { [cls['not-selected']]: viewType.view !== view },
                   [],
                 )}
+                onClick={onClick(viewType.view as ArticleView)}
               />
-            </ButtonDeprecated>
-          ))}
-        </div>
-      }
-      on={
-        <Card
-          border='round'
-          className={classNames(cls.articleViewSelectorRedesigned, {}, [
-            className,
-            cls.getHStach,
-          ])}
-        >
-          {viewTypes.map(viewType => (
-            <Icon
-              key={viewType.view}
-              clickable
-              src={viewType.icon}
-              width={24}
-              height={24}
-              className={classNames(
-                '',
-                { [cls.notSelected]: viewType.view !== view },
-                [],
-              )}
-              onClick={onClick(viewType.view as ArticleView)}
-            />
-          ))}
-        </Card>
-      }
-    />
-  );
-};
+            ))}
+          </Card>
+        }
+      />
+    );
+  },
+);

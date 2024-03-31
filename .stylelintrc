@@ -6,14 +6,11 @@
   ],
   "plugins": ["stylelint-order"],
   "rules": {
-    "no-missing-end-of-source-newline": null,
-    "selector-class-pattern": null,
     "import-notation": "string",
+    "scss/at-mixin-pattern": null,
     "at-rule-no-unknown": [
       true,
-      {
-        "ignoreAtRules": ["function", "if", "each", "include", "mixin"]
-      }
+      { "ignoreAtRules": ["function", "if", "each", "include", "mixin"] }
     ]
   }
 }

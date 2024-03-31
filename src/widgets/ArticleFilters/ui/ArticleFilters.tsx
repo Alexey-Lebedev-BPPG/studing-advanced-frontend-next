@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslation } from 'next-i18next';
-import { FC } from 'react';
+import { useTranslations } from 'next-intl';
+import { FC, memo } from 'react';
 import cls from './articleFilters.module.scss';
 import { ArticleSortFields, ArticleType } from '@/entities/Article';
 import { ArticleSortSelector } from '@/features/ArticleSortSelector';
@@ -26,7 +24,7 @@ export interface IArticleFiltersProps {
   type: ArticleType;
 }
 
-export const ArticleFilters: FC<IArticleFiltersProps> = props => {
+export const ArticleFilters: FC<IArticleFiltersProps> = memo(props => {
   const {
     className,
     onChangeOrder,
@@ -39,18 +37,18 @@ export const ArticleFilters: FC<IArticleFiltersProps> = props => {
     type,
   } = props;
 
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <Card
-      className={classNames(cls.articleFilters, {}, [className])}
+      className={classNames(cls['article-filters'], {}, [className])}
       padding='24'
     >
       <VStack gap='32'>
         <Input
           value={search}
           placeholder={`${t('Поиск')}`}
-          addonLeft={<Icon src={SearchIcon} />}
+          addonLeft={<Icon Svg={SearchIcon} />}
           size='s'
           onChange={onChangeSearch}
         />
@@ -64,4 +62,4 @@ export const ArticleFilters: FC<IArticleFiltersProps> = props => {
       </VStack>
     </Card>
   );
-};
+});

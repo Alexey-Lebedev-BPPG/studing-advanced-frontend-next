@@ -3,6 +3,7 @@ import {
   FC,
   InputHTMLAttributes,
   ReactNode,
+  memo,
   useEffect,
   useRef,
   useState,
@@ -31,7 +32,7 @@ interface IInputProps extends HTMLInputProps {
   value?: string | number;
 }
 
-export const Input: FC<IInputProps> = props => {
+export const Input: FC<IInputProps> = memo(props => {
   const {
     addonLeft,
     addonRight,
@@ -62,8 +63,8 @@ export const Input: FC<IInputProps> = props => {
   const mods = {
     [cls.readonly]: readonly,
     [cls.focused]: isFocused,
-    [cls.withAddonLeft]: Boolean(addonLeft),
-    [cls.withAddonRight]: Boolean(addonRight),
+    [cls['with-addon-left']]: Boolean(addonLeft),
+    [cls['with-addon-right']]: Boolean(addonRight),
   };
 
   // делаем автофокус при открытии
@@ -76,8 +77,10 @@ export const Input: FC<IInputProps> = props => {
   }, [autofocus]);
 
   const input = (
-    <div className={classNames(cls.inputWrapper, mods, [className, cls[size]])}>
-      {!!addonLeft && <div className={cls.addonLeft}>{addonLeft}</div>}
+    <div
+      className={classNames(cls['input-wrapper'], mods, [className, cls[size]])}
+    >
+      {!!addonLeft && <div className={cls['addon-left']}>{addonLeft}</div>}
       <input
         ref={ref}
         type={type}
@@ -90,7 +93,7 @@ export const Input: FC<IInputProps> = props => {
         onBlur={onBlurHandler}
         {...otherProps}
       />
-      {!!addonRight && <div className={cls.addonRight}>{addonRight}</div>}
+      {!!addonRight && <div className={cls['addon-right']}>{addonRight}</div>}
     </div>
   );
 
@@ -103,4 +106,4 @@ export const Input: FC<IInputProps> = props => {
     );
 
   return input;
-};
+});
