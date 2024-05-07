@@ -9,11 +9,15 @@ import {
   ThunkExtraArg,
 } from '@/app-fsd/providers/StoreProvider/config/stateSchema';
 
+// создаем тип для диспатча, чтоб подхватывались используемые типы
 export type AppDispatch = ThunkDispatch<
   StateSchema,
   ThunkExtraArg,
   UnknownAction
 >;
+
+// или
+// export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<StateSchema> = useSelector;

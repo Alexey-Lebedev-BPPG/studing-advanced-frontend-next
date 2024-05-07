@@ -3,6 +3,8 @@ import { useMessages } from 'next-intl';
 import { ReactNode } from 'react';
 import type { Metadata, ResolvingMetadata } from 'next';
 import './globals.css';
+import RuImage from './Meta/b2.jpg';
+import EnImage from './Meta/b2_eng.jpg';
 import { RootProviders } from '@/app-fsd/providers/RootProviders';
 import { SnackbarsContainer } from '@/shared/ui/redesigned/Snackbars/Snackbars';
 
@@ -38,10 +40,8 @@ export async function generateMetadata(
     locale === 'en'
       ? 'Studying advanced frontend next'
       : 'Studying advanced frontend next';
-  const ogImage =
-    locale === 'en' ? `${url}/Meta/b2.jpg` : `${url}/Meta/b2_ru.jpg`;
-  const twitterImage =
-    locale === 'en' ? `${url}/Meta/b2.jpg` : `${url}/Meta/b2_ru.jpg`;
+  const ogImage = locale === 'en' ? EnImage : RuImage;
+  const twitterImage = locale === 'en' ? EnImage : RuImage;
   const twitterTitle =
     locale === 'en'
       ? 'Studying advanced frontend next'
@@ -53,12 +53,18 @@ export async function generateMetadata(
 
   return {
     description,
-    // metadataBase: new URL(url),
-    openGraph: { description: ogDescription, images: ogImage, title: ogTitle },
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+    ),
+    openGraph: {
+      description: ogDescription,
+      images: ogImage.src,
+      title: ogTitle,
+    },
     title,
     twitter: {
       description: twitterDescription,
-      images: twitterImage,
+      images: twitterImage.src,
       title: twitterTitle,
     },
   };
@@ -71,13 +77,13 @@ export default function RootLayout({
   const messages = useMessages();
 
   const headersList = headers();
-  const nextUrl = headersList.get('next-url');
+  // const nextUrl = headersList.get('next-url');
 
-  const reg = /\/(en|ru)/g;
+  // const reg = /\/(en|ru)/g;
 
-  const currentPathname = nextUrl
-    ? nextUrl.replace(reg, '').replace(reg, '')
-    : '';
+  // const currentPathname = nextUrl
+  //   ? nextUrl.replace(reg, '').replace(reg, '')
+  //   : '';
 
   // const withHeader = pathWithHeader(currentPathname);
 

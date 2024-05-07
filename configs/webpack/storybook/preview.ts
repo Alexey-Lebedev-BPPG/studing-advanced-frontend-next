@@ -2,14 +2,15 @@
 import { Preview } from '@storybook/react';
 // import initStoryshots from '@storybook/addon-storyshots';
 // import results from '../../../reports/unit/.jest-test-results.json';
-import { FeaturesFlagsDecorator } from '../../../src/shared/config/storybook/FeaturesFlagsDecorator/FeaturesFlagsDecorator';
-import { NewDesignDecorator } from '../../../src/shared/config/storybook/NewDesignDecorator/NewDesignDecorator';
-import { RouterDecorator } from '../../../src/shared/config/storybook/RouterDecorator/RouterDecorator';
-import { StyleDecorator } from '../../../src/shared/config/storybook/StyleDecorator/StyleDecorator';
-import { SuspenseDecorator } from '../../../src/shared/config/storybook/SuspenseDecorator/SuspenseDecorator';
-import { ThemeDecorator } from '../../../src/shared/config/storybook/ThemeDecorator/ThemeDecorator';
-import { TranslationDecorator } from '../../../src/shared/config/storybook/TranslationDecorator/TranslationDecorator';
+import { FeaturesFlagsDecorator } from '../../../src/shared/configs/storybook/FeaturesFlagsDecorator/FeaturesFlagsDecorator';
+import { NewDesignDecorator } from '../../../src/shared/configs/storybook/NewDesignDecorator/NewDesignDecorator';
+import { RouterDecorator } from '../../../src/shared/configs/storybook/RouterDecorator/RouterDecorator';
+import { StyleDecorator } from '../../../src/shared/configs/storybook/StyleDecorator/StyleDecorator';
+import { SuspenseDecorator } from '../../../src/shared/configs/storybook/SuspenseDecorator/SuspenseDecorator';
+import { ThemeDecorator } from '../../../src/shared/configs/storybook/ThemeDecorator/ThemeDecorator';
+import { TranslationDecorator } from '../../../src/shared/configs/storybook/TranslationDecorator/TranslationDecorator';
 import { Theme } from '../../../src/shared/const/theme';
+// import initStoryshots from '@storybook/addon-storyshots';
 
 const parameters: Preview = {
   parameters: {
@@ -21,6 +22,13 @@ const parameters: Preview = {
         date: /Date$/,
       },
       sort: 'requiredFirst',
+    },
+    globals: {
+      locale: 'ru',
+      locales: {
+        en: 'English',
+        ru: 'Russian',
+      },
     },
     // добавляем, чтоб компоненты сторибука открывались на весь экран без паддингов
     layout: 'fullscreen',
@@ -44,6 +52,7 @@ const parameters: Preview = {
         { name: 'VeryLarge', value: '96px' },
       ],
     },
+    parameters: { nextjs: { appDirectory: true } },
     // настройки аддона storybook-addon-themes под темы
     themes: {
       // указываем дефолтную тему

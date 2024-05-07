@@ -8,7 +8,11 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl =
+  process.env.NEXT_PUBLIC_APP_ENV === 'local' ||
+  process.env.NEXT_PUBLIC_APP_ENV === 'dev'
+    ? 'http://localhost:8000'
+    : process.env.NEXT_PUBLIC_API_URL;
 
 const baseQuery = fetchBaseQuery({
   // указываем базовый урл

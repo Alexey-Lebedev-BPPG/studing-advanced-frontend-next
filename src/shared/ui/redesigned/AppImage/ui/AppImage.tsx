@@ -1,5 +1,5 @@
 import NextImage, { ImageProps } from 'next/image';
-import { FC, ReactElement, memo, useLayoutEffect, useState } from 'react';
+import { FC, ReactElement, memo, useState } from 'react';
 
 export interface IAppImageProps extends ImageProps {
   className?: string;
@@ -23,19 +23,19 @@ export const AppImage: FC<IAppImageProps> = memo(props => {
   // если при загрузке произошла ошибка
   const [hasError, setHasError] = useState(false);
 
-  // используем useLayoutEffect, чтоб действие синхронно происходило перед вмонтированием компонента
-  useLayoutEffect(() => {
-    // создаем изображение. В этот момент будет происходить фоновая подгрузка изображения
-    const img = new Image();
-    // @ts-ignore
-    img.src = src || '';
-    // когда изображение подгрузилось, меняем флаг на false
-    img.onload = () => setIsLoading(false);
-    img.onerror = () => {
-      setIsLoading(false);
-      setHasError(true);
-    };
-  }, [src]);
+  // // используем useLayoutEffect, чтоб действие синхронно происходило перед вмонтированием компонента
+  // useLayoutEffect(() => {
+  //   // создаем изображение. В этот момент будет происходить фоновая подгрузка изображения
+  //   const img = new Image();
+  //   // @ts-ignore
+  //   img.src = src || '';
+  //   // когда изображение подгрузилось, меняем флаг на false
+  //   img.onload = () => setIsLoading(false);
+  //   img.onerror = () => {
+  //     setIsLoading(false);
+  //     setHasError(true);
+  //   };
+  // }, [src]);
 
   if (isLoading && fallback) return fallback;
 

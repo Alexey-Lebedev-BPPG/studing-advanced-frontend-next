@@ -14,11 +14,7 @@
       "importMeta": false,
       "preserveAllComments": false
     },
-    "transform": {
-      "react": {
-        "runtime": "automatic"
-      }
-    },
+    "transform": { "react": { "runtime": "automatic" } },
     "target": "es5",
     "loose": false,
     "externalHelpers": false,

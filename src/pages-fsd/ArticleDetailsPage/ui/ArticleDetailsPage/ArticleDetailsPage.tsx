@@ -15,13 +15,13 @@ import {
   ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { ToggleFeatures } from '@/shared/lib/features';
-import { useQueryParams } from '@/shared/lib/hooks/useQueryParams';
 import { Card } from '@/shared/ui/deprecated/Card';
 import { VStack } from '@/shared/ui/redesigned/Stack';
 import { Page } from '@/widgets/Page';
 
 interface IArticleDetailsPageProps {
   className?: string;
+  id: string;
 }
 
 const reducers: ReducersList = {
@@ -29,9 +29,7 @@ const reducers: ReducersList = {
 };
 
 export const ArticleDetailsPage: FC<IArticleDetailsPageProps> = props => {
-  const { className } = props;
-
-  const { id } = useQueryParams();
+  const { className, id } = props;
 
   if (!id) return null;
 
@@ -45,7 +43,7 @@ export const ArticleDetailsPage: FC<IArticleDetailsPageProps> = props => {
           >
             <VStack max gap='16'>
               <ArticleDetailsPageHeader />
-              <DetailsContainer />
+              <DetailsContainer id={id} />
               <Card>{'Оценка статей скоро появится!'}</Card>
               <ArticleRecommendationsList />
               <ArticleDetailsComments id={id} />

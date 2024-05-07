@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
 import { Profile } from '@/entities/Profile';
 
@@ -22,6 +21,6 @@ export const fetchProfileData = createAsyncThunk<
   } catch (error) {
     process.env.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
     // для обработки ошибок
-    return rejectWithValue(i18next.t('LOGIN_ERROR'));
+    return rejectWithValue('LOGIN_ERROR');
   }
 });

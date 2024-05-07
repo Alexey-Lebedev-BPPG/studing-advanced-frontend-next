@@ -1,11 +1,20 @@
+import fs from 'fs';
 import path from 'path';
 
-require('dotenv').config();
+const config = JSON.parse(
+  fs.readFileSync(`${__dirname}/../../.swcrc`, 'utf-8'),
+);
+// import nextJest from 'next/jest.js';
+// import type { Config } from 'jest';
 
+// const createJestConfig = nextJest({
+//   dir: '../../',
+// });
+
+// const config = (): Config => {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const isDevDebug =
-    JSON.parse(process.env.NEXT_PUBLIC_DEBUG || 'false') || false;
+  const isDevDebug = process.env.DEBUG ? JSON.parse(process.env.DEBUG) : false;
 
   return {
     // удалять моки после тестов
@@ -13,10 +22,13 @@ export default () => {
     // игнорируемые папки для тестирования
     coveragePathIgnorePatterns: ['/node_modules/'],
     // чтоб объявлять глобальные переменные
+    // coverageProvider: 'v8',
     globals: {
       __API__: 'https://test.com',
+      __GOOGLE_ANALYTICS__: '',
       __IS_DEV__: true,
-      __IS_DEV_DEBUG__: true,
+      __IS_DEV_DEBUG__: isDevDebug,
+      __LOCATION_TOKEN__: '',
       __PROJECT__: 'jest',
     },
     // добавляем "src", чтоб заработали абсолютные пути
@@ -56,6 +68,7 @@ export default () => {
     testEnvironment: 'jsdom',
     // регулярка для поиска файлов тестирования (rootDir заменяется на вышестоящий путь)
     testMatch: ['<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'],
+    transform: { '^.+\\.(t|j)sx?$': ['@swc/jest', { ...config }] },
     // All imported modules in your tests should be mocked automatically
     // automock: false,
 
@@ -221,3 +234,5 @@ export default () => {
     // watchman: true,
   };
 };
+
+// export default createJestConfig(config());

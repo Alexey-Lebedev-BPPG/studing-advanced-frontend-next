@@ -1,8 +1,13 @@
 'use client';
 
-import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
+import {
+  AbstractIntlMessages,
+  NextIntlClientProvider,
+  useLocale,
+} from 'next-intl';
 import { FC, ReactNode } from 'react';
 // для google tag manager
+import { AppSessionProvider } from './AppSessionProvider/AppSessionProvider';
 import { GTMProviderProvider } from './GTMProvider/GTMProvider';
 // для GA
 import { GoogleAnalyticsProvider } from './GoogleAnalyticsProvider/GoogleAnalyticsProvider';
@@ -18,6 +23,7 @@ import { App } from '../App';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { ForceUpdateProvider } from '@/shared/lib/render/forceUpdate';
+import { useAppPathname } from '@/shared/lib/router/navigation';
 
 interface IRootProvidersProps {
   children?: ReactNode;
@@ -29,9 +35,16 @@ export const RootProviders: FC<IRootProvidersProps> = props => {
   const { children, locale, messages } = props;
 
   const { theme } = useTheme();
+  const pathname = useAppPathname();
+  const lang = useLocale();
+
+  const isLocal = process.env.NEXT_PUBLIC_APP_ENV === 'local';
+  const widgetKey = process.env.NEXT_PUBLIC_WIDGET_KEY;
+
+  const appStyle = { justifyContent: 'center' };
 
   return (
-    <body className={classNames('', {}, [theme])}>
+    <body className={classNames('', {}, [theme])} style={appStyle}>
       <StoreProvider>
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
@@ -40,7 +53,9 @@ export const RootProviders: FC<IRootProvidersProps> = props => {
                 <GoogleAnalyticsProvider>
                   <GTMProviderProvider>
                     <HotjarProvider>
-                      <App>{children}</App>
+                      <AppSessionProvider>
+                        <App>{children}</App>
+                      </AppSessionProvider>
                     </HotjarProvider>
                   </GTMProviderProvider>
                 </GoogleAnalyticsProvider>
@@ -49,14 +64,14 @@ export const RootProviders: FC<IRootProvidersProps> = props => {
           </NextIntlClientProvider>
         </ThemeProvider>
       </StoreProvider>
-      {/* {!isLocal && (
-      <script
-        async
-        id='ze-snippet'
-        src={`https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`}
-        crossOrigin='anonymous'
-      />
-    )} */}
+      {!isLocal && (
+        <script
+          async
+          id='ze-snippet'
+          src={`https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`}
+          crossOrigin='anonymous'
+        />
+      )}
     </body>
   );
 };

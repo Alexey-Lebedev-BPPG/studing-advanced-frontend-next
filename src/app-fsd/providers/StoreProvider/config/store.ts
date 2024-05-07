@@ -70,6 +70,8 @@ export const createReduxStore = (
     // создаем мидлваер, что передать туда наш инстанс аксиоса
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
+        immutableCheck: !isLocal,
+        serializableCheck: false,
         thunk: {
           // сюда можно передать все что угодно
           // extraArgument: { api: $api, navigate },
@@ -87,6 +89,8 @@ export const createReduxStore = (
     // для persist
     // reducer: persistedReducer,
   }) as ReduxStoreWithManager;
+  // или
+  // }) as TStore;
 
   // добавляем наш менеджер для стейта
   store.reducerManager = reducerManager;
@@ -97,6 +101,3 @@ export const createReduxStore = (
   // return { persist, store };
   return store;
 };
-
-// создаем тип для диспатча, чтоб подхватывались используемые типы
-export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];

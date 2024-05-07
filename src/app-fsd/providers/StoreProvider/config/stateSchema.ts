@@ -76,6 +76,10 @@ export interface ReduxStoreWithManager
   > {
   reducerManager: ReducerManager;
 }
+// или так
+// export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> {
+//   reducerManager: ReducerManager;
+// }
 
 // создает типизацию для экстра
 export interface ThunkExtraArg {

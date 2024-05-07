@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
 import { Article } from '@/entities/Article';
 
@@ -26,6 +25,6 @@ export const fetchArticleRecommendations = createAsyncThunk<
     return response.data;
   } catch (error) {
     // для обработки ошибок
-    return rejectWithValue(i18next.t('ARTICLE_ERROR'));
+    return rejectWithValue('ARTICLE_ERROR');
   }
 });

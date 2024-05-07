@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { setJsonSettingsMutation } from '../../api/userApi';
 import { getUserAuthData } from '../selectors/getUserAuthData/getUserAuthData';
 import { getJsonSettings } from '../selectors/jsonSettings/jsonSettings';
@@ -36,6 +35,6 @@ export const saveJsonSettings = createAsyncThunk<
     // чтоб не показывался консоль при тестах
     process.env.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
     // для обработки ошибок
-    return rejectWithValue(i18next.t('JSONSETTINGS_ERROR'));
+    return rejectWithValue('JSONSETTINGS_ERROR');
   }
 });

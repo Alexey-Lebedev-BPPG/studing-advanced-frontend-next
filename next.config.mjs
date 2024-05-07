@@ -10,6 +10,7 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  reactStrictMode: false,
   webpack: (config, options) => {
     config.module.rules.push({
       exclude: /node_modules/,

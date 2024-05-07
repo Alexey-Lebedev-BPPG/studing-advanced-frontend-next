@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { Article } from '../../types/article';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
 
@@ -27,6 +26,6 @@ export const fetchArticleById = createAsyncThunk<
     // чтоб не показывался консоль при тестах
     process.env.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
     // для обработки ошибок
-    return rejectWithValue(i18next.t('ARTICLE_ERROR'));
+    return rejectWithValue('ARTICLE_ERROR');
   }
 });

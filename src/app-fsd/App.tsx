@@ -1,12 +1,6 @@
 'use client';
 
 import { FC, ReactNode, useEffect } from 'react';
-// для google tag manager
-// для GA
-// для hotjar
-// для выбора языка по геолокации
-// для редакса
-// для темы
 import { getUserInited, initAuthData } from '@/entities/User';
 import { AppLoadLayout } from '@/shared/layouts/AppLoadLayout';
 import { MainLayout } from '@/shared/layouts/MainLayout';

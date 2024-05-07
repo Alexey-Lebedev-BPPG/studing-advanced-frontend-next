@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
 import { Comment } from '@/entities/Comment';
 
@@ -12,13 +11,12 @@ export const fetchCommentsByArticleId = createAsyncThunk<
   const { extra, rejectWithValue } = thunkApi;
 
   try {
-    if (!articleId) return rejectWithValue(i18next.t('ARTICLE_ERROR'));
+    if (!articleId) return rejectWithValue('ARTICLE_ERROR');
 
     const response = await extra.api.get<Comment[]>('/comments', {
       params: {
         // чтоб получить полную сущность пользователя
         _expand: 'user',
-
         articleId,
       },
     });
@@ -28,6 +26,6 @@ export const fetchCommentsByArticleId = createAsyncThunk<
     return response.data;
   } catch (error) {
     // для обработки ошибок
-    return rejectWithValue(i18next.t('ARTICLE_ERROR'));
+    return rejectWithValue('ARTICLE_ERROR');
   }
 });

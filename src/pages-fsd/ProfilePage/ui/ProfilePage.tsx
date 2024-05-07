@@ -2,18 +2,16 @@ import { FC } from 'react';
 import cls from './ProfilePage.module.scss';
 import { EditableProfileCard } from '@/features/EditableProfileCard';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { useQueryParams } from '@/shared/lib/hooks/useQueryParams';
 import { VStack } from '@/shared/ui/redesigned/Stack';
 import { Page } from '@/widgets/Page';
 
 interface IProfilePageProps {
   className?: string;
+  id: string;
 }
 
 export const ProfilePage: FC<IProfilePageProps> = props => {
-  const { className } = props;
-
-  const { id } = useQueryParams();
+  const { className, id } = props;
 
   return (
     <Page

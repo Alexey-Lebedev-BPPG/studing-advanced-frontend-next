@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
 
 interface IArticleEditPageProps {}
@@ -22,6 +21,6 @@ export const fetchArticleEditPage = createAsyncThunk<
   } catch (error) {
     console.log(error);
     // для обработки ошибок
-    return rejectWithValue(i18next.t('ERROR'));
+    return rejectWithValue('ERROR');
   }
 });

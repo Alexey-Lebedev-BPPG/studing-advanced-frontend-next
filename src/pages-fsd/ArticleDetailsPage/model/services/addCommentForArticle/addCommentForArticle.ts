@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { fetchCommentsByArticleId } from '../fetchCommentsByArticleId/fetchCommentsByArticleId';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
 import { getArticleDetailsData } from '@/entities/Article';
@@ -18,8 +17,7 @@ export const addCommentForArticle = createAsyncThunk<
   const userData = getUserAuthData(getState());
   const article = getArticleDetailsData(getState());
 
-  if (!userData || !text || !article)
-    return rejectWithValue(i18next.t('ERROR'));
+  if (!userData || !text || !article) return rejectWithValue('ERROR');
 
   try {
     const response = await extra.api.post<Comment>('/comments', {
@@ -36,6 +34,6 @@ export const addCommentForArticle = createAsyncThunk<
   } catch (error) {
     console.log(error);
     // для обработки ошибок
-    return rejectWithValue(i18next.t('ERROR'));
+    return rejectWithValue('ERROR');
   }
 });

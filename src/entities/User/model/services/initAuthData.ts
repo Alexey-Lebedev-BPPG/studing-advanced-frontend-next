@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { getUserDataByIdQuery } from '../../api/userApi';
 import { User } from '../types/UserSchema';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
@@ -33,7 +32,7 @@ export const initAuthData = createAsyncThunk<User, void, ThunkConfig<string>>(
       // чтоб не показывался консоль при тестах
       process.env.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
       // для обработки ошибок
-      return rejectWithValue(i18next.t('JSONSETTINGS_ERROR'));
+      return rejectWithValue('JSONSETTINGS_ERROR');
     }
   },
 );

@@ -1,6 +1,9 @@
 import path from 'path';
 import { Configuration, DefinePlugin, RuleSetRule } from 'webpack';
-import { buildScssLoaders } from '../build/loaders/buildScssLoaders';
+// import { buildFileLoader } from '../build/loaders/buildFileLoader';
+// import { buildFontLoader } from '../build/loaders/buildFontLoader';
+// import { buildMjsLoader } from '../build/loaders/buildMjsLoader';
+// import { buildScssLoaders } from '../build/loaders/buildScssLoaders';
 import { buildSvgLoader } from '../build/loaders/buildSvgLoader';
 import { BuildPaths } from '../build/types/config';
 
@@ -37,15 +40,19 @@ const config = {
     // '@storybook/addon-mdx-gfm',
     // '@storybook/addon-storyshots',
     // '@storybook/addon-storyshots-puppeteer',
+    'storybook-react-intl',
   ],
   core: { disableTelemetry: true },
   docs: { autodocs: true },
   framework: {
-    name: '@storybook/react-webpack5',
-    options: { builder: { lazyCompilation: true }, fastRefresh: true },
+    name: '@storybook/nextjs',
+    options: {
+      builder: { lazyCompilation: true, useSWC: true },
+      fastRefresh: true,
+    },
   },
   // чтоб переводы работали корректно
-  staticDirs: ['../../../public'],
+  staticDirs: ['../../../.next'],
   stories: [
     {
       directory: '../../../src',
@@ -98,14 +105,19 @@ const config = {
     configWebpack.module?.rules?.push(buildSvgLoader());
 
     // добавляем css лоадер для сторибука со значением isDev как true, т.к. сторибук будет использоваться только в дев-разработке
-    configWebpack!.module!.rules.push(buildScssLoaders(true));
+    // configWebpack!.module!.rules.push(buildScssLoaders(true));
+    // inputConfig.module?.rules?.push(buildFontLoader());
+    // inputConfig.module?.rules?.push(buildFileLoader());
+    // inputConfig.module?.rules?.push(buildMjsLoader());
 
     // добавляем глобальную переменную
     configWebpack!.plugins!.push(
       new DefinePlugin({
         __API__: JSON.stringify('https://testapi.ru'),
+        __GOOGLE_ANALYTICS__: '',
         __IS_DEV__: JSON.stringify(true),
         __IS_DEV_DEBUG__: JSON.stringify(true),
+        __LOCATION_TOKEN__: JSON.stringify(''),
         __PROJECT__: JSON.stringify('storybook'),
       }),
     );

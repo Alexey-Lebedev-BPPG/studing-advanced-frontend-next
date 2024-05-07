@@ -1,4 +1,4 @@
-import { t } from 'i18next';
+import { useTranslations } from 'next-intl';
 import { FC, memo } from 'react';
 import { useArticleRecommendationsList } from '../api/articleRecommendationApi';
 import { ArticleList } from '@/entities/Article';
@@ -15,6 +15,7 @@ export interface IArticleRecommendationsListProps {
 export const ArticleRecommendationsList: FC<IArticleRecommendationsListProps> =
   memo(props => {
     const { className } = props;
+    const t = useTranslations();
     // передаем в хук наш лимит и получаем поля по умолчанию (data, isLoading, error и т.д)
     const {
       data: recommendations,

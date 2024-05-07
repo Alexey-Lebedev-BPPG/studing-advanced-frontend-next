@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import { updateFeatureFlagsMutation } from '../api/featureFlagsApi';
 import { getAllFeatureFlags } from '../lib/setGetFeatures';
 import { ThunkConfig } from '@/app-fsd/providers/StoreProvider';
@@ -41,7 +40,7 @@ export const updateFeatureFlags = createAsyncThunk<
       // чтоб не показывался консоль при тестах
       process.env.NEXT_PUBLIC_PROJECT !== 'jest' && console.log(error);
       // для обработки ошибок
-      return rejectWithValue(i18next.t('updateFeatureFlags_ERROR'));
+      return rejectWithValue('updateFeatureFlags_ERROR');
     }
   },
 );

@@ -28,7 +28,7 @@ export const ArticleAdditionalInfo: FC<IArticleAdditionalInfoProps> = memo(
         </HStack>
         <Button onClick={onEdit}>{t('Редактировать')}</Button>
         {/* используем плюральные формы для подстановки окончаний слова */}
-        <Text text={t('{{count}} просмотров', { count: views })} />
+        <Text text={t('{count} просмотров', { count: views })} />
       </VStack>
     );
   },

@@ -17,10 +17,7 @@ export const HotjarProvider: FC<IHotjarProviderProps> = props => {
     process.env.NEXT_PUBLIC_APP_ENV === 'prod' ||
     process.env.NEXT_PUBLIC_APP_ENV === 'stage';
 
-  isProd &&
-    hotjarId &&
-    hotjarSv &&
-    hotjar.initialize({ hjid: hotjarId, hjsv: hotjarSv });
+  isProd && hotjar.initialize({ hjid: hotjarId, hjsv: hotjarSv });
 
   return children;
 };

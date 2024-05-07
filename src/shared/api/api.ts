@@ -4,7 +4,11 @@ import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 
 let count = 0;
 
-const api = process.env.NEXT_PUBLIC_API_URL;
+const api =
+  process.env.NEXT_PUBLIC_APP_ENV === 'local' ||
+  process.env.NEXT_PUBLIC_APP_ENV === 'dev'
+    ? 'http://localhost:8000'
+    : process.env.NEXT_PUBLIC_API_URL;
 
 // создаем экземпляр аксиоса
 export const $api = axios.create({
@@ -19,14 +23,6 @@ export const $api = axios.create({
   },
   // указываем поддержку куки
   // withCredentials: true,
-});
-
-$api.interceptors.request.use(config => {
-  if (config.headers)
-    config.headers.Authorization =
-      localStorage.getItem(USER_LOCALSTORAGE_KEY) || '';
-
-  return config;
 });
 
 $api.interceptors.request.use(

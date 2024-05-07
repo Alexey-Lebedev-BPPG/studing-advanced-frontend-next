@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import i18next from 'i18next';
 import {
   getArticlesPageLimit,
   getArticlesPageNum,
@@ -54,6 +53,6 @@ export const fetchArticlesList = createAsyncThunk<
     return response.data;
   } catch (error) {
     // для обработки ошибок
-    return rejectWithValue(i18next.t('ARTICLE_ERROR'));
+    return rejectWithValue('ARTICLE_ERROR');
   }
 });
