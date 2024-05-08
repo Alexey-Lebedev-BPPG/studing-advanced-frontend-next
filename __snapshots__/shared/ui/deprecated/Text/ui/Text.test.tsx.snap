@@ -2,7 +2,7 @@
 
 exports[`Text Test clear theme 1`] = `
 <div
-  className="textWrapper size_m primary left m"
+  className="text-wrapper size-m primary left m"
 >
   <p
     className="text"

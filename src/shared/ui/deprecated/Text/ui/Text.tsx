@@ -56,7 +56,8 @@ export const Text: FC<ITextProps> = memo(props => {
       className={classNames(cls['text-wrapper'], {}, [
         className,
         mapSizeClass[size],
-        // cls[theme],
+        // @ts-ignore
+        cls[theme],
         cls[align],
         // @ts-ignore
         cls[size],

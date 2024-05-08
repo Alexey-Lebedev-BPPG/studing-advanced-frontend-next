@@ -1,5 +1,5 @@
 module.exports = {
-  env: { browser: true, es2021: true, jest: true, node: true },
+  env: { es2021: true, jest: true, node: true },
   extends: [
     'plugin:react/recommended',
     'airbnb',

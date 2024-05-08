@@ -1,6 +1,5 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import type { AuthOptions } from 'next-auth';
-import urls from '@/shared/const/urls';
 
 const api = process.env.NEXT_PUBLIC_API_URL;
 
@@ -41,7 +40,7 @@ export const authConfig: AuthOptions = {
           password: credentials?.password,
         };
 
-        const resp = await fetch(`${api}${urls.partners.signIn}`, {
+        const resp = await fetch(`${api}/sign_in`, {
           body: JSON.stringify(userData),
           headers: {
             'Content-Type': 'application/json;charset=utf-8',

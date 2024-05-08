@@ -75,7 +75,8 @@ export const Button: FC<IButtonProps> = memo(props => {
       type='button'
       className={classNames(cls.button, mods, [
         className,
-        // cls[theme],
+        // @ts-ignore
+        cls[theme],
         mapSizeClass[size],
       ])}
       {...otherProps}

@@ -83,6 +83,6 @@ describe('loginByUsername', () => {
     expect(thunk.api.post).toHaveBeenCalled();
     expect(thunk.dispatch).toHaveBeenCalledTimes(2);
     expect(result.meta.requestStatus).toBe('rejected');
-    expect(result.payload).toEqual(undefined);
+    expect(result.payload).toEqual('LOGIN_ERROR');
   });
 });

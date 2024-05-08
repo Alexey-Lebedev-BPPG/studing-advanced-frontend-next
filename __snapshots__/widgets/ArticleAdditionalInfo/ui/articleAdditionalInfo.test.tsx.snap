@@ -5,10 +5,10 @@ exports[`Button Test clear theme 1`] = `
   className="app app-light-theme"
 >
   <div
-    className="flex justifyStart alignStart directionColumn gap32 nowrap"
+    className="flex justify-start align-start direction-column gap32 nowrap"
   >
     <div
-      className="flex justifyStart alignCenter directionRow gap8 nowrap"
+      className="flex justify-start align-center direction-row gap8 nowrap"
     >
       <div
         className="skeleton"
@@ -23,10 +23,10 @@ exports[`Button Test clear theme 1`] = `
         <div />
       </div>
       <div
-        className=" bold accent left size_m"
+        className=" bold accent left size-m"
       />
       <div
-        className=" accent left size_m"
+        className=" accent left size-m"
       >
         <p
           className="text"
@@ -44,13 +44,13 @@ exports[`Button Test clear theme 1`] = `
       Редактировать
     </button>
     <div
-      className=" accent left size_m"
+      className=" accent left size-m"
     >
       <p
         className="text"
         data-testid="Text.Paragraph"
       >
-        10 просмотров
+        {count} просмотров
       </p>
     </div>
   </div>

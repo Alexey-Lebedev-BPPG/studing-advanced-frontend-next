@@ -2,7 +2,7 @@
 
 exports[`Button Test clear theme 1`] = `
 <button
-  className="button clear size_m"
+  className="button clear size-m"
   type="button"
 >
   TEST
@@ -11,7 +11,7 @@ exports[`Button Test clear theme 1`] = `
 
 exports[`Button Test render 1`] = `
 <button
-  className="button outline size_m"
+  className="button outline size-m"
   type="button"
 >
   TEST

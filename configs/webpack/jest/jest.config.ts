@@ -1,9 +1,7 @@
-import fs from 'fs';
+// import fs from 'fs';
 import path from 'path';
 
-const config = JSON.parse(
-  fs.readFileSync(`${__dirname}/../../.swcrc`, 'utf-8'),
-);
+// const config = JSON.parse(fs.readFileSync(`${__dirname}/.swcrc`, 'utf-8'));
 // import nextJest from 'next/jest.js';
 // import type { Config } from 'jest';
 
@@ -68,7 +66,8 @@ export default () => {
     testEnvironment: 'jsdom',
     // регулярка для поиска файлов тестирования (rootDir заменяется на вышестоящий путь)
     testMatch: ['<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)'],
-    transform: { '^.+\\.(t|j)sx?$': ['@swc/jest', { ...config }] },
+    // transform: { '^.+\\.(t|j)sx?$': ['@swc/jest', { ...config }] },
+    transform: { '^.+\\.(t|j)sx?$': '@swc/jest' },
     // All imported modules in your tests should be mocked automatically
     // automock: false,
 

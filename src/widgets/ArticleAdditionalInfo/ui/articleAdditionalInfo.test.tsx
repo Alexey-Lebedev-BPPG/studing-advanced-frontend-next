@@ -10,11 +10,7 @@ describe('Button', () => {
         <ArticleAdditionalInfo
           createdAt='22.10.2000'
           views={10}
-          author={{
-            avatar: '',
-            id: '',
-            username: '',
-          }}
+          author={{ avatar: '', id: '', username: '' }}
           onEdit={() => console.log()}
         />
       </TestProvider>,
@@ -28,11 +24,7 @@ describe('Button', () => {
         <ArticleAdditionalInfo
           createdAt='22.10.2000'
           views={10}
-          author={{
-            avatar: '',
-            id: '',
-            username: '',
-          }}
+          author={{ avatar: '', id: '', username: '' }}
           onEdit={() => console.log()}
         />
       </TestProvider>,
@@ -43,11 +35,7 @@ describe('Button', () => {
           <ArticleAdditionalInfo
             createdAt='22.10.2000'
             views={10}
-            author={{
-              avatar: '',
-              id: '',
-              username: '',
-            }}
+            author={{ avatar: '', id: '', username: '' }}
             onEdit={() => console.log()}
           />
         </TestProvider>,

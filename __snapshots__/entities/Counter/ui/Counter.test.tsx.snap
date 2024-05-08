@@ -11,7 +11,7 @@ exports[` 1`] = `
       10
     </h1>
     <button
-      className="button outline size_m"
+      className="button outline size-m"
       data-testid="increment-btn"
       onClick={[Function]}
       type="button"
@@ -19,7 +19,7 @@ exports[` 1`] = `
       increment
     </button>
     <button
-      className="button outline size_m"
+      className="button outline size-m"
       data-testid="decrement-btn"
       onClick={[Function]}
       type="button"

@@ -1,7 +1,7 @@
 import { ReducersMapObject } from '@reduxjs/toolkit';
 import { render } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 // import { I18nextProvider } from 'react-i18next';
 // import { MemoryRouter } from 'react-router-dom';
 import { StateSchema, StoreProvider } from '@/app-fsd/providers/StoreProvider';
@@ -24,6 +24,8 @@ interface TestProviderProps {
   options?: IComponentRenderOptions;
 }
 
+type MessageType = typeof import('@/../messages/en/translation.json');
+
 // выносим все обертки в одну, чтоб можно было также использовать в изолированных тестах в сайпресс
 export function TestProvider(props: TestProviderProps) {
   const { children, options = {} } = props;
@@ -34,10 +36,24 @@ export function TestProvider(props: TestProviderProps) {
     theme = Theme.LIGHT,
   } = options;
 
+  const lang = 'ru';
+  const MessageRef = useRef<MessageType>();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const getMessages = () =>
+    Promise.all([import(`../../../../../messages/${lang}/translation.json`)]);
+  useEffect(() => {
+    // вызываем функцию подгрузки библиотек
+    getMessages().then(([mes]) => {
+      MessageRef.current = mes;
+      setIsLoaded(true);
+    });
+  }, []);
+
   return (
     //  добавляем еще сторпровайдер для тестов
     <StoreProvider asyncReducers={asyncReducer} initialState={initialState}>
-      <NextIntlClientProvider locale='ru' messages={{}}>
+      <NextIntlClientProvider locale={lang} messages={MessageRef.current}>
         <ThemeProvider initialTheme={theme}>
           <div className={`app ${theme}`}>{children}</div>
         </ThemeProvider>
