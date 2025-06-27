@@ -16,7 +16,7 @@
     "start:esbuild": "ts-node ./configs/esbuild/esbuild-dev.ts",
     "start:dev": "concurrently \"npm start\" \"npm run start:dev:server\"",
     "start:dev:vite": "concurrently \"npm run start:vite\" \"npm run start:dev:server\"",
-    "start:dev:only:next": "next dev",
+    "start:dev:only:next": "next dev --turbo",
     "start:dev:next": "concurrently \"npm run start:dev:only:next\" \"npm run start:dev:server\"",
     "start:dev:esbuild": "concurrently \"npm run start:esbuild\" \"npm run start:dev:server\"",
     "start:debug": "webpack serve --env mode=development",

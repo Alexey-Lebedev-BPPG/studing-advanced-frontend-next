@@ -24,6 +24,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { ForceUpdateProvider } from '@/shared/lib/render/forceUpdate';
 import { useAppPathname } from '@/shared/lib/router/navigation';
+import { OptimizedScript } from '@/shared/ui/redesigned/OptimizedScript/OptimizedScript';
 
 interface IRootProvidersProps {
   children?: ReactNode;
@@ -65,7 +66,7 @@ export const RootProviders: FC<IRootProvidersProps> = props => {
         </ThemeProvider>
       </StoreProvider>
       {!isLocal && (
-        <script
+        <OptimizedScript
           async
           id='ze-snippet'
           src={`https://static.zdassets.com/ekr/snippet.js?key=${widgetKey}`}
